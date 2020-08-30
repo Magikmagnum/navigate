@@ -1,0 +1,35 @@
+export const trainingStorage = [
+    {
+        id:1,
+        title:'Licence en Mathématique',
+        date: '2 Mai à 13:26',
+        description: "Pour l'horizontale, vous pouvez essayer de placer la FlatList horizontale dans le ListHeaderComponent de la FlatList verticale et voir ce qui se passe",
+        avatarUri: require("../assets/avatar/img1.jpg"),
+        mention : 'Tres bien',
+        entreprise: 'USTM',
+        end: '23 Mars 2011',
+        adresse: 'Okala, Akanda / Gabon', 
+    },
+    {   
+        id:2,
+        title:'BAC C',
+        date: '2 Mai à 13:26',
+        description: "Pour l'horizontale, vous pouvez essayer de placer la FlatList horizontale dans le ListHeaderComponent de la FlatList verticale et voir ce qui se passe",
+        avatarUri: require("../assets/avatar/img1.jpg"),
+        mention : 'Tres bien',
+        entreprise: 'Saint esprit',
+        end: '14 Juillet 2014',
+        adresse: 'Okala, Akanda / Gabon', 
+    },
+    {   
+        id:3,
+        title:'BEPC',
+        date: '2 Mai à 13:26',
+        description: "Les gestes couramment utilisés sur les appareils dotés d'écrans tactiles comprennent les balayages et les casseroles. Ceux-ci permettent à l'utilisateur de faire défiler une liste d'éléments ou de parcourir des pages de contenu. Pour ceux-ci, consultez le composant ScrollView Core.",
+        avatarUri: require("../assets/avatar/img1.jpg"),
+        mention : 'Tres bien',
+        entreprise: 'Nchtoréré',
+        end: '09 Septembre 2013',
+        adresse: 'Nzeng-Ayong, Libreville / Gabon', 
+    }
+]

@@ -1,0 +1,30 @@
+{
+        "dev": {
+                "color": "#8e24aa",
+                "lightColor": "#c158dc",
+                "darkColor": "#5c007a",
+                "silver": "#e0e0e0"
+        },
+        "primary": {
+                "color": "#1faa00",
+                "lightColor": "#9cff57",
+                "darkColor": "#64dd17",
+                "silver": "#e0e0e0"
+        },
+        "secondary": {
+                "color": "#ff8f00",
+                "lightColor": "#ffc046",
+                "darkColor": "#c56000",
+                "silver": "#e0e0e0"
+        },
+        "text": {
+                "primary": "#ffffff",
+                "secondary": "#000000",
+                "silver": "#777"
+                
+        },
+        "danger":{
+                "color": "#ef5350"
+        }           
+}
+      
