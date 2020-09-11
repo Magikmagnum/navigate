@@ -15,9 +15,14 @@ import { postUserSkill } from '../../../store/API/RatisseurApi'
 
 import { specialCharValidator } from '../../../helpers/dataValidatorHelpers'
 
+
 const color = require('../../../helpers/color.json')
 
 export default function SkillsModifyComponent({ setModalVisible }) {
+
+    console.log('----------------------------------- Start Machine --------------------------------');
+
+
 
     const [state, dispatch] = React.useContext(Context)
     const refInputSkill = React.createRef()
@@ -46,26 +51,38 @@ export default function SkillsModifyComponent({ setModalVisible }) {
 
     const getValidatorData = () => {
 
-        setIsLoading(true)
+
+        //setIsLoading(true)
 
         let error = { skill: false, category: false, newCategory: false }
-        let data = {}
+        const data = new FormData();
 
 
         const skillResult = specialCharValidator(skill)
         if (skillResult.error) {
             error.skill = skillResult.data
         } else {
-            data.skill = skillResult.data
+            data.append('skills', skillResult.data)
         }
 
-        if (error.skill === false ) {
+        if (image) {
+            data.append('file', {
+                type: 'image/jpg',
+                uri: image,
+                name: 'imageUploadTmp.jpg'
+            })
+        }
+
+
+
+        if (error.skill === false) {
             postUserSkill(data, state.compte.api_key)
                 .then(dataPostUserSkill => {
                     console.log(dataPostUserSkill)
+                    return true;
                     if (dataPostUserSkill.status == 201) {
                         addUserSkill(dataPostUserSkill.data)
-                        handleSuccess(setIsLoading, setLoadingSuccess, (() => setModalVisible(false)))
+                        //handleSuccess(setIsLoading, setLoadingSuccess, (() => setModalVisible(false)))
                     } else {
                         if (dataPostUserSkill.data) {
                             dataPostUserSkill.data.forEach(item => {
@@ -73,22 +90,22 @@ export default function SkillsModifyComponent({ setModalVisible }) {
                                     error.name = item.message
                                 }
                                 if (item.path == 'category') {
-                                    error.sexe = item.message
+                                    error.category = item.message
                                 }
                                 if (item.path == 'newCategory') {
-                                    error.brithday = item.message
+                                    error.newCategory = item.message
                                 }
                             })
                         } else {
                             console.log('Error', dataPostUserSkill.message)
                         }
-                        handleFailure(setIsLoading, setLoadingFailure, (() => setErrorForm(error)))
+                        //handleFailure(setIsLoading, setLoadingFailure, (() => setErrorForm(error)))
                     }
                 }).catch(e => {
-                    handleFailure(setIsLoading, setLoadingFailure, (() => console.log('putCompte error', e)))
+                    //handleFailure(setIsLoading, setLoadingFailure, (() => console.log('putCompte error', e)))
                 })
         } else {
-            handleFailure(setIsLoading, setLoadingFailure, (() => setErrorForm(error)))
+            //handleFailure(setIsLoading, setLoadingFailure, (() => setErrorForm(error)))
         }
     }
 

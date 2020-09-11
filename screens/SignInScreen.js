@@ -2,12 +2,12 @@ import React from 'react'
 import { StyleSheet, View, StatusBar, TouchableOpacity, ScrollView } from 'react-native'
 
 import { Context } from '../store/configureStore'
-import { login_ckeck } from '../store/API/RatisseurApi'
+import { login_ckeck, getSkills } from '../store/API/RatisseurApi'
 
 import { Input, Button } from '../components/formComponent'
 import { Header3, Header6 } from '../components/typoComponent'
 import { Loading, handleFailure, handleSuccess } from '../components/loadingComponent'
-//Helpers
+
 import { passwordValidator, emailValidator } from '../helpers/dataValidatorHelpers'
 
 

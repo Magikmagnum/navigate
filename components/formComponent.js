@@ -33,15 +33,15 @@ export function Input(props) {
 
     let labelTextInputFocus
     isFocus ? labelTextInputFocus = styles.labelTextInputFocus : labelTextInputFocus = {}
-    
+
     //{getIcon(props.icon, isFocus)}
 
     return (
         <TouchableOpacity style={styles.contentTextInput} onPress={onPress} activeOpacity={1}>
             <View style={{ flex: 1, flexDirection: 'row' }}>
                 <View style={{ flex: 8 }}>
-                    <View style={{...styles.boxTextInput, ...boxTextInputFocus}}>
-                        <Text style={{...styles.labelTextInput, ...labelTextInputFocus}}>{props.label}</Text>
+                    <View style={{ ...styles.boxTextInput, ...boxTextInputFocus }}>
+                        <Text style={{ ...styles.labelTextInput, ...labelTextInputFocus }}>{props.label}</Text>
                         <TextInput
                             ref={props.refItem}
                             style={styles.textInput}
@@ -193,10 +193,10 @@ export function DateInput(props) {
     return (
         <TouchableOpacity style={styles.contentTextInput} onPress={showDatepicker} activeOpacity={1}>
             <View style={{ flex: 1, flexDirection: 'row' }}>
-                
+
                 <View style={{ flex: 8 }}>
-                    <View style={{...styles.boxTextInput, ...boxTextInputFocus}}>
-                        <Text style={{...styles.labelTextInput, ...labelTextInputFocus}}>{props.label}</Text>
+                    <View style={{ ...styles.boxTextInput, ...boxTextInputFocus }}>
+                        <Text style={{ ...styles.labelTextInput, ...labelTextInputFocus }}>{props.label}</Text>
                         <Text style={styles.textInput}>{moment(props.value).format("DD / MM / YYYY")}</Text>
                         {show && (
                             <DateTimePicker
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         height: 66,
         marginVertical: 2,
-        marginBottom:12,
+        marginBottom: 12,
     },
     boxTextInput: {
         //backgroundColor: '#cfd8dc',
@@ -255,21 +255,22 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         height: 56,
-        justifyContent:'center',
+        justifyContent: 'center',
         borderWidth: 1,
-        borderRadius:12,
+        borderRadius: 12,
         borderColor: color.primary.silver,
     },
+
     boxTextInputFocus: {
         borderColor: color.primary.color,
     },
     labelTextInput: {
-        position:'absolute',
-        top:-15,
-        left:12,
+        position: 'absolute',
+        top: -15,
+        left: 12,
         height: 20,
         fontSize: 12,
-        paddingHorizontal:4,
+        paddingHorizontal: 4,
         color: color.text.silver,
         fontWeight: 'bold',
         backgroundColor: '#fff',
@@ -285,7 +286,7 @@ const styles = StyleSheet.create({
     },
     textInput: {
         //backgroundColor: '#eee',
-        marginVertical:10,
+        marginVertical: 10,
         marginHorizontal: 16,
         height: 20,
         fontSize: 16,
@@ -313,7 +314,7 @@ const styles = StyleSheet.create({
         padding: 16,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 8,
+        borderRadius: 4,
         minWidth: 64,
         marginVertical: 8,
         borderWidth: 2,

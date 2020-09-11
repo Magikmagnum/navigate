@@ -20,7 +20,6 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 
 
 
-
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
 const SettingsStack = createStackNavigator()
@@ -246,7 +245,6 @@ const HomeTabNavigator = () => (
       } else if (route.name == 'Profil') {
         iconName = 'md-contact'
       }
-
       return <Ionicons name={iconName} size={size} color={color} />
     },
   })}

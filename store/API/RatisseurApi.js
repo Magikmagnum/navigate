@@ -1,8 +1,13 @@
 
 import React, { useEffect, useState } from "react";
+//import RNFetchBlob from 'rn-fetch-blob'
 
-const API_LOCAL = "http://192.168.1.78:8000/api/v1/"
+const API_PATH = "http://192.168.1.76:8000";
+const API_LOCAL = API_PATH + "/api/v1/";
 
+export const API_IMG_SKILL = (ImageName) => {
+    return { uri: API_PATH + "/images/skill/" + ImageName };
+}
 
 
 export function post() {
@@ -142,15 +147,14 @@ export function postUserSkill(data, TOKEN_SECURITY) {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
+            'Content-Type': 'multipart/form-data; ',
             'Authorization': 'BEARER ' + TOKEN_SECURITY,
         },
-        body: JSON.stringify({
-            "skills": data.skill,
-        })
+        body: data
     })
         .then((response) => response.json())
         .catch((error) => console.log(error.message))
+
 }
 
 
@@ -190,7 +194,7 @@ export function getUser(TOKEN_SECURITY, Context, data) {
     const [loading, response] = useFetch('admin/security/', 'GET', TOKEN_SECURITY, data)
 
     useEffect(() => {
-        (async ()=>{
+        (async () => {
             if (loading == true) {
                 if (response.status == 200) {
                     await dispatch({ type: 'ADD_COMPTE', payload: { api_key: TOKEN_SECURITY, id: response.data.id } })

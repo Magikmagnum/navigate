@@ -62,8 +62,8 @@ export function HeaderTitle(props) {
     }
   }
   let subColor = {}
-  if(props.subColor) {
-    subColor = {color: props.subColor}
+  if (props.subColor) {
+    subColor = { color: props.subColor }
   }
   return (
     <View style={{ ...styles.headerTextContent, ...styleTitle, marginBottom: 2 }}>
@@ -357,6 +357,7 @@ const styles = StyleSheet.create({
   bodyImage: {
     flex: 1,
     height: 194,
+
     width: windowWidth - 40,
     borderRadius: 12,
   }

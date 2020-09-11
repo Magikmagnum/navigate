@@ -117,13 +117,13 @@ export default function reducer(state, action) {
 
 
     case 'TOGGLE_SKILL':
-      
+
       const skillIndex = state.userSkills.findIndex(item => item.id === action.payload.id)
       if (skillIndex === -1) {
         // Le film n'est pas dans les films favoris, on l'ajoute à la liste
         nextState = {
           ...state,
-          userSkills: [...state.userSkills, action.payload]
+          userSkills: action.payload //[...state.userSkills, action.payload]
         }
       } else {
         // Le film est déjà dans les favoris, on le supprime de la liste

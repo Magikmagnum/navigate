@@ -18,10 +18,22 @@ const Store = ({ children }) => {
       await getCompteStorage().then((data) => {
         if (data) {
           initialState.compte = JSON.parse(data)
-          getContactStorage(initialState.compte).then((data) => { data ? initialState.contact = JSON.parse(data) : initialState.contact = {} }).catch(initialState.contact = {})
-          getIdentityStorage(initialState.compte).then((data) => { data ? initialState.identity = JSON.parse(data) : initialState.identity = {} }).catch(initialState.identity = {})
-          getUserSkillsStorage(initialState.compte).then((data) => { data ? initialState.userSkills = JSON.parse(data) : initialState.userSkills = [] }).catch(initialState.userSkills = [])
-          getAvatarStorage(initialState.compte).then((data) => { data ? initialState.avatar = JSON.parse(data) : initialState.avatar = false }).catch(initialState.avatar = false)
+          getContactStorage(initialState.compte).then(
+            (data) => {
+              data ? initialState.contact = JSON.parse(data) : initialState.contact = {}
+            }).catch(initialState.contact = {})
+          getIdentityStorage(initialState.compte).then(
+            (data) => {
+              data ? initialState.identity = JSON.parse(data) : initialState.identity = {}
+            }).catch(initialState.identity = {})
+          getUserSkillsStorage(initialState.compte).then(
+            (data) => {
+              data ? initialState.userSkills = JSON.parse(data) : initialState.userSkills = []
+            }).catch(initialState.userSkills = [])
+          getAvatarStorage(initialState.compte).then(
+            (data) => {
+              data ? initialState.avatar = JSON.parse(data) : initialState.avatar = false
+            }).catch(initialState.avatar = false)
         } else {
           initialState.compte = {}
         }

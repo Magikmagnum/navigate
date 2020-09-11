@@ -68,7 +68,7 @@ export default function CatalogScreen({ navigation }) {
 
 
       <ScrollView style={{ ...styles.container, backgroundColor: '#fff' }}>
-        
+
         <View style={{ marginHorizontal: 20 }}>
           <HeaderTitle title='Les plus proche de vous' />
         </View>
