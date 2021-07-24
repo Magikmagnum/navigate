@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
-import { ImageBody, HeaderAvatar, HeaderTitle, HeaderMore, Item, Category, HeaderShown, SkillDash, Paragraphe } from '../components/cardsComponent'
+import { ImageContent, HeaderAvatar, HeaderTitle, HeaderMore, Item, Category, HeaderShown, SkillDash, Paragraphe } from '../components/cardsComponent'
 import { Button } from '../components/formComponent'
 import Map from '../components/mapComponent'
 import { experienceStorage } from '../helpers/experienceStorage'
@@ -58,8 +58,8 @@ export default function SkillsChannelScreen(props) {
     return (
       <>
         <ScrollView onPress={() => setModalVisible(true)} style={{ ...styles.content, ...props.styleContent, height: 'auto', backgroundColor: '#fff' }}>
+          <ImageContent imageUri={state.imageUri} />
           <View style={{ paddingHorizontal: 20 }}>
-            <ImageBody imageUri={state.imageUri} />
             <View style={{ ...styles.head, paddingTop: 20, position: "relative" }}>
               <HeaderAvatar avatarUri={state.avatarUri} />
               <View style={{ position: "absolute", left: 70, top: 4 }}>

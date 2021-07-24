@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, StatusBar, TouchableOpacity, ScrollView } from 'react-native'
+import { StyleSheet, View, StatusBar, TouchableOpacity, ScrollView, Text, TextInput } from 'react-native'
 
 import { Context } from '../store/configureStore'
 import { login_ckeck, getSkills } from '../store/API/RatisseurApi'
@@ -31,7 +31,6 @@ export default function SignInScreen({ navigation }) {
 
   const refInput1 = React.createRef();
   const refInput2 = React.createRef();
-
 
 
 
@@ -88,6 +87,12 @@ export default function SignInScreen({ navigation }) {
       getSignIn()
     }
   }
+
+  // onSubmit method
+  const onSubmit = (data) => {
+    console.log(data, 'data');
+  };
+
 
   return (
     <View style={styles.container}>
@@ -183,6 +188,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 50,
   },
+
+
+
+  label: {
+    margin: 20,
+    marginLeft: 0
+  },
+  input: {
+    height: 40,
+    padding: 10,
+    borderRadius: 4,
+  },
+
 });
 
 

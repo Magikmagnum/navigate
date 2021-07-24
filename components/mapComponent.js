@@ -1,17 +1,16 @@
-import React, { useState, useEffect, useRef, Component } from 'react'
-import { Platform, Text, View, StyleSheet} from 'react-native'
+import React from 'react'
+import { Text, View, StyleSheet } from 'react-native'
 import MapView from 'react-native-maps'
 import Constants from 'expo-constants'
 
 
 
-export default function MapScreen (props) {
-  const latitude =  props.coords.latitude
-  const longitude =  props.coords.longitude
-  const avatar = props.avatar
+export default function MapScreen(props) {
+  const latitude = props.coords.latitude
+  const longitude = props.coords.longitude
 
-  if(latitude && longitude){
-    return(
+  if (latitude && longitude) {
+    return (
       <MapView
         initialRegion={{
           latitude: latitude,
@@ -19,46 +18,24 @@ export default function MapScreen (props) {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
-        style={{...styles.container, ...props.styleMap}}
-        >
-          <MapView.Marker.Animated
-              key={1}
-              coordinate={{ latitude, longitude }}
-            />
+        style={{ ...styles.container, ...props.styleMap }}
+      >
+        <MapView.Marker.Animated
+          key={1}
+          coordinate={{ latitude, longitude }}
+        />
       </MapView>
     )
   }
 
-  return(
+  return (
     <View style={styles.container}>
       <Text style={styles.paragraph}>Impossible de localiser le lieu</Text>
     </View>
   )
 }
 
-/*
-const latitude =  this.props.coords.latitude
-    const longitude =  this.props.coords.longitude
 
-    if(latitude && longitude){
-      console.log(latitude, longitude)
-    }
-
-    return(
-      <View style={styles.container}>
-        <Text style={styles.paragraph}>Impossible de localiser le lieu</Text>
-      </View>
-    )
-
-
-
-
-
-
-
-
-
-*/
 const styles = StyleSheet.create({
   container: {
     flex: 1,

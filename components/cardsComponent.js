@@ -54,6 +54,14 @@ export function ImageBody(props) {
   )
 }
 
+export function ImageContent(props) {
+  return (
+    <View style={styles.body}>
+      <Image style={{ ...styles.bodyImage, width: windowWidth, borderRadius: 0, marginLeft: 40 }} source={props.imageUri} />
+    </View>
+  )
+}
+
 export function HeaderTitle(props) {
   let styleTitle = {}
   if (!props.subTitle) {
@@ -87,9 +95,6 @@ export function RealCardBottom(props) {
     </View>
   )
 }
-
-
-
 
 
 export function Category(props) {

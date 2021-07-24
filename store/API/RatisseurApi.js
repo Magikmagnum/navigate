@@ -1,9 +1,9 @@
 
 import React, { useEffect, useState } from "react";
-//import RNFetchBlob from 'rn-fetch-blob'
 
-const API_PATH = "http://192.168.1.76:8000";
+const API_PATH = "http://192.168.1.196:8000";
 const API_LOCAL = API_PATH + "/api/v1/";
+
 
 export const API_IMG_SKILL = (ImageName) => {
     return { uri: API_PATH + "/images/skill/" + ImageName };

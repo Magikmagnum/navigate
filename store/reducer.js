@@ -105,7 +105,6 @@ export default function reducer(state, action) {
 
 
     case 'ADD_AVATAR':
-      console.log('ADD_AVATAR', action.payload)
       nextState = {
         ...state,
         avatar: action.payload,
@@ -123,7 +122,7 @@ export default function reducer(state, action) {
         // Le film n'est pas dans les films favoris, on l'ajoute à la liste
         nextState = {
           ...state,
-          userSkills: action.payload //[...state.userSkills, action.payload]
+          userSkills: [action.payload, ...state.userSkills]
         }
       } else {
         // Le film est déjà dans les favoris, on le supprime de la liste
@@ -141,6 +140,19 @@ export default function reducer(state, action) {
       return state
 
 
+    case 'UPDATE_SKILL_LIST':
+
+      nextState = {
+        ...state,
+        userSkills: action.payload
+      }
+
+      if (state.userSkills) {
+        setUserSkillsStorage(nextState)
+        return nextState
+      }
+
+      return state
 
     default:
       return state

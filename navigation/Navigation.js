@@ -15,15 +15,15 @@ import SignUpScreen from '../screens/SignUpScreen'
 import AvatarScreen from '../screens/AvatarScreen'
 import IdentityScreen from '../screens/IdentityScreen'
 import ResetingScreen from '../screens/ResetingScreen'
+import YourSkillScreen from '../screens/YourSkillScreen'
 import SkillsChannelScreen from '../screens/skillsChannelScreen'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
 
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
 const SettingsStack = createStackNavigator()
-const ProxiStack = createStackNavigator()
+const SkillStack = createStackNavigator()
 const ProfilStack = createStackNavigator()
 const SignUpStack = createStackNavigator()
 const HomeStack = createStackNavigator()
@@ -96,14 +96,14 @@ const SignUpStackNavigator = ({ navigation, route }) => {
 }
 
 
-const ProxiStackNavigator = ({ navigation, route }) => {
+const SkillStackNavigator = ({ navigation, route }) => {
   if (route.state) {
     navigation.setOptions({
       tabBarVisible: route.state.index > 0 ? false : true
     })
   }
   return (
-    <ProxiStack.Navigator
+    <SkillStack.Navigator
       screenOptions={{
         headerStyle: {
           backgroundColor: '#fff',
@@ -117,15 +117,15 @@ const ProxiStackNavigator = ({ navigation, route }) => {
         ...TransitionPresets.SlideFromRightIOS
       }}
       initialRouteName='Catalog'>
-      <ProxiStack.Screen name="Catalog" component={CatalogScreen} options={{
+      <SkillStack.Screen name="Catalog" component={CatalogScreen} options={{
         title: "Catalogue",
         headerShown: false
       }} />
-      <ProxiStack.Screen name="Skill" component={SkillsChannelScreen} options={{
+      <SkillStack.Screen name="YourSkill" component={YourSkillScreen} options={{
         title: "Competence",
         headerShown: false
       }} />
-    </ProxiStack.Navigator>
+    </SkillStack.Navigator>
   )
 }
 
@@ -256,7 +256,7 @@ const HomeTabNavigator = () => (
   >
 
     <Tab.Screen name='Acceuil' component={HomeStackNavigator} ></Tab.Screen>
-    <Tab.Screen name='Catalogue' component={ProxiStackNavigator}></Tab.Screen>
+    <Tab.Screen name='Catalogue' component={SkillStackNavigator}></Tab.Screen>
     <Tab.Screen name='Profil' component={ProfilStackNavigator}></Tab.Screen>
   </Tab.Navigator>
 )

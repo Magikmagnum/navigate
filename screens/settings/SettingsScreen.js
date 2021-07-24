@@ -23,27 +23,6 @@ export default function SettingsScreen() {
   const [state, dispatch] = useContext(Context)
   const navigation = useNavigation()
 
-
-  const importData = async () => {
-    try {
-      /*const keys = await AsyncStorage.getAllKeys()
-      const identity = await AsyncStorage.getItem('identity')
-      console.log('identity', identity)
-      const compte = await AsyncStorage.getItem('compte')
-      console.log('compte', compte)
-      const contact = await AsyncStorage.getItem('contact')
-      console.log('contact', contact)*/
-      const avatar = await AsyncStorage.getItem('avatar')
-      console.log(state)
-      //console.log('state', state.compte.api_key)
-      //const result = await AsyncStorage.multiGet(keys)
-      //return result.map(req => JSON.parse(req)).forEach(console.log)
-    } catch (erreur) { console.error(erreur) }
-  }
-
-
-  importData()
-
   const DATA = [
     {
       title: 'Identité',

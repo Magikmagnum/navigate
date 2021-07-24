@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Modal } from 'react-native';
-import { ImageBody, HeaderAvatar, HeaderTitle, HeaderMore, SkillDash } from './cardsComponent'
-import { SkillsChannelScreen } from '../screens/skillsChannelScreen'
-import { Start } from '../components/startComponent'
+import { ImageBody, HeaderAvatar } from './cardsComponent'
 import { Ionicons } from '@expo/vector-icons'
-import { BorderlessButton, BaseButton, TouchableOpacity, RectButton } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const color = require('../helpers/color.json')
 
@@ -50,13 +48,10 @@ export function SkillsCards(props) {
         </TouchableOpacity>
     )
 }
-/** */
 
 const styles = StyleSheet.create({
     content: {
         height: 382,
-        //backgroundColor:'#aaa', 
-        //margin:8,
     },
     head: {
         flex: 1,

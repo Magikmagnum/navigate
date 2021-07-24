@@ -15,9 +15,7 @@ export default function AddNewSkill() {
     const [themeStyle, setThemeStyle] = useRecoilState(themeState);
 
     const skillsAbstractionCallback = useCallback(SkillsAbstraction({}, setModalVisible), []);
-    console.log('----------------------------------- Start AddNewSkill --------------------------------');
-
-
+    console.log('render AddNewSkill avec  useMemo')
     return (
         <View style={{ marginHorizontal: 20, marginBottom: 20 }}>
             <HeaderTitle color={themeStyle.color} subColor={themeStyle.subColor} title='Ajouter une competence' subTitle="Ajouter une competence à votre compte vous permet d'aparaitre et de vendre vos competence dans le catalogue Ratisseur." />

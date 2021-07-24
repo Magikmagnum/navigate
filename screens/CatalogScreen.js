@@ -1,27 +1,20 @@
-import React, { useState, useContext, useEffect, memo, useCallback } from 'react';
+import React, { useState } from 'react';
 import {
-  StyleSheet, View, StatusBar, Text, Dimensions,
-  TouchableOpacity, ScrollView, SafeAreaView, Modal
+  StyleSheet, View, StatusBar, ScrollView, SafeAreaView
 } from 'react-native';
-import { Context } from '../store/configureStore';
-import { Ionicons } from '@expo/vector-icons';
-import { HeaderShown, HeaderTitle, Category } from '../components/cardsComponent';
+import { HeaderShown } from '../components/cardsComponent';
 import UserSkillListe from '../components/UserSkillListeComponent';
 import AddNewSkill from '../components/AddNewSkillComponent';
-import { SkillsAbstraction } from '../components/settings/skills/AddComponent';
-import { getUserSkill } from '../store/API/RatisseurApi';
 import { useRecoilState } from 'recoil';
 import { themeState } from '../store/atomes/theme';
 
-const color = require('../helpers/color.json')
-const windowWidth = Dimensions.get('window').width
-const windowHeight = Dimensions.get('window').height
 
 export default function HomeScreen({ navigation }) {
 
-  console.log('----------------------------------- Start competence screen --------------------------------');
   const [theme, setTheme] = useState('light');
   const [themeStyle, setThemeStyle] = useRecoilState(themeState);
+
+  console.log('HomeScreen')
 
   return (
     <View style={{ ...styles.container, backgroundColor: themeStyle.content }}>
@@ -32,9 +25,8 @@ export default function HomeScreen({ navigation }) {
 
       <ScrollView>
         <AddNewSkill />
-        <UserSkillListe />
+        <UserSkillListe navigation={navigation} />
       </ScrollView>
-
     </View>
   )
 }

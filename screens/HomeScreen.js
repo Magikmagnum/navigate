@@ -42,7 +42,6 @@ export default function CatalogScreen({ navigation }) {
         setContent(skills);
       }
     }
-    console.log(loading);
   }, [loading])
 
 
@@ -97,17 +96,6 @@ export default function CatalogScreen({ navigation }) {
           <HeaderTitle title='Les plus solicité' />
         </View>
 
-
-        {content}
-
-        <SkillsSlide callBack={SkillsScreen} />
-
-      </ScrollView>
-    </>
-  )
-}
-
-/*
         <SkillsCards
           navigation={navigation}
           id={1} callback={SkillsScreen}
@@ -123,56 +111,16 @@ export default function CatalogScreen({ navigation }) {
           experience={6} training={2} recommendation={8}
           note={5} voter={1} />
 
+        {content}
 
-        <SkillsCards
-          navigation={navigation}
-          id={3} callback={SkillsScreen}
-          imageUri={require("../assets/avatar/fete.jpg")} avatarUri={require("../assets/avatar/img1.jpg")}
-          title='Decorateur' subTitle='Okala, Akanda / Gabon'
-          experience={6} training={2} recommendation={8}
-          note={5} voter={1} />
+        <SkillsSlide callBack={SkillsScreen} />
 
-        <SkillsCards
-          navigation={navigation}
-          id={4} callback={SkillsScreen}
-          imageUri={require("../assets/avatar/plom.jpg")} avatarUri={require("../assets/avatar/img2.jpg")}
-          title='Plombier' subTitle='Plein-orety, Libreville / Gabon'
-          experience={6} training={2} recommendation={8}
-          note={5} voter={1} />
-
-        <SkillsCards
-          navigation={navigation}
-          id={5} callback={SkillsScreen}
-          imageUri={require("../assets/avatar/medecin.jpg")} avatarUri={require("../assets/avatar/img3.jpg")}
-          title='Infirmier' subTitle='Louis, Libreville / Gabon'
-          experience={6} training={2} recommendation={8}
-          note={5} voter={1} />
-        <SkillsCards
-          navigation={navigation}
-          id={6} callback={SkillsScreen}
-          imageUri={require("../assets/avatar/macon.jpg")} avatarUri={require("../assets/avatar/img4.jpg")}
-          title='Maçon' subTitle='Ondogho, Nzeng-ayong / Gabon'
-          experience={6} training={2} recommendation={8}
-          note={5} voter={1} />
-        <SkillsCards
-          navigation={navigation}
-          id={7} callback={SkillsScreen}
-          imageUri={require("../assets/avatar/gara.jpg")} avatarUri={require("../assets/avatar/img5.jpg")}
-          title='Mecanicier auto' subTitle='Okala, Akanda / Gabon'
-          experience={6} training={2} recommendation={8}
-          note={5} voter={1} />
-        <SkillsCards
-          navigation={navigation}
-          id={8} callback={SkillsScreen}
-          imageUri={require("../assets/avatar/ant.jpg")} avatarUri={require("../assets/avatar/img6.jpg")}
-          title='Antenniste canal+' subTitle='Agondje chateau, Akanda / Gabon'
-          experience={6} training={2} recommendation={8}
-          note={5} voter={1} />
+      </ScrollView>
+    </>
+  )
+}
 
 
-
-
-*/
 const styles = StyleSheet.create({
   container: {
     flex: 1,

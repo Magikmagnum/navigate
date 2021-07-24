@@ -24,3 +24,8 @@
 [0513/163338.545:ERROR:exception_snapshot_win.cc(98)] thread ID 7284 not found in process
 [0513/163338.545:ERROR:exception_snapshot_win.cc(98)] thread ID 11504 not found in process
 [0513/163338.545:ERROR:exception_snapshot_win.cc(98)] thread ID 12012 not found in process
+[1018/063026.079:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\ericg\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\7193a106-5ef6-4cd3-9caf-6dc2ca550230: Le chemin d’accès spécifié est introuvable. (0x3)
+[1018/063026.134:ERROR:directory_reader_win.cc(43)] FindFirstFile: Le chemin d’accès spécifié est introuvable. (0x3)
+[1018/063026.134:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\ericg\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\bae3a9ed-ec68-4af9-abf2-03907a51a593: Le chemin d’accès spécifié est introuvable. (0x3)
+[1018/063026.154:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\ericg\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\583be9f6-16b7-4eb9-b43b-5338fcb09294: Le chemin d’accès spécifié est introuvable. (0x3)
+[1019/073047.728:ERROR:directory_reader_win.cc(43)] FindFirstFile: Le chemin d’accès spécifié est introuvable. (0x3)

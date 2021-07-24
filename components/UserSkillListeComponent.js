@@ -4,22 +4,24 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Context } from '../store/configureStore';
 import { HeaderTitle, Category } from '../components/cardsComponent';
 import { getUserSkill, API_IMG_SKILL } from '../store/API/RatisseurApi';
-
-
 import { useRecoilState } from 'recoil';
+import { useNavigation } from '@react-navigation/native';
 import { themeState } from '../store/atomes/theme';
+import { yourskillState } from '../store/atomes/yourskill';
+
 
 
 
 export default function UserSkillListe() {
-    console.log('----------------------------------- Start UserSkillListe --------------------------------');
 
     const [state, dispatch] = useContext(Context);
     const [yourSkills, setYourSkills] = useState(false);
+    const [nextSkillView, setNextSkillView] = useRecoilState(yourskillState);
     const [themeStyle, setThemeStyle] = useRecoilState(themeState);
+    const navigation = useNavigation();
 
 
-    // recover user skills from the database
+    // recover user-skills from the database
     useEffect(() => {
         getUserSkill(state.compte.api_key)
             .then((result) => {
@@ -27,13 +29,13 @@ export default function UserSkillListe() {
                     alert(result.message)
                 } else {
                     // add in global state
-                    toggleSkills(result.data)
+                    console.log(result)
+                    updateSkillList(result.data)
                 }
             })
             .catch((e) => {
                 console.log(e)
             })
-
     }, [])
 
 
@@ -43,41 +45,43 @@ export default function UserSkillListe() {
         const skills = state.userSkills;
         if (skills != undefined) {
             const skillListe = skills.map((item) => {
-
-                console.log(item);
                 return <SkillIteme title={item.skills.name} key={item.id} imageUri={API_IMG_SKILL(item.imageName)} />
             })
             setYourSkills(skillListe);
         }
-
     }, [state])
 
+
     //dispatch in reduce
-    async function toggleSkills(data) {
-        await dispatch({ type: 'TOGGLE_SKILL', payload: data });
+    async function updateSkillList(data) {
+
+        await dispatch({ type: 'UPDATE_SKILL_LIST', payload: data.reverse() });
     }
 
 
     // Skill Iteme 
     const SkillIteme = ({ title, imageUri }) => {
+        const subText = { fontSize: 13, color: '#222', color: themeStyle.subColor };
         return (
-            <TouchableOpacity style={{ marginBottom: 20, flexDirection: 'row' }}>
+            <TouchableOpacity style={{ marginBottom: 20, flexDirection: 'row' }} onPress={() => {
+                setNextSkillView({ title, imageUri });
+                navigation.navigate('YourSkill');
+            }}>
                 <Category imageUri={imageUri} />
                 <View style={{ flexDirection: 'column', marginHorizontal: 20, flex: 1 }}>
                     <Text style={{ fontWeight: 'bold', color: themeStyle.color, marginBottom: 6 }}>{title}</Text>
-                    <Text style={{ fontSize: 13, color: '#222', color: themeStyle.subColor }}>0 vue</Text>
-                    <Text style={{ fontSize: 13, color: '#222', color: themeStyle.subColor }}>0 recomandation</Text>
-                    <Text style={{ fontSize: 13, color: '#222', color: themeStyle.subColor }}>0 commentaire</Text>
-                    <Text style={{ fontSize: 13, color: '#222', color: themeStyle.subColor }}>0 Partage</Text>
-
+                    <Text style={subText}>180 vue</Text>
+                    <Text style={subText}>3 recomandation</Text>
+                    <Text style={subText}>18 commentaire</Text>
+                    <Text style={subText}>0 Partage</Text>
                 </View>
-
                 <View style={{ backgroundColor: 'red', height: 24, width: 24, marginRight: 20, borderRadius: 12, alignItems: "center", justifyContent: "center" }} >
                     <Text style={{ color: '#fff', fontSize: 10 }}>14</Text>
                 </View>
             </TouchableOpacity>
         )
     }
+
 
     return (
         <View style={{}}>

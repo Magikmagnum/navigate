@@ -20,10 +20,6 @@ const color = require('../../../helpers/color.json')
 
 export default function SkillsModifyComponent({ setModalVisible }) {
 
-    console.log('----------------------------------- Start Machine --------------------------------');
-
-
-
     const [state, dispatch] = React.useContext(Context)
     const refInputSkill = React.createRef()
 
@@ -38,6 +34,7 @@ export default function SkillsModifyComponent({ setModalVisible }) {
 
     const [errorForm, setErrorForm] = React.useState({ skill: false, category: false, newCategory: false })
 
+
     React.useEffect(() => {
         (async () => {
             if (Constants.platform.ios) {
@@ -49,10 +46,10 @@ export default function SkillsModifyComponent({ setModalVisible }) {
         })()
     }, [])
 
+
     const getValidatorData = () => {
 
-
-        //setIsLoading(true)
+        setIsLoading(true)
 
         let error = { skill: false, category: false, newCategory: false }
         const data = new FormData();
@@ -73,16 +70,12 @@ export default function SkillsModifyComponent({ setModalVisible }) {
             })
         }
 
-
-
         if (error.skill === false) {
             postUserSkill(data, state.compte.api_key)
                 .then(dataPostUserSkill => {
-                    console.log(dataPostUserSkill)
-                    return true;
                     if (dataPostUserSkill.status == 201) {
                         addUserSkill(dataPostUserSkill.data)
-                        //handleSuccess(setIsLoading, setLoadingSuccess, (() => setModalVisible(false)))
+                        handleSuccess(setIsLoading, setLoadingSuccess, (() => setModalVisible(false)))
                     } else {
                         if (dataPostUserSkill.data) {
                             dataPostUserSkill.data.forEach(item => {
@@ -99,13 +92,13 @@ export default function SkillsModifyComponent({ setModalVisible }) {
                         } else {
                             console.log('Error', dataPostUserSkill.message)
                         }
-                        //handleFailure(setIsLoading, setLoadingFailure, (() => setErrorForm(error)))
+                        handleFailure(setIsLoading, setLoadingFailure, (() => setErrorForm(error)))
                     }
                 }).catch(e => {
-                    //handleFailure(setIsLoading, setLoadingFailure, (() => console.log('putCompte error', e)))
+                    handleFailure(setIsLoading, setLoadingFailure, (() => console.log('putCompte error', e)))
                 })
         } else {
-            //handleFailure(setIsLoading, setLoadingFailure, (() => setErrorForm(error)))
+            handleFailure(setIsLoading, setLoadingFailure, (() => setErrorForm(error)))
         }
     }
 
@@ -211,18 +204,7 @@ export function SkillsAbstraction(data, setModalVisible) {
 
 
 const styles = StyleSheet.create({
-    container: {
-        //flex: 1,
-        //backgroundColor: '#fff',
-        //justifyContent: "center",
-    },
     head: {
         marginBottom: 28
-    },
-    body: {
-        marginVertical: 20,
-    },
-    boxButtom: {
-        marginVertical: 20,
     },
 });
