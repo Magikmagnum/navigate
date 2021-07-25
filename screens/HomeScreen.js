@@ -1,7 +1,7 @@
-import React, { useContext, useState, useCallback, useEffect } from 'react';
-import { StyleSheet, View, StatusBar, Dimensions, Modal, SafeAreaView, TextInput } from 'react-native'
+import React, { useContext, useState, useEffect } from 'react';
+import { StyleSheet, View, StatusBar, Dimensions, } from 'react-native'
 
-import { Category, HeaderShown, HeaderTitle, HeaderShownSearch } from '../components/cardsComponent'
+import { Category, HeaderTitle, HeaderShownSearch } from '../components/cardsComponent'
 import { Context } from '../store/configureStore'
 import SkillsChannelScreen from './skillsChannelScreen'
 import { SkillsCards } from '../components/skillsCardsComponent'
@@ -15,34 +15,32 @@ import { ScrollView } from 'react-native-gesture-handler'
 
 const color = require('../helpers/color.json')
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 export default function CatalogScreen({ navigation }) {
 
   const [state, dispatch] = useContext(Context)
-  const [modalVisible, setModalVisible] = useState(false);
   const [content, setContent] = useState(false);
-  const [loading, response] = getSkills(state.compte.api_key);
+  //const [loading, response] = getSkills(state.compte.api_key);
 
 
-  useEffect(() => {
-
-    if (loading == false) {
-      if (response.status == 200) {
-        const skills = response.data.map((item) => {
-          return <SkillsCards
-            key={item.id}
-            navigation={navigation}
-            id={3} callback={SkillsScreen}
-            imageUri={require("../assets/avatar/fete.jpg")} avatarUri={require("../assets/avatar/img1.jpg")}
-            title={item.skills.name} subTitle='Okala, Akanda / Gabon'
-            experience={6} training={2} recommendation={8}
-            note={5} voter={1} />
-        })
-        setContent(skills);
-      }
-    }
-  }, [loading])
+  /* useEffect(() => {
+ 
+     if (loading == false) {
+       if (response.status == 200) {
+         const skills = response.data.map((item) => {
+           return <SkillsCards
+             key={item.id}
+             navigation={navigation}
+             id={3} callback={SkillsScreen}
+             imageUri={require("../assets/avatar/fete.jpg")} avatarUri={require("../assets/avatar/img1.jpg")}
+             title={item.skills.name} subTitle='Okala, Akanda / Gabon'
+             experience={6} training={2} recommendation={8}
+             note={5} voter={1} />
+         })
+         setContent(skills);
+       }
+     }
+   }, [loading])*/
 
 
   const SkillsScreen = (props) => {
@@ -92,10 +90,11 @@ export default function CatalogScreen({ navigation }) {
           <HeaderTitle title='Les plus solicité' />
         </View>
         <SkillsSlide callBack={SkillsScreen} />
-        <View style={{ marginHorizontal: 20 }}>
-          <HeaderTitle title='Les plus solicité' />
-        </View>
 
+
+        <View style={{ marginHorizontal: 20 }}>
+          <HeaderTitle title='Nos propositions' />
+        </View>
         <SkillsCards
           navigation={navigation}
           id={1} callback={SkillsScreen}
@@ -111,7 +110,6 @@ export default function CatalogScreen({ navigation }) {
           experience={6} training={2} recommendation={8}
           note={5} voter={1} />
 
-        {content}
 
         <SkillsSlide callBack={SkillsScreen} />
 

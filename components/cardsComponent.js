@@ -2,11 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, SafeAreaView, TextInput } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'
 import { BorderlessButton } from 'react-native-gesture-handler'
-import { Button } from '../components/formComponent'
 
 const color = require('../helpers/color.json')
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 export function HeaderAvatar(props) {
   return (
@@ -63,16 +61,19 @@ export function ImageContent(props) {
 }
 
 export function HeaderTitle(props) {
+
   let styleTitle = {}
   if (!props.subTitle) {
     styleTitle = {
       justifyContent: 'center'
     }
   }
+
   let subColor = {}
   if (props.subColor) {
     subColor = { color: props.subColor }
   }
+
   return (
     <View style={{ ...styles.headerTextContent, ...styleTitle, marginBottom: 2 }}>
       <Text style={{ ...styles.headText, color: props.color }} numberOfLines={props.numberOfLines}>{props.title}</Text>
@@ -80,7 +81,6 @@ export function HeaderTitle(props) {
         style={{ ...styles.headSubText, marginTop: 4, lineHeight: 16, ...subColor }}
         numberOfLines={props.subNumberOfLines}
         dataDetectorType={props.subDataDetectorType}
-
       >{props.subTitle}</Text> : null}
     </View>
   )

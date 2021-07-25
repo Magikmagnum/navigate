@@ -69,16 +69,8 @@ export default function Navigation() {
   )
 }
 
-function MyTabs() {
-  return (
-    <TopTab.Navigator>
-      <TopTab.Screen name="Home" component={HomeScreen} />
-      <TopTab.Screen name="Settings" component={SettingsScreen} />
-    </TopTab.Navigator>
-  )
-}
 
-const SignUpStackNavigator = ({ navigation, route }) => {
+const SignUpStackNavigator = () => {
 
   return (
     <SignUpStack.Navigator

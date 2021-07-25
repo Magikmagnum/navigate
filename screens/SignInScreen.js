@@ -1,11 +1,14 @@
-import React from 'react'
-import { StyleSheet, View, StatusBar, TouchableOpacity, ScrollView, Text, TextInput } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, View, StatusBar, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native'
+import { themeState } from '../store/atomes/theme';
 
+import { HeaderShown } from '../components/cardsComponent';
+import { useRecoilState } from 'recoil';
 import { Context } from '../store/configureStore'
-import { login_ckeck, getSkills } from '../store/API/RatisseurApi'
+import { login_ckeck } from '../store/API/RatisseurApi'
 
 import { Input, Button } from '../components/formComponent'
-import { Header3, Header6 } from '../components/typoComponent'
+import { Header6 } from '../components/typoComponent'
 import { Loading, handleFailure, handleSuccess } from '../components/loadingComponent'
 
 import { passwordValidator, emailValidator } from '../helpers/dataValidatorHelpers'
@@ -16,21 +19,37 @@ import { passwordValidator, emailValidator } from '../helpers/dataValidatorHelpe
 const color = require('../helpers/color.json')
 
 
+//  This arrow function allow you to exit from one field to another by pressing the enter key
+const onSubmitEditing = (ref) => {
+  if (ref) {
+    ref.current.focus()
+  } else {
+    getSignIn()
+  }
+}
 
 export default function SignInScreen({ navigation }) {
 
-  const [username, setUsername] = React.useState('')
-  const [password, setPassword] = React.useState('')
-  const [errorForm, setErrorForm] = React.useState({ username: false, password: false })
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [errorForm, setErrorForm] = useState({ username: false, password: false })
 
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [loadingSuccess, setLoadingSuccess] = React.useState(false)
-  const [loadingFailure, setLoadingFailure] = React.useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [loadingSuccess, setLoadingSuccess] = useState(false)
+  const [loadingFailure, setLoadingFailure] = useState(false)
+
+
+
+
+
 
   const [state, dispatch] = React.useContext(Context)
 
   const refInput1 = React.createRef();
   const refInput2 = React.createRef();
+
+  const [theme, setTheme] = useState('light');
+  const [themeStyle, setThemeStyle] = useRecoilState(themeState);
 
 
 
@@ -80,32 +99,19 @@ export default function SignInScreen({ navigation }) {
   }
 
 
-  const onSubmitEditing = (ref) => {
-    if (ref) {
-      ref.current.focus()
-    } else {
-      getSignIn()
-    }
-  }
-
-  // onSubmit method
-  const onSubmit = (data) => {
-    console.log(data, 'data');
-  };
-
-
   return (
     <View style={styles.container}>
+      <SafeAreaView style={{ borderBottomColor: themeStyle.border, borderBottomWidth: 1 }}>
+        <StatusBar backgroundColor={themeStyle.content} networkActivityIndicatorVisible={true} barStyle={theme == 'dark' ? 'light-content' : 'dark-content'} hidden={false} />
+        <HeaderShown title='Connexion' theme={theme} />
+      </SafeAreaView>
+
       <ScrollView style={{ padding: 20 }}>
-        <StatusBar backgroundColor="#fff" networkActivityIndicatorVisible={true} barStyle='dark-content' hidden={false} />
 
         <View style={styles.head}>
-          <Header3
-            title='Connexion'
-            fontWeight="bold"
-          />
+
           <Header6
-            title="Bienvenu sur le catalogue ratisseur. Connectez-vous à votre compte"
+            title="Bienvenu sur la page de connexion du catalogue de competence ratisseur. Si, vous avez deja un compte, connectez-vous ici. Sinon, rendez-vous sur inscrition plus bas."
           />
         </View>
 
@@ -143,6 +149,7 @@ export default function SignInScreen({ navigation }) {
         </View>
 
         <View style={styles.foot}>
+
           <TouchableOpacity style={{ marginVertical: 8 }} onPress={() => navigation.navigate('SignUp')}>
             <Header6
               title="Vous n'avez pas de compte ? Inscription"
@@ -150,6 +157,7 @@ export default function SignInScreen({ navigation }) {
               fontWeight="bold"
             />
           </TouchableOpacity>
+
           <TouchableOpacity style={{ marginVertical: 8 }} onPress={() => navigation.navigate('Reset')}>
             <Header6
               title="Mot de passe oublié ?"
@@ -159,7 +167,9 @@ export default function SignInScreen({ navigation }) {
           </TouchableOpacity>
         </View>
       </ScrollView>
+
       {isLoading ? <Loading success={loadingSuccess} failure={loadingFailure} /> : <View />}
+
     </View>
   )
 }

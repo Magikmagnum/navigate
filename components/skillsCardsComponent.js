@@ -11,7 +11,7 @@ export function SkillsCards(props) {
     const [modalVisible, setModalVisible] = useState(false);
     return (
         <TouchableOpacity style={{ ...styles.content, ...props.styleContent, height: 'auto', paddingHorizontal: 20 }} onPress={() => {
-            props.navigation.navigate('Skill', props)
+            props.navigation.navigate('Skill', JSON.stringify(props))
         }}>
             <ImageBody imageUri={props.imageUri} />
             <View style={styles.head}>
@@ -43,7 +43,7 @@ export function SkillsCards(props) {
                 visible={modalVisible}
                 onRequestClose={() => setModalVisible(false)}
             >
-                {modalVisible ? props.callback(props) : false}
+                {modalVisible && props.callback(props)}
             </Modal>
         </TouchableOpacity>
     )

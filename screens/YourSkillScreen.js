@@ -10,13 +10,14 @@ import { Start } from '../components/startComponent'
 
 
 
+
 export default function YourSkillScreen() {
 
     const [theme, setTheme] = useState('light');
     const [themeStyle, setThemeStyle] = useRecoilState(themeState);
     const [nextSkillView, setNextSkillView] = useRecoilState(yourskillState);
 
-    console.log(nextSkillView.imageUri)
+
     return (
         <View style={{ ...styles.container, backgroundColor: themeStyle.content }}>
             <SafeAreaView style={{ borderBottomColor: themeStyle.border, borderBottomWidth: 1 }}>

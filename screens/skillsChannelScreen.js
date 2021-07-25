@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Dimensions } from 'react-native';
-import { ImageContent, HeaderAvatar, HeaderTitle, HeaderMore, Item, Category, HeaderShown, SkillDash, Paragraphe } from '../components/cardsComponent'
+import { StyleSheet, View, StatusBar, ScrollView, SafeAreaView } from 'react-native';
+
+import { HeaderShown, HeaderAvatar, ImageContent, HeaderTitle, Item, Category, SkillDash, Paragraphe } from '../components/cardsComponent';
+import { useRecoilState } from 'recoil';
+import { themeState } from '../store/atomes/theme';
+
+
 import { Button } from '../components/formComponent'
 import Map from '../components/mapComponent'
 import { experienceStorage } from '../helpers/experienceStorage'
@@ -9,14 +14,11 @@ import ExperienceChannelScreen from './ExperienceChannelScreen'
 import TrainingChannelScreen from './TrainingChannelScreen'
 import { ListItemsComponent } from '../components/ListItemsComponent'
 import { Loading } from '../components/loadingComponent'
-import { ScrollView } from 'react-native-gesture-handler'
 
 
 import { Start } from '../components/startComponent'
 
 const color = require('../helpers/color.json')
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 const data = {
   coords: {
@@ -29,21 +31,30 @@ export default function SkillsChannelScreen(props) {
   const [isLoading, setIsLoading] = useState(true)
   const [state, setState] = useState({})
 
+  const [theme, setTheme] = useState('light');
+  const [themeStyle, setThemeStyle] = useRecoilState(themeState);
+
+  const params = JSON.parse(props.route.params)
+
+  console.log('state', state)
+
   useEffect(() => {
-    setState(props.route.params)
+    setState(params)
+    console.log("useEffect")
     setTimeout(() => {
       setIsLoading(false)
     }, 10)
-  })
-
+  }, [])
 
   const experienceScreen = (arg) => {
+    console.log('experienceScreen')
     return (
       <ExperienceChannelScreen data={arg} avatarUri={state.avatarUri} />
     )
   }
 
   const trainingScreen = (arg) => {
+    console.log('trainingScreen')
     return (
       <TrainingChannelScreen data={arg} avatarUri={state.avatarUri} />
     )
@@ -54,9 +65,14 @@ export default function SkillsChannelScreen(props) {
     if (isLoading) {
       return <View><Loading /></View>
     }
+    console.log("RENDER")
 
     return (
       <>
+        <SafeAreaView style={{ borderBottomColor: themeStyle.border, borderBottomWidth: 1 }}>
+          <StatusBar backgroundColor={themeStyle.content} networkActivityIndicatorVisible={true} barStyle={theme == 'dark' ? 'light-content' : 'dark-content'} hidden={false} />
+          <HeaderShown title='Détail' theme={theme} />
+        </SafeAreaView>
         <ScrollView onPress={() => setModalVisible(true)} style={{ ...styles.content, ...props.styleContent, height: 'auto', backgroundColor: '#fff' }}>
           <ImageContent imageUri={state.imageUri} />
           <View style={{ paddingHorizontal: 20 }}>
