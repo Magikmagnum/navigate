@@ -14,7 +14,7 @@ import ExperienceChannelScreen from './ExperienceChannelScreen'
 import TrainingChannelScreen from './TrainingChannelScreen'
 import { ListItemsComponent } from '../components/ListItemsComponent'
 import { Loading } from '../components/loadingComponent'
-
+import { useNavigation } from '@react-navigation/core';
 
 import { Start } from '../components/startComponent'
 
@@ -35,6 +35,8 @@ export default function SkillsChannelScreen(props) {
 
   const [theme, setTheme] = useState('light');
   const [themeStyle, setThemeStyle] = useRecoilState(themeState);
+
+  const navigation = useNavigation()
 
   let params = {}
   console.log('params', props.route)
@@ -73,7 +75,7 @@ export default function SkillsChannelScreen(props) {
       <>
         <SafeAreaView style={{ borderBottomColor: themeStyle.border, borderBottomWidth: 1 }}>
           <StatusBar backgroundColor={themeStyle.content} networkActivityIndicatorVisible={true} barStyle={theme == 'dark' ? 'light-content' : 'dark-content'} hidden={false} />
-          <HeaderShown title='Détail' theme={theme} icon='md-arrow-back' callback={() => alert("coucou")} />
+          <HeaderShown title='Détail' theme={theme} icon='md-arrow-back' callback={() => navigation.navigate('Home', JSON.stringify(props.data))} />
         </SafeAreaView>
 
 
