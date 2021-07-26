@@ -117,7 +117,7 @@ export function Category(props) {
               <Text style={{ fontSize: 13, color: '#222', color: '#888' }}>{props.note}</Text>
               <Ionicons style={{ marginLeft: 2, marginRight: 16 }} name={'md-star'} color='#888' size={13} />
               <Text style={{ fontSize: 13, color: '#222', color: '#888' }}>{props.voter}</Text>
-              <Ionicons style={{ marginLeft: 2 }} name={'md-heart'} color='#888' size={13} />
+              <Ionicons style={{ marginLeft: 2 }} name={'md-bookmark'} color='#888' size={13} />
             </View>
           </View>
         }

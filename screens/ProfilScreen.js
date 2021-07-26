@@ -9,7 +9,6 @@ import moment from "moment"
 const color = require('../helpers/color.json')
 
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 
 export default function ProfilScreen() {
@@ -56,9 +55,15 @@ export default function ProfilScreen() {
       imgUri = { uri: state.avatar }
     }
     let sexe = 'Femme'
+    /*
+    test du sex de l'individu
     if (state.identity.sexe) {
       sexe = 'Homme'
     }
+
+    age 
+    moment(state.identity.brithday).format("DD / MM / YYYY")
+    */
 
     return (
       <View style={{ marginHorizontal: 20, paddingBottom: 20, borderBottomColor: themeStyle.border, borderBottomWidth: 1 }} >
@@ -66,7 +71,7 @@ export default function ProfilScreen() {
           <HeaderAvatarProfil avatarUri={imgUri} />
           <View style={{ flex: 1, marginLeft: 20, height: 82 }} >
             <Text style={{ ...styles.headText, fontSize: 20, marginBottom: 4, color: themeStyle.color }}>{name}</Text>
-            <Text style={{ fontSize: 13, marginBottom: 0, color: themeStyle.subColor }}>{moment(state.identity.brithday).format("DD / MM / YYYY")}</Text>
+            <Text style={{ fontSize: 13, marginBottom: 0, color: themeStyle.subColor }}>{"01/07/1994"}</Text>
             <Text style={{ fontSize: 13, marginBottom: 8, color: themeStyle.subColor }}>{sexe}</Text>
           </View>
         </View>
@@ -130,8 +135,8 @@ export default function ProfilScreen() {
       </SafeAreaView>
 
       <ScrollView >
-        <ProfilHeader name={state.identity.name} navigation={navigation} state={state} />
-        <ProfilBody name={state.identity.name} navigation={navigation} state={state} />
+        <ProfilHeader name={'Gansa eric'} navigation={navigation} state={state} />
+        <ProfilBody name={'Gansa eric'} navigation={navigation} state={state} />
       </ScrollView>
     </View>
   )

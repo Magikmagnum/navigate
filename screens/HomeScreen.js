@@ -18,12 +18,12 @@ const windowWidth = Dimensions.get('window').width;
 
 export default function CatalogScreen({ navigation }) {
 
+  /*
   const [state, dispatch] = useContext(Context)
   const [content, setContent] = useState(false);
-  //const [loading, response] = getSkills(state.compte.api_key);
+  const [loading, response] = getSkills(state.compte.api_key);
 
-
-  /* useEffect(() => {
+  useEffect(() => {
  
      if (loading == false) {
        if (response.status == 200) {
@@ -40,20 +40,9 @@ export default function CatalogScreen({ navigation }) {
          setContent(skills);
        }
      }
-   }, [loading])*/
+   }, [loading])
+  */
 
-
-  const SkillsScreen = (props) => {
-    return (
-      <SkillsChannelScreen
-        id={props.id}
-        imageUri={props.imageUri} avatarUri={props.avatarUri}
-        title={props.title} subTitle={props.subTitle}
-        note={props.note} voter={props.voter}
-        experience={props.experience} training={props.training} recommendation={props.recommendation}
-      />
-    )
-  }
 
 
   return (
@@ -63,55 +52,39 @@ export default function CatalogScreen({ navigation }) {
         <HeaderShownSearch />
       </View>
 
-
       <ScrollView style={{ ...styles.container, backgroundColor: '#fff' }}>
 
         <View style={{ marginHorizontal: 20 }}>
           <HeaderTitle title='Les plus proche de vous' />
         </View>
-        <View style={{ height: 147, marginBottom: 20, paddingVertical: 6, justifyContent: 'center', alignItems: 'center' }}>
-          <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-          >
-            <Category imageUri={require("../assets/avatar/fete.jpg")} />
-            <Category imageUri={require("../assets/avatar/plom.jpg")} />
-            <Category imageUri={require("../assets/avatar/medecin.jpg")} />
-            <Category imageUri={require("../assets/avatar/rest.jpg")} />
-            <Category imageUri={require("../assets/avatar/gara.jpg")} />
-            <Category imageUri={require("../assets/avatar/nounou.jpg")} />
-            <Category imageUri={require("../assets/avatar/macon.jpg")} />
-            <Category imageUri={require("../assets/avatar/ant.jpg")} />
-          </ScrollView>
-        </View>
-
+        <SkillsSlide />
 
         <View style={{ marginHorizontal: 20 }}>
           <HeaderTitle title='Les plus solicité' />
         </View>
-        <SkillsSlide callBack={SkillsScreen} />
-
+        <SkillsSlide />
 
         <View style={{ marginHorizontal: 20 }}>
           <HeaderTitle title='Nos propositions' />
         </View>
         <SkillsCards
           navigation={navigation}
-          id={1} callback={SkillsScreen}
+          id={1}
           imageUri={require("../assets/avatar/rest.jpg")} avatarUri={require("../assets/avatar/img5.jpg")}
           title='Traiteur' subTitle='Nzeng-Ayong, Libreville / Gabon'
           experience={52} training={102} recommendation={3}
-          note={3} voter={3} />
+          note={3} voter={3}
+        />
         <SkillsCards
           navigation={navigation}
-          id={2} callback={SkillsScreen}
+          id={2}
           imageUri={require("../assets/avatar/nounou.jpg")} avatarUri={require("../assets/avatar/img3.jpg")}
           title='Nounou' subTitle='Charbonnages, Libreville / Gabon'
           experience={6} training={2} recommendation={8}
-          note={5} voter={1} />
+          note={5} voter={1}
+        />
 
-
-        <SkillsSlide callBack={SkillsScreen} />
+        <SkillsSlide />
 
       </ScrollView>
     </>

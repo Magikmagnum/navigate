@@ -28,33 +28,36 @@ const data = {
 }
 
 export default function SkillsChannelScreen(props) {
+
+
   const [isLoading, setIsLoading] = useState(true)
   const [state, setState] = useState({})
 
   const [theme, setTheme] = useState('light');
   const [themeStyle, setThemeStyle] = useRecoilState(themeState);
 
-  const params = JSON.parse(props.route.params)
+  let params = {}
+  console.log('params', props.route)
+  if (props.route) {
+    params = JSON.parse(props.route.params)
+  }
 
   console.log('state', state)
-
+  //return null;
   useEffect(() => {
     setState(params)
-    console.log("useEffect")
     setTimeout(() => {
       setIsLoading(false)
     }, 10)
   }, [])
 
   const experienceScreen = (arg) => {
-    console.log('experienceScreen')
     return (
       <ExperienceChannelScreen data={arg} avatarUri={state.avatarUri} />
     )
   }
 
   const trainingScreen = (arg) => {
-    console.log('trainingScreen')
     return (
       <TrainingChannelScreen data={arg} avatarUri={state.avatarUri} />
     )
@@ -65,14 +68,15 @@ export default function SkillsChannelScreen(props) {
     if (isLoading) {
       return <View><Loading /></View>
     }
-    console.log("RENDER")
 
     return (
       <>
         <SafeAreaView style={{ borderBottomColor: themeStyle.border, borderBottomWidth: 1 }}>
           <StatusBar backgroundColor={themeStyle.content} networkActivityIndicatorVisible={true} barStyle={theme == 'dark' ? 'light-content' : 'dark-content'} hidden={false} />
-          <HeaderShown title='Détail' theme={theme} />
+          <HeaderShown title='Détail' theme={theme} icon='md-arrow-back' callback={() => alert("coucou")} />
         </SafeAreaView>
+
+
         <ScrollView onPress={() => setModalVisible(true)} style={{ ...styles.content, ...props.styleContent, height: 'auto', backgroundColor: '#fff' }}>
           <ImageContent imageUri={state.imageUri} />
           <View style={{ paddingHorizontal: 20 }}>

@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Modal } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { ImageBody, HeaderAvatar } from './cardsComponent'
 import { Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-const color = require('../helpers/color.json')
-
 export function SkillsCards(props) {
 
-    const [modalVisible, setModalVisible] = useState(false);
     return (
-        <TouchableOpacity style={{ ...styles.content, ...props.styleContent, height: 'auto', paddingHorizontal: 20 }} onPress={() => {
+        <TouchableOpacity style={{ ...styles.content, ...props.styleContent, height: 'auto', paddingHorizontal: 20, marginBottom: 40 }} onPress={() => {
             props.navigation.navigate('Skill', JSON.stringify(props))
         }}>
             <ImageBody imageUri={props.imageUri} />
@@ -25,7 +22,7 @@ export function SkillsCards(props) {
                         <Text style={{ fontSize: 13, color: '#222', color: '#888' }}>{props.note}</Text>
                         <Ionicons style={{ marginLeft: 2, marginRight: 32 }} name={'md-star'} color='#888' size={13} />
                         <Text style={{ fontSize: 13, color: '#222', color: '#888' }}>{props.voter}</Text>
-                        <Ionicons style={{ marginLeft: 2, marginRight: 32 }} name={'md-images'} color='#888' size={13} />
+                        <Ionicons style={{ marginLeft: 2, marginRight: 32 }} name={'md-bookmark'} color='#888' size={13} />
                         <Text style={{ fontSize: 13, color: '#222', color: '#888' }}>{props.voter}</Text>
                         <Ionicons style={{ marginLeft: 2, marginRight: 32 }} name={'md-heart'} color='#888' size={13} />
                         <Text style={{ fontSize: 13, color: '#222', color: '#888' }}>{props.voter}</Text>
@@ -33,18 +30,6 @@ export function SkillsCards(props) {
                     </View>
                 </View>
             </View>
-            <View style={{ marginBottom: 40 }}>
-
-            </View>
-            <Modal
-                presentationStyle="overFullScreen"
-                animationType="slide"
-                hardwareAccelerated={true}
-                visible={modalVisible}
-                onRequestClose={() => setModalVisible(false)}
-            >
-                {modalVisible && props.callback(props)}
-            </Modal>
         </TouchableOpacity>
     )
 }
