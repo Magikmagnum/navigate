@@ -1,17 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, Image, Dimensions, Modal, CheckBox } from 'react-native';
-import { Topbar, ImageBody, HeaderAvatar, HeaderTitle, HeaderMore, Item, Category, HeaderShown, SkillDash, Paragraphe, Cards4} from '../components/cardsComponent'
-import  { Start } from '../components/startComponent'
-import { Ionicons } from '@expo/vector-icons'
+import { StyleSheet, Text, View } from 'react-native';
+import { Topbar, HeaderAvatar, HeaderTitle, Item, HeaderShown, Paragraphe } from '../components/cardsComponent'
+import { Start } from '../components/startComponent'
 import { ExperienceSlide } from '../components/slideComponent'
-import { BorderlessButton, BaseButton, ScrollView, TouchableOpacity, RectButton } from 'react-native-gesture-handler'
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 
 
-const color = require('../helpers/color.json') 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+const color = require('../helpers/color.json')
 
-export default function ExperienceChannelScreen (props) {
+export default function ExperienceChannelScreen(props) {
 
 
 
@@ -21,32 +18,32 @@ export default function ExperienceChannelScreen (props) {
 
     const LitelTouche = (props) => {
         return (
-            <TouchableOpacity style={{backgroundColor: color.primary.color, marginHorizontal:4, borderRadius:100, height:20, width:40, alignItems:'center'}} >
-                    <Text style={{fontSize:12, color:'#fff'}}>{props.title}</Text>
+            <TouchableOpacity style={{ backgroundColor: color.primary.color, marginHorizontal: 4, borderRadius: 100, height: 20, width: 40, alignItems: 'center' }} >
+                <Text style={{ fontSize: 12, color: '#fff' }}>{props.title}</Text>
             </TouchableOpacity>
         )
     }
 
     const Comentaire = () => {
         return (
-            <View style={{backgroundColor:'#e6e6e6'}}>
+            <View style={{ backgroundColor: '#e6e6e6' }}>
                 <View style={styles.head}>
-                    <HeaderAvatar avatarUri={data.avatarUri}/>
-                    <HeaderTitle title='Kassassa Divin'/>
+                    <HeaderAvatar avatarUri={data.avatarUri} />
+                    <HeaderTitle title='Kassassa Divin' />
                 </View>
-                <View style={{marginHorizontal:16, marginBottom:8}}>
-                    <Start note={4} message={data.date}/>
+                <View style={{ marginHorizontal: 16, marginBottom: 8 }}>
+                    <Start note={4} message={data.date} />
                 </View>
-                <Paragraphe/> 
-                <View style={{justifyContent:'center', marginHorizontal:16, marginBottom:8, height:42}}>
-                    <View style={{flexDirection:'row'}}>
-                        <Text style={{fontSize:12, color:'#888', marginRight:20}}>Avez vous trouvez cette avis utile?</Text>
-                        <LitelTouche title='Oui'/>
-                        <LitelTouche title='Non'/>
+                <Paragraphe />
+                <View style={{ justifyContent: 'center', marginHorizontal: 16, marginBottom: 8, height: 42 }}>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 12, color: '#888', marginRight: 20 }}>Avez vous trouvez cette avis utile?</Text>
+                        <LitelTouche title='Oui' />
+                        <LitelTouche title='Non' />
                     </View>
                 </View>
             </View>
-            
+
         )
     }
 
@@ -58,32 +55,32 @@ export default function ExperienceChannelScreen (props) {
         setOpendAvis(height)
     }*/
 
-    
+
     return (
         <View style={styles.content}>
-            <Topbar/>
-            <ScrollView style={{marginTop:64}}>
+            <Topbar />
+            <ScrollView style={{ marginTop: 64 }}>
                 <View style={styles.head}>
-                    <HeaderAvatar avatarUri={props.avatarUri}/>
-                    <HeaderTitle title={data.title} subTitle={data.date}/>
+                    <HeaderAvatar avatarUri={props.avatarUri} />
+                    <HeaderTitle title={data.title} subTitle={data.date} />
                 </View>
-                <View style={{marginHorizontal:16, marginBottom:8}}>
-                    <Start note={data.note} voter={data.voter}/>
+                <View style={{ marginHorizontal: 16, marginBottom: 8 }}>
+                    <Start note={data.note} voter={data.voter} />
                 </View>
-                <Paragraphe text={data.description} styleChild={{height:'auto', marginVertical: 10}}/>
-                <HeaderShown icon='md-business' title='Entreprise / Particulier'/>
+                <Paragraphe text={data.description} styleChild={{ height: 'auto', marginVertical: 10 }} />
+                <HeaderShown icon='md-business' title='Entreprise / Particulier' />
                 <View>
-                    <Item marginLeft={54} title={data.entreprise} subTitle={data.adresse}/>
+                    <Item marginLeft={54} title={data.entreprise} subTitle={data.adresse} />
                 </View>
-                <HeaderShown icon='md-calendar' title='Periode'/>
+                <HeaderShown icon='md-calendar' title='Periode' />
                 <View>
-                    <Item marginLeft={54} title={'Début :    ' + data.start}/>
-                    <Item marginLeft={54} title={'Fin :    ' + data.end}/>
+                    <Item marginLeft={54} title={'Début :    ' + data.start} />
+                    <Item marginLeft={54} title={'Fin :    ' + data.end} />
                 </View>
 
                 {/* Realisation */}
-                <HeaderShown icon='md-construct' title='Réalisation'/>
-                <ExperienceSlide callback={() => alert('coucou')}/>
+                <HeaderShown icon='md-construct' title='Réalisation' />
+                <ExperienceSlide callback={() => alert('coucou')} />
             </ScrollView>
         </View>
     )
@@ -93,19 +90,19 @@ export default function ExperienceChannelScreen (props) {
 
 const styles = StyleSheet.create({
     content: {
-        flexDirection:"column",
-        height:'auto', 
-        backgroundColor:'#fff',
+        flexDirection: "column",
+        height: 'auto',
+        backgroundColor: '#fff',
     },
     head: {
-        height:72,
+        height: 72,
         //backgroundColor:'#fff', 
-        flexDirection:"row",
+        flexDirection: "row",
     },
-    foot:{
-      height:116,
-      backgroundColor:'#fff',
-      paddingHorizontal:16,
+    foot: {
+        height: 116,
+        backgroundColor: '#fff',
+        paddingHorizontal: 16,
     },
 });
 
@@ -128,7 +125,7 @@ const styles = StyleSheet.create({
                             <Ionicons name="md-share-alt" size={22} />
                         </TouchableOpacity>
                     </View>
-                    
+
                     <Comentaire/>
                     <Comentaire/>
                     <Comentaire/>

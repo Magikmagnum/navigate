@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Dimensions, Modal } from 'react-native';
-import { Category, Cards4 } from '../components/cardsComponent'
+import { StyleSheet, View, Text, Modal } from 'react-native';
+import { Category } from '../components/cardsComponent'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { Start } from '../components/startComponent'
 import { useNavigation } from '@react-navigation/core';
@@ -31,6 +31,7 @@ export function SkillsSlide(props) {
                 {SkillsArray.map((item, index) => {
                     return <SkillsCategory key={item.id} data={item} propsParent={props} />
                 })}
+                <View style={{ width: 20 }}></View>
             </ScrollView>
         </View>
     )

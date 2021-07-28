@@ -22,25 +22,23 @@ export default function UserSkillListe() {
 
 
     // recover user-skills from the database
-    useEffect(() => {
+    /*useEffect(() => {
         getUserSkill(state.compte.api_key)
             .then((result) => {
                 if (result.errors) {
                     alert(result.message)
                 } else {
                     // add in global state
-                    console.log(result)
                     updateSkillList(result.data)
                 }
             })
             .catch((e) => {
                 console.log(e)
             })
-    }, [])
-
+    }, [])*/
 
     // generate the list of user skills
-    useEffect(() => {
+    /*useEffect(() => {
         // recover user skills the global state
         const skills = state.userSkills;
         if (skills != undefined) {
@@ -49,14 +47,13 @@ export default function UserSkillListe() {
             })
             setYourSkills(skillListe);
         }
-    }, [state])
+    }, [state])*/
 
 
     //dispatch in reduce
-    async function updateSkillList(data) {
-
+    /*async function updateSkillList(data) {
         await dispatch({ type: 'UPDATE_SKILL_LIST', payload: data.reverse() });
-    }
+    }*/
 
 
     // Skill Iteme 

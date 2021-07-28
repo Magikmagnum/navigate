@@ -14,8 +14,6 @@ export default function HomeScreen({ navigation }) {
   const [theme, setTheme] = useState('light');
   const [themeStyle, setThemeStyle] = useRecoilState(themeState);
 
-  console.log('HomeScreen')
-
   return (
     <View style={{ ...styles.container, backgroundColor: themeStyle.content }}>
       <SafeAreaView style={{ borderBottomColor: themeStyle.border, borderBottomWidth: 1 }}>

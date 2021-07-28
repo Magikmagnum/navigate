@@ -87,16 +87,6 @@ export function HeaderTitle(props) {
 }
 
 
-export function RealCardBottom(props) {
-  return (
-    <View style={{ flexDirection: 'row', minWidth: 64, paddingHorizontal: 20, height: 28, justifyContent: "center", alignItems: "center" }}>
-      <Text style={{ fontSize: 12, fontWeight: 'bold', marginRight: 10, color: '#888' }}>{props.note}</Text>
-      <Ionicons name={props.icon} size={18} color='#888' />
-    </View>
-  )
-}
-
-
 export function Category(props) {
 
   let height = 100
@@ -127,6 +117,7 @@ export function Category(props) {
 }
 
 
+
 export function DashItems(props) {
   let border = {}
   let color = '#000'
@@ -153,6 +144,7 @@ export function HeaderShown(props) {
 
   let marginLeft = 0
   let width = windowWidth
+  let alignItems = 'center'
   let theme = {
     icon: {
       color: '#000'
@@ -163,6 +155,11 @@ export function HeaderShown(props) {
     content: {
       backgroundColor: '#fff'
     }
+  }
+
+
+  if (props.alignLeft) {
+    alignItems = "flex-start"
   }
 
   if (!props.icon && props.iconRight) {
@@ -187,7 +184,7 @@ export function HeaderShown(props) {
           <Ionicons name={props.icon} color={theme.icon.color} size={24} />
         </TouchableOpacity> : null
       }
-      <View style={{ alignItems: 'center', justifyContent: 'center', height: 64, width: width }} >
+      <View style={{ alignItems: alignItems, justifyContent: 'center', height: 64, width: width }} >
         <Text style={{ ...styles.headText, marginLeft: marginLeft, ...theme.text }}>{props.title}</Text>
       </View>
       {props.iconRight ?
@@ -223,16 +220,6 @@ export function HeaderShownSearch(props) {
   )
 }
 
-
-export function SkillDash(props) {
-  return (
-    <View style={{ flexDirection: "row", height: 28, position: "relative" }}>
-      <RealCardBottom note={props.experience} icon='md-medkit' />
-      <RealCardBottom note={props.training} icon='md-school' />
-      <RealCardBottom note={props.recommendation} icon='md-rocket' />
-    </View>
-  )
-}
 
 
 export function Item(props) {

@@ -1,47 +1,44 @@
 import React from 'react'
-import { View, Text, StyleSheet, Dimensions } from 'react-native'
+import { View, StyleSheet, Dimensions } from 'react-native'
 import Animated from 'react-native-reanimated'
-import { TapGestureHandler, ScrollView, TouchableOpacity, BorderlessButton } from 'react-native-gesture-handler'
-//import {Entypo} from '@expo/vector-icons'
-import { Ionicons } from '@expo/vector-icons'
-import { ImageBody, HeaderAvatar, HeaderTitle, HeaderMore, Item, Category, HeaderShown, SkillDash, Paragraphe} from '../components/cardsComponent'
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
+import { HeaderAvatar, HeaderTitle, Item, HeaderShown } from '../components/cardsComponent'
 
 
 const { width, height } = Dimensions.get("window")
-const heightBottomSheet = height-136
-const color = require('../helpers/color.json') 
+const heightBottomSheet = height - 136
 
 
-export default function AnimetedBottomSheetComponent ({ translateY }) {
-    
+export default function AnimetedBottomSheetComponent({ translateY }) {
+
     const infos = () => {
         return (
             <>
-                <View style={{...styles.head, marginHorizontal:12}}>
-                    <HeaderAvatar avatarUri={require("../assets/avatar/img1.jpg")}/>
+                <View style={{ ...styles.head, marginHorizontal: 12 }}>
+                    <HeaderAvatar avatarUri={require("../assets/avatar/img1.jpg")} />
                     <HeaderTitle title="Gansa Diambote" subTitle='Dispo dans 30 minute' />
-                </View> 
+                </View>
                 <ScrollView>
-                    <View style={{marginHorizontal:20}}>
-                        <HeaderShown icon='md-person' title='Identité'/>
-                        <Item marginLeft={54} title='Sexe:     Hommme'/>
-                        <Item marginLeft={54} title='Age:     42 ans'/>
+                    <View style={{ marginHorizontal: 20 }}>
+                        <HeaderShown icon='md-person' title='Identité' />
+                        <Item marginLeft={54} title='Sexe:     Hommme' />
+                        <Item marginLeft={54} title='Age:     42 ans' />
 
-                        <HeaderShown icon='md-call' title='Télephone'/>
+                        <HeaderShown icon='md-call' title='Télephone' />
                         <TouchableOpacity>
-                            <Item marginLeft={54} title='+241 74609874'/>
+                            <Item marginLeft={54} title='+241 74609874' />
                         </TouchableOpacity>
 
-                        <HeaderShown icon='md-at' title='Email'/>
+                        <HeaderShown icon='md-at' title='Email' />
                         <TouchableOpacity>
-                            <Item marginLeft={54} title='ericgansa01@gmail.com'/>
+                            <Item marginLeft={54} title='ericgansa01@gmail.com' />
                         </TouchableOpacity>
 
 
-                        <HeaderShown icon='md-bonfire' title='Competence'/>
+                        <HeaderShown icon='md-bonfire' title='Competence' />
 
                         <TouchableOpacity>
-                            <Item marginLeft={54} title='Mathématicent' subTitle='Analyste'/>
+                            <Item marginLeft={54} title='Mathématicent' subTitle='Analyste' />
                         </TouchableOpacity>
 
                         <TouchableOpacity>
@@ -49,16 +46,16 @@ export default function AnimetedBottomSheetComponent ({ translateY }) {
                         </TouchableOpacity>
 
                         <TouchableOpacity>
-                            <Item marginLeft={54} title='Compositeur de musique' subTitle='Hip-Hop & RNB'/>
+                            <Item marginLeft={54} title='Compositeur de musique' subTitle='Hip-Hop & RNB' />
                         </TouchableOpacity>
 
                         <TouchableOpacity>
-                            <Item marginLeft={54} title='Infographe' subTitle='motion designe'/>
+                            <Item marginLeft={54} title='Infographe' subTitle='motion designe' />
                         </TouchableOpacity>
-                        
-                        <HeaderShown icon='md-pin' title='Adresse'/>
-                        <TouchableOpacity style={{marginBottom:40}}>
-                            <Item marginLeft={54} title='Nzeng-Ayong' subTitle='Libreville / Gabon'/>
+
+                        <HeaderShown icon='md-pin' title='Adresse' />
+                        <TouchableOpacity style={{ marginBottom: 40 }}>
+                            <Item marginLeft={54} title='Nzeng-Ayong' subTitle='Libreville / Gabon' />
                         </TouchableOpacity>
                     </View>
                 </ScrollView>
@@ -66,39 +63,39 @@ export default function AnimetedBottomSheetComponent ({ translateY }) {
         )
     }
 
-    return(
+    return (
         <>
-            <Animated.View style={{...styles.bottomSeet, transform: [{ translateY: translateY }], zIndex:100}}>
+            <Animated.View style={{ ...styles.bottomSeet, transform: [{ translateY: translateY }], zIndex: 100 }}>
                 {infos()}
             </Animated.View>
         </>
-        
+
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex:1,
-        alignItems:"center",
-        justifyContent:"center",
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
     },
-    bottomSeet:{
-        position:"absolute",
-        bottom:0,
-        width:width,
-        height:heightBottomSheet,
-        backgroundColor:'#fff',
-        borderTopLeftRadius:18,
-        borderTopRightRadius:18,
+    bottomSeet: {
+        position: "absolute",
+        bottom: 0,
+        width: width,
+        height: heightBottomSheet,
+        backgroundColor: '#fff',
+        borderTopLeftRadius: 18,
+        borderTopRightRadius: 18,
         //alignItems:"center",
         //justifyContent:"center",
-        elevation:4
+        elevation: 4
     },
     head: {
         //flex:1,
-        height:72,
+        height: 72,
         //backgroundColor:'red', 
-        flexDirection:"row",
+        flexDirection: "row",
     },
 
 })

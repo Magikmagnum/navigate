@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, StatusBar, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, View, StatusBar, ScrollView, SafeAreaView, Text } from 'react-native';
 
-import { HeaderShown, HeaderAvatar, ImageContent, HeaderTitle, Item, Category, SkillDash, Paragraphe } from '../components/cardsComponent';
+import { HeaderShown, HeaderAvatar, ImageContent, HeaderTitle, Item, Category, Paragraphe } from '../components/cardsComponent';
+
 import { useRecoilState } from 'recoil';
 import { themeState } from '../store/atomes/theme';
-
 
 import { Button } from '../components/formComponent'
 import Map from '../components/mapComponent'
@@ -14,10 +14,10 @@ import ExperienceChannelScreen from './ExperienceChannelScreen'
 import TrainingChannelScreen from './TrainingChannelScreen'
 import { ListItemsComponent } from '../components/ListItemsComponent'
 import { Loading } from '../components/loadingComponent'
+import Realisation from '../components/Realisation'
 import { useNavigation } from '@react-navigation/core';
-
 import { Start } from '../components/startComponent'
-
+import { SkillDashBoard } from "../components/skillDashBoard"
 const color = require('../helpers/color.json')
 
 const data = {
@@ -38,32 +38,14 @@ export default function SkillsChannelScreen(props) {
 
   const navigation = useNavigation()
 
-  let params = {}
-  console.log('params', props.route)
-  if (props.route) {
-    params = JSON.parse(props.route.params)
-  }
+  const params = JSON.parse(props.route.params)
 
-  console.log('state', state)
-  //return null;
   useEffect(() => {
     setState(params)
     setTimeout(() => {
       setIsLoading(false)
     }, 10)
   }, [])
-
-  const experienceScreen = (arg) => {
-    return (
-      <ExperienceChannelScreen data={arg} avatarUri={state.avatarUri} />
-    )
-  }
-
-  const trainingScreen = (arg) => {
-    return (
-      <TrainingChannelScreen data={arg} avatarUri={state.avatarUri} />
-    )
-  }
 
   const render = (props) => {
 
@@ -80,7 +62,9 @@ export default function SkillsChannelScreen(props) {
 
 
         <ScrollView onPress={() => setModalVisible(true)} style={{ ...styles.content, ...props.styleContent, height: 'auto', backgroundColor: '#fff' }}>
-          <ImageContent imageUri={state.imageUri} />
+
+
+
           <View style={{ paddingHorizontal: 20 }}>
             <View style={{ ...styles.head, paddingTop: 20, position: "relative" }}>
               <HeaderAvatar avatarUri={state.avatarUri} />
@@ -90,78 +74,37 @@ export default function SkillsChannelScreen(props) {
             </View>
           </View>
 
-          <View style={{ marginBottom: 26 }}>
-            <View>
-              <SkillDash experience={state.experience} training={state.training} recommendation={state.recommendation} />
-            </View>
-            <View style={{ paddingHorizontal: 16, height: 16 }}>
-              <Start note={state.note} voter={state.voter} />
-            </View>
+          <View style={{ marginBottom: 26, marginTop: 26 }}>
+            <SkillDashBoard note={state.note} experience={state.experience} training={state.training} recommendation={state.recommendation} />
           </View>
-          <Paragraphe styleChild={{ height: 'auto', marginBottom: 20, paddingHorizontal: 20 }} />
-
 
           <View style={{ ...styles.foot, flexDirection: 'row', height: 'auto' }}>
-            <View style={{ flex: 9, marginRight: 10 }}>
+            <View style={{ flex: 8, marginRight: 10 }}>
               <Button title="Lancer l'appel" />
             </View>
-            <View style={{ flex: 3 }}>
+            <View style={{ flex: 4 }}>
               <Button title='+' />
             </View>
           </View>
 
-          <HeaderShown icon='md-person' title='Identité' />
-          <View>
-            <Item marginLeft={54} title='Nom   :  Eric Gansa Diambote' />
-            <Item marginLeft={54} title='Sexe  :  Homme' />
-            <Item marginLeft={54} title='Age   :  28 ans' />
+          <View style={{ marginHorizontal: 20 }}>
+            <HeaderTitle title='Mes réalisations' />
           </View>
-
-          <HeaderShown icon='md-stats' title='Statistique' />
-          <Item icon='md-star-outline' marginLeft={54} title='Services' />
-          <Stats note={4} />
-          <Item icon='md-hourglass' marginLeft={54} title='Délais' />
-          <Stats note={10} />
-          <Item icon='md-card' marginLeft={54} title='Prix' />
-          <Stats note={7} />
-          <Item icon='md-heart-empty' marginLeft={54} title='Humanité' />
-          <Stats note={2} />
-
-          <HeaderShown icon='md-pin' title='Moins 1km de vous' />
-          <View style={{ flexDirection: 'row' }}>
-            <Item icon="md-walk" title='36 min' />
-            <Item icon="md-bicycle" title='23 min' />
-            <Item icon="md-car" title='10 min' />
-          </View>
-          <View style={{ height: 200, marginBottom: 20, }}>
-            <Map coords={data.coords} />
-          </View>
-
-          {/* Formation */}
-          <HeaderShown icon='md-school' title='Formation' />
-          <ListItemsComponent callback={trainingScreen} data={trainingStorage} avatar={state.avatarUri} />
-
-
-          {/* Experience */}
-          <HeaderShown icon='md-briefcase' title='Experience' />
-          <ListItemsComponent callback={experienceScreen} data={experienceStorage} avatar={state.avatarUri} />
-
-
-
-
-          {/* Autre competence */}
-          <HeaderShown title='Autre competence' />
-          <View style={{ height: 132, marginBottom: 20 }}>
+          <View style={{ height: 190, marginBottom: 20 }}>
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}
             >
-              <Category title='Maçon' imageUri={require("../assets/avatar/macon.jpg")} />
-              <Category title='Restaurant' imageUri={require("../assets/avatar/rest.jpg")} />
-              <Category title='Mecanicien' imageUri={require("../assets/avatar/gara.jpg")} />
+              <Realisation title='Maçon' imageUri={require("../assets/avatar/macon.jpg")} />
+              <Realisation title='Restaurant' imageUri={require("../assets/avatar/rest.jpg")} />
+              <Realisation title='Mecanicien' imageUri={require("../assets/avatar/gara.jpg")} />
+              <Realisation title='Restaurant' imageUri={require("../assets/avatar/rest.jpg")} />
+              <Realisation title='Mecanicien' imageUri={require("../assets/avatar/gara.jpg")} />
+              <View style={{ width: 20 }}></View>
             </ScrollView>
           </View>
         </ScrollView>
+
       </>
     )
   }
@@ -171,6 +114,35 @@ export default function SkillsChannelScreen(props) {
   )
 }
 
+
+
+
+
+const styles = StyleSheet.create({
+  content: {
+    height: 382,
+    backgroundColor: '#aaa',
+  },
+
+  head: {
+
+    flexDirection: "row",
+  },
+
+  foot: {
+    height: 116,
+    backgroundColor: '#fff',
+    paddingHorizontal: 16,
+  },
+});
+
+
+
+
+
+
+
+//------------ statistique --------------------
 
 
 function Stats(props) {
@@ -185,31 +157,18 @@ function Stats(props) {
   )
 }
 
-const styles = StyleSheet.create({
-  content: {
-    height: 382,
-    backgroundColor: '#aaa',
-    //margin:8,
-  },
+const experienceScreen = (arg) => {
+  return (
+    <ExperienceChannelScreen data={arg} avatarUri={state.avatarUri} />
+  )
+}
 
-  head: {
-    //flex: 1,
-    //height:72,
-    //backgroundColor: '#fff',
-    flexDirection: "row",
-  },
+const trainingScreen = (arg) => {
+  return (
+    <TrainingChannelScreen data={arg} avatarUri={state.avatarUri} />
+  )
+}
 
-  foot: {
-    height: 116,
-    backgroundColor: '#fff',
-    paddingHorizontal: 16,
-  },
-});
-
-
-/*
-            <Category title='Boit de nuit' imageUri={require("../assets/avatar/fete.jpg")} />
-            <Category title='Plombier' imageUri={require("../assets/avatar/plom.jpg")} />
-            <Category title='Medecin' imageUri={require("../assets/avatar/medecin.jpg")} />
-            <Category title='Nounou' imageUri={require("../assets/avatar/nounou.jpg")} />
-*/
+/* <View style={{ paddingHorizontal: 16, height: 16 }}>
+              <Start  voter={state.voter} />
+            </View>*/
