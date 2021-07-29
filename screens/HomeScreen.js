@@ -70,7 +70,7 @@ export default function CatalogScreen({ navigation }) {
         <SkillsCards
           navigation={navigation}
           id={1}
-          imageUri={require("../assets/avatar/rest.jpg")} avatarUri={require("../assets/avatar/img5.jpg")}
+          imageUri={require("../assets/avatar/rest.jpg")} avatarUri={require("../assets/avatar/img3.jpg")}
           title='Traiteur' subTitle='Nzeng-Ayong, Libreville / Gabon'
           experience={52} training={102} recommendation={3}
           note={3} voter={3}
@@ -78,7 +78,7 @@ export default function CatalogScreen({ navigation }) {
         <SkillsCards
           navigation={navigation}
           id={2}
-          imageUri={require("../assets/avatar/nounou.jpg")} avatarUri={require("../assets/avatar/img3.jpg")}
+          imageUri={require("../assets/avatar/nounou.jpg")} avatarUri={require("../assets/avatar/img5.jpg")}
           title='Nounou' subTitle='Charbonnages, Libreville / Gabon'
           experience={6} training={2} recommendation={8}
           note={5} voter={1}

@@ -1,11 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/core';
+
 
 
 const color = require('../helpers/color.json')
 
 export default function Realisation(props) {
+
+    const navigation = useNavigation()
 
     let height = 140
     if (props.title) {
@@ -13,7 +17,9 @@ export default function Realisation(props) {
     }
 
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+            navigation.navigate('Realization', JSON.stringify(props))
+        }}>
             <View style={{ height: height, marginLeft: 20, borderWidth: 0.2 }}>
                 <View style={{ height: 140, width: 200, borderColor: '#aaa', borderRadius: 12, elevation: 3, backgroundColor: color.primary.color }}>
                     <Image source={props.imageUri} style={{ borderBottomLeftRadius: 12, borderBottomRightRadius: 12, flex: 1, width: null, height: null, resizeMode: "cover", borderTopLeftRadius: 12, borderTopRightRadius: 12 }} />

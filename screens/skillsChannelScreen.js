@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, StatusBar, ScrollView, SafeAreaView, Text } from 'react-native';
 
-import { HeaderShown, HeaderAvatar, ImageContent, HeaderTitle, Item, Category, Paragraphe } from '../components/cardsComponent';
+import { HeaderShown, ImageContent, HeaderTitle, Item, Category, Paragraphe, HeaderAvatarProfil } from '../components/cardsComponent';
 
 import { useRecoilState } from 'recoil';
 import { themeState } from '../store/atomes/theme';
@@ -13,11 +13,14 @@ import { trainingStorage } from '../helpers/trainingStorage'
 import ExperienceChannelScreen from './ExperienceChannelScreen'
 import TrainingChannelScreen from './TrainingChannelScreen'
 import { ListItemsComponent } from '../components/ListItemsComponent'
+import GraphSkillComponent from '../components/graphSkillComponent'
 import { Loading } from '../components/loadingComponent'
 import Realisation from '../components/Realisation'
 import { useNavigation } from '@react-navigation/core';
 import { Start } from '../components/startComponent'
 import { SkillDashBoard } from "../components/skillDashBoard"
+import AvisComponent from "../components/avisComponent"
+
 const color = require('../helpers/color.json')
 
 const data = {
@@ -61,20 +64,18 @@ export default function SkillsChannelScreen(props) {
         </SafeAreaView>
 
 
-        <ScrollView onPress={() => setModalVisible(true)} style={{ ...styles.content, ...props.styleContent, height: 'auto', backgroundColor: '#fff' }}>
+        <ScrollView style={{ backgroundColor: '#fff', marginBottom: 70 }}>
 
-
-
-          <View style={{ paddingHorizontal: 20 }}>
-            <View style={{ ...styles.head, paddingTop: 20, position: "relative" }}>
-              <HeaderAvatar avatarUri={state.avatarUri} />
-              <View style={{ position: "absolute", left: 70, top: 4 }}>
-                <HeaderTitle title={state.title} subTitle={state.subTitle} />
-              </View>
+          <View style={{ flexDirection: "row", marginTop: 20, marginHorizontal: 20 }}>
+            <View style={{}}>
+              <HeaderAvatarProfil avatarUri={state.avatarUri} />
+            </View>
+            <View style={{ marginLeft: 20, marginTop: -20 }}>
+              <HeaderTitle title={state.title} subTitle={state.subTitle} litleTitle={"Gansa Diambote eric"} />
             </View>
           </View>
 
-          <View style={{ marginBottom: 26, marginTop: 26 }}>
+          <View style={{ marginBottom: 26, marginTop: 16 }}>
             <SkillDashBoard note={state.note} experience={state.experience} training={state.training} recommendation={state.recommendation} />
           </View>
 
@@ -85,6 +86,15 @@ export default function SkillsChannelScreen(props) {
             <View style={{ flex: 4 }}>
               <Button title='+' />
             </View>
+          </View>
+
+          <View style={{ marginHorizontal: 20, marginTop: 20 }}>
+            <HeaderTitle title='A moins 1km de vous' subTitle={"Le lorem ipsum est, en imprimerie, une suite de mots sans signification"} />
+          </View>
+          <View style={{ marginHorizontal: 20, marginBottom: 20, marginTop: -14, flexDirection: 'row', justifyContent: "space-between", alignItems: "center" }}>
+            <Item icon="md-walk" title='36 min' />
+            <Item icon="md-bicycle" title='23 min' />
+            <Item icon="md-car" title='10 min' />
           </View>
 
           <View style={{ marginHorizontal: 20 }}>
@@ -103,6 +113,15 @@ export default function SkillsChannelScreen(props) {
               <View style={{ width: 20 }}></View>
             </ScrollView>
           </View>
+
+          <View style={{ marginHorizontal: 20 }}>
+            <HeaderTitle title='Notes et avis' />
+          </View>
+          <GraphSkillComponent />
+          <AvisComponent />
+          <AvisComponent />
+          <AvisComponent />
+          <View style={{ marginBottom: 30 }}></View>
         </ScrollView>
 
       </>
@@ -142,21 +161,6 @@ const styles = StyleSheet.create({
 
 
 
-//------------ statistique --------------------
-
-
-function Stats(props) {
-
-  const width = 200
-  let note = props.note * 20
-
-  return (
-    <View style={{ height: 4, width: width, backgroundColor: '#ddd', marginLeft: 54, borderRadius: 4, marginBottom: 20 }}>
-      <View style={{ height: 4, width: note, backgroundColor: color.primary.color, borderRadius: 4 }}></View>
-    </View>
-  )
-}
-
 const experienceScreen = (arg) => {
   return (
     <ExperienceChannelScreen data={arg} avatarUri={state.avatarUri} />
@@ -168,7 +172,3 @@ const trainingScreen = (arg) => {
     <TrainingChannelScreen data={arg} avatarUri={state.avatarUri} />
   )
 }
-
-/* <View style={{ paddingHorizontal: 16, height: 16 }}>
-              <Start  voter={state.voter} />
-            </View>*/

@@ -22,6 +22,14 @@ export function HeaderAvatarProfil(props) {
   )
 }
 
+export function HeaderAvatarComment(props) {
+  return (
+    <View style={{ ...styles.headAvatarContent, height: 36, width: 36, }}>
+      <Image style={{ ...styles.headAvatar, height: 36, width: 36, borderRadius: 6 }} source={props.avatarUri} />
+    </View>
+  )
+}
+
 export function HeaderMore(props) {
   return (
     <BorderlessButton onPress={() => setModalVisible(true)} style={{ width: 64, justifyContent: "center", alignItems: "center" }}>
@@ -77,11 +85,18 @@ export function HeaderTitle(props) {
   return (
     <View style={{ ...styles.headerTextContent, ...styleTitle, marginBottom: 2 }}>
       <Text style={{ ...styles.headText, color: props.color }} numberOfLines={props.numberOfLines}>{props.title}</Text>
-      {props.subTitle ? <Text
+
+      {props.litleTitle && <Text
+        style={{ ...styles.headSubText, marginTop: 4, lineHeight: 16, color: color.primary.color, fontWeight: "bold" }}
+        numberOfLines={props.subNumberOfLines}
+        dataDetectorType={props.subDataDetectorType}
+      >{props.litleTitle}</Text>}
+
+      {props.subTitle && <Text
         style={{ ...styles.headSubText, marginTop: 4, lineHeight: 16, ...subColor }}
         numberOfLines={props.subNumberOfLines}
         dataDetectorType={props.subDataDetectorType}
-      >{props.subTitle}</Text> : null}
+      >{props.subTitle}</Text>}
     </View>
   )
 }
@@ -240,7 +255,7 @@ export function Item(props) {
         <Ionicons name={props.icon} color='#666' size={18} />
       </View>
       <View style={{ flexDirection: "column" }}>
-        <Text style={{ fontSize: 13, fontWeight: 'bold', color: '#666', marginBottom: 6, marginHorizontal: marginHorizontal }}>{props.title}</Text>
+        <Text style={{ fontSize: 13, fontWeight: 'bold', color: '#666', marginHorizontal: marginHorizontal }}>{props.title}</Text>
         {props.subTitle ? <Text style={{ ...{ fontSize: 12, color: '#666' }, marginHorizontal: marginHorizontal }}>{props.subTitle}</Text> : null}
       </View>
     </View>

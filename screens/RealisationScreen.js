@@ -24,7 +24,6 @@ export default function RealisationScreen(props) {
 
 
     useEffect(() => {
-        setState(params)
         setTimeout(() => {
             setIsLoading(false)
         }, 10)
@@ -40,7 +39,7 @@ export default function RealisationScreen(props) {
             <>
                 <SafeAreaView style={{ borderBottomColor: themeStyle.border, borderBottomWidth: 1 }}>
                     <StatusBar backgroundColor={themeStyle.content} networkActivityIndicatorVisible={true} barStyle={theme == 'dark' ? 'light-content' : 'dark-content'} hidden={false} />
-                    <HeaderShown title='Réalisation' theme={theme} icon='md-arrow-back' callback={() => navigation.navigate('Home', JSON.stringify(props.data))} />
+                    <HeaderShown title='Réalisation' theme={theme} icon='md-arrow-back' callback={() => navigation.navigate('Skill', JSON.stringify(props.data))} />
                 </SafeAreaView>
             </>
         )

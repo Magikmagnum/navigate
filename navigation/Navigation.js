@@ -8,6 +8,7 @@ import { Context } from '../store/configureStore'
 import HomeScreen from '../screens/HomeScreen'
 import CatalogScreen from '../screens/CatalogScreen'
 import ProfilScreen from '../screens/ProfilScreen'
+import RealisationScreen from '../screens/RealisationScreen'
 import SettingsScreen from '../screens/settings/SettingsScreen'
 import SettingsCompteScreen from '../screens/settings/SettingsCompteScreen'
 import SignInScreen from '../screens/SignInScreen'
@@ -27,7 +28,6 @@ const SkillStack = createStackNavigator()
 const ProfilStack = createStackNavigator()
 const SignUpStack = createStackNavigator()
 const HomeStack = createStackNavigator()
-const TopTab = createMaterialTopTabNavigator();
 
 let INITIAL_ROUTE_NAME = 'SignIn'
 
@@ -149,6 +149,10 @@ const HomeStackNavigator = ({ navigation, route }) => {
       }} />
       <HomeStack.Screen name="Skill" component={SkillsChannelScreen} options={{
         title: "Competence",
+        headerShown: false
+      }} />
+      <HomeStack.Screen name="Realization" component={RealisationScreen} options={{
+        title: "Realisation",
         headerShown: false
       }} />
     </HomeStack.Navigator>
