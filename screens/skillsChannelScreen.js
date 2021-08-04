@@ -15,11 +15,13 @@ import TrainingChannelScreen from './TrainingChannelScreen'
 import { ListItemsComponent } from '../components/ListItemsComponent'
 import GraphSkillComponent from '../components/graphSkillComponent'
 import { Loading } from '../components/loadingComponent'
-import Realisation from '../components/Realisation'
+import Realisation from '../components/RealisationComponent'
 import { useNavigation } from '@react-navigation/core';
 import { Start } from '../components/startComponent'
 import { SkillDashBoard } from "../components/skillDashBoard"
 import AvisComponent from "../components/avisComponent"
+import FaireOffreComponent from "../components/FaireOffreComponent"
+import { SkillsSlide } from '../components/slideComponent'
 
 const color = require('../helpers/color.json')
 
@@ -80,11 +82,11 @@ export default function SkillsChannelScreen(props) {
           </View>
 
           <View style={{ ...styles.foot, flexDirection: 'row', height: 'auto' }}>
-            <View style={{ flex: 8, marginRight: 10 }}>
+            <View style={{ flex: 6, marginRight: 10 }}>
               <Button title="Lancer l'appel" />
             </View>
-            <View style={{ flex: 4 }}>
-              <Button title='+' />
+            <View style={{ flex: 6 }}>
+              <FaireOffreComponent />
             </View>
           </View>
 
@@ -121,7 +123,13 @@ export default function SkillsChannelScreen(props) {
           <AvisComponent />
           <AvisComponent />
           <AvisComponent />
-          <View style={{ marginBottom: 30 }}></View>
+
+          <View style={{ marginHorizontal: 20 }}>
+            <HeaderTitle title='Autres compétences' />
+          </View>
+          <SkillsSlide />
+
+          <View style={{ marginBottom: 20 }}></View>
         </ScrollView>
 
       </>

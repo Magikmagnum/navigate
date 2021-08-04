@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, View, StatusBar, ScrollView, SafeAreaView, Text } from 'react-native';
-import { HeaderShown, HeaderAvatar, ImageContent, HeaderTitle, Item, Category, Paragraphe, HeaderAvatarComment } from './cardsComponent';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { HeaderAvatarComment } from './cardsComponent';
 import { Start } from './startComponent';
 
 export default function AvisComponent() {
@@ -23,9 +23,21 @@ export default function AvisComponent() {
             <View style={{ marginBottom: 10 }}>
                 <Text style={{ fontSize: 13, color: "#888", lineHeight: 20 }}>Le lorem ipsum également appelé faux-texte, lipsum, ou bolo bolo est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée.</Text>
             </View>
-            <View>
-                <Text style={{ fontSize: 12, color: "#888", lineHeight: 20 }}>Avez vous trouvé cet avis utile ?</Text>
+            <View style={{ flexDirection: "row", marginBottom: 10, alignItems: "center" }}>
+                <Text style={{ fontSize: 12, color: "#888", lineHeight: 20, marginRight: 10 }}>Avez vous trouvé cet avis utile ?</Text>
+                <View style={{ flexDirection: "row" }}>
+                    <ButtonAvis title='Oui' />
+                    <ButtonAvis title='Non' />
+                </View>
             </View>
         </View>
+    )
+}
+
+const ButtonAvis = ({ title }) => {
+    return (
+        <TouchableOpacity onPress={() => alert(title)} style={{ borderColor: '#ddd', borderWidth: 1, borderRadius: 10, padding: 1, paddingHorizontal: 8, marginHorizontal: 6 }}>
+            <Text style={{ fontSize: 12, color: "#888" }} >{title}</Text>
+        </TouchableOpacity>
     )
 }

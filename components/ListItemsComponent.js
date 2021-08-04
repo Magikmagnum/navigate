@@ -6,7 +6,7 @@ import { BorderlessButton, RectButton } from 'react-native-gesture-handler'
 
 
 
-function Liseter(props) {
+function Lister(props) {
 
     const [modalVisible, setModalVisible] = React.useState(false)
     const [settingVisible, setSettingVisible] = React.useState(false)
@@ -51,7 +51,7 @@ export function ListItemsComponent(props) {
     return (
         <View style={{}}>
             {data.map((item, index) => {
-                return <Liseter key={item.id} data={item} callback={props.callback} admin={true} />
+                return <Lister key={item.id} data={item} callback={props.callback} admin={true} />
             })}
         </View>
     )

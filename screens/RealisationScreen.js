@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, StatusBar, SafeAreaView } from 'react-native';
+import { StyleSheet, View, StatusBar, SafeAreaView, ScrollView } from 'react-native';
+
+import { useNavigation } from '@react-navigation/core';
+import { useRecoilState } from 'recoil';
 
 import { HeaderShown } from '../components/cardsComponent';
+import { RealisationIteme } from '../components/RealisationComponent';
+import { Loading } from '../components/loadingComponent'
 
-import { useRecoilState } from 'recoil';
 import { themeState } from '../store/atomes/theme';
 
 
-import { Loading } from '../components/loadingComponent'
-import { useNavigation } from '@react-navigation/core';
 
 
 export default function RealisationScreen(props) {
@@ -41,6 +43,9 @@ export default function RealisationScreen(props) {
                     <StatusBar backgroundColor={themeStyle.content} networkActivityIndicatorVisible={true} barStyle={theme == 'dark' ? 'light-content' : 'dark-content'} hidden={false} />
                     <HeaderShown title='Réalisation' theme={theme} icon='md-arrow-back' callback={() => navigation.navigate('Skill', JSON.stringify(props.data))} />
                 </SafeAreaView>
+                <ScrollView>
+                    <RealisationIteme />
+                </ScrollView>
             </>
         )
     }

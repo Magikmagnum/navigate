@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import {
-    StyleSheet, View, StatusBar, ScrollView, SafeAreaView, Text
-} from 'react-native';
+import { StyleSheet, View, StatusBar, SafeAreaView, Text } from 'react-native';
 import { HeaderShown, HeaderAvatar, ImageContent } from '../components/cardsComponent';
 import { useRecoilState } from 'recoil';
 import { themeState } from '../store/atomes/theme';
