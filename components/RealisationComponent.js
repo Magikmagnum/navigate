@@ -76,6 +76,8 @@ function RealisationCard() {
 
     const [love, setLove] = useState(false)
     const [loveCount, setLoveCount] = useState(0)
+    const [modalVisible, setModalVisible] = useState(false);
+    const [commentaireFocus, setCommentaireFocus] = useState(false);
 
     const _handelPressHeartButton = useCallback(
         () => {
@@ -84,6 +86,14 @@ function RealisationCard() {
             setLove(newValue)
         },
         [love],
+    )
+
+    const _handelPressCommentaireButton = useCallback(
+        () => {
+            setModalVisible(true)
+            setCommentaireFocus(true)
+        },
+        [],
     )
 
     return (
@@ -103,7 +113,7 @@ function RealisationCard() {
                     <TouchableOpacity onPress={_handelPressHeartButton}>
                         <Ionicons style={{ marginLeft: 2, marginRight: 60 }} name={'md-heart'} color={love ? 'red' : '#bbb'} size={24} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={{}}>
+                    <TouchableOpacity onPress={_handelPressCommentaireButton} >
                         <Ionicons style={{ marginLeft: 2, marginRight: 60 }} name={'md-chatbubbles'} color='#bbb' size={24} />
                     </TouchableOpacity>
                     <TouchableOpacity style={{}}>
@@ -111,33 +121,7 @@ function RealisationCard() {
                     </TouchableOpacity>
                 </View>
             </View>
-            <CommentaireListe />
+            <CommentaireListe visible={{ modalVisible, setModalVisible }} focus={commentaireFocus} setFocus={setCommentaireFocus} />
         </View>
     )
 }
-
-
-
-/**
- *
- *
-            MODAL
-
-            <Modal
-                presentationStyle='pageSheet'
-                animationType="slide"
-                hardwareAccelerated={true}
-                visible={modalVisible}
-                onRequestClose={() => setModalVisible(false)}
-            >
-                <View>
-                    <SafeAreaView style={{ borderBottomColor: themeStyle.border, borderBottomWidth: 1 }}>
-                        <StatusBar backgroundColor={themeStyle.content} networkActivityIndicatorVisible={true} barStyle={theme == 'dark' ? 'light-content' : 'dark-content'} hidden={false} />
-                        <HeaderShown title="Faire une offre"
-                            icon='md-arrow-back' callback={(() => setModalVisible(false))}
-                            theme={theme}
-                        />
-                    </SafeAreaView>
-                </View>
-            </Modal>
- */

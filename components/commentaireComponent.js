@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import { StatusBar, Text, View, SafeAreaView, TouchableOpacity, Dimensions, Modal, ScrollView } from 'react-native';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { StatusBar, Text, View, SafeAreaView, TouchableOpacity, Dimensions, Modal, ScrollView, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { Ionicons } from '@expo/vector-icons'
 
@@ -40,17 +40,28 @@ export function CommentaireItem(params) {
     )
 }
 
-export function CommentaireListe(params) {
+export function CommentaireListe({ visible, focus, setFocus }) {
 
-    const [modalVisible, setModalVisible] = useState(false);
+    // le useState de la modal, initialiser dans le component realisation
+    const modalVisible = visible.modalVisible
+    const setModalVisible = visible.setModalVisible
+
+    console.log("CommentaireListe", focus)
+    const _handelPressVoirCommentaire = useCallback(
+        () => {
+            setFocus(false)
+            setModalVisible(true)
+        },
+        [],
+    )
 
     return (
-        <View style={{ marginBottom: 10, }}>
+        <View style={{}}>
             <View style={{ borderTopWidth: 1, borderColor: "#f1f1f1", paddingHorizontal: 30, paddingVertical: 20 }}>
-                <TouchableOpacity onPress={() => setModalVisible(true)}>
+                <TouchableOpacity onPress={_handelPressVoirCommentaire}>
                     <Text style={{ color: "#888" }} >Voir les commentaire</Text>
                 </TouchableOpacity>
-                {modalVisible && <CommentaireModal setModalVisible={setModalVisible} modalVisible={modalVisible} />}
+                {modalVisible && <CommentaireModal setModalVisible={setModalVisible} modalVisible={modalVisible} focus={focus} />}
             </View>
             <CommentaireItem />
         </View>
@@ -63,39 +74,30 @@ export function CommentaireListeModal(params) {
     const [modalVisible, setModalVisible] = useState(false);
 
     return (
-        <View style={{ marginBottom: 10, }}>
-            <ScrollView style={{ backgroundColor: '#fff', marginBottom: 70, paddingTop: 10 }}>
-                <CommentaireItem />
-                <CommentaireItem />
-                <CommentaireItem />
-                <CommentaireItem />
-                <CommentaireItem />
-                <CommentaireItem />
-                <CommentaireItem />
-                <CommentaireItem />
-                <CommentaireItem />
-                <CommentaireItem />
-                <CommentaireItem />
-                <CommentaireItem />
-                <CommentaireItem />
-                <CommentaireItem />
-                <CommentaireItem />
-                <CommentaireItem />
-                <CommentaireItem />
-                <CommentaireItem />
-                <CommentaireItem />
 
-                <View style={{ marginBottom: 60 }}></View>
-            </ScrollView>
-        </View>
+        <ScrollView style={{ backgroundColor: '#fff', paddingTop: 10 }}>
+            <CommentaireItem />
+            <CommentaireItem />
+            <CommentaireItem />
+            <CommentaireItem />
+            <CommentaireItem />
+            <CommentaireItem />
+            <CommentaireItem />
+            <CommentaireItem />
+            <CommentaireItem />
+            <CommentaireItem />
+            <CommentaireItem />
+        </ScrollView>
     )
 }
 
 
-function CommentaireModal({ modalVisible, setModalVisible }) {
+function CommentaireModal({ modalVisible, setModalVisible, focus }) {
 
     const [theme, setTheme] = useState('light');
     const [themeStyle, setThemeStyle] = useRecoilState(themeState);
+
+    console.log("CommentaireModal", focus)
 
     return (
         <Modal
@@ -113,8 +115,62 @@ function CommentaireModal({ modalVisible, setModalVisible }) {
                         theme={theme}
                     />
                 </SafeAreaView>
-                <CommentaireListeModal />
+                <View style={{ marginBottom: 212 }}>
+                    <CommentaireListeModal />
+                </View>
+            </View>
+            <View style={{
+                position: 'absolute', bottom: 0, borderTopWidth: 1, borderTopColor: '#f3f3f3', backgroundColor: "#fff",
+                shadowColor: "#000", shadowOpacity: 0.23, shadowRadius: 2.62, elevation: 4,
+                shadowOffset: {
+                    width: 0,
+                    height: 2,
+                },
+            }} >
+                <CommentaireTextInput focus={focus} />
             </View>
         </Modal>
+    )
+}
+
+function CommentaireTextInput({ focus }) {
+
+    const [message, setmessage] = useState('')
+    const [inputSize, setinputSize] = useState(64)
+    const refTextInput = useRef()
+
+    const _handelOnContentSizeChange = (event) => {
+        setinputSize(event.nativeEvent.contentSize.height)
+    }
+
+    useEffect(() => {
+        if (focus) {
+            refTextInput.current.focus()
+            console.log(refTextInput.current)
+        }
+    }, [focus])
+
+    console.log("CommentaireTextInput", focus)
+
+    return (
+        <View style={{ flexDirection: "row", marginHorizontal: 20, marginTop: 20, marginBottom: 20, alignItems: "center", width: windowWidth - 40 }} >
+            <View style={{ marginRight: 16 }}>
+                <HeaderAvatarComment avatarUri={require("../assets/avatar/img2.jpg")} />
+            </View>
+            <View style={{ flexDirection: "row", flex: 1, height: inputSize, borderRadius: 10, justifyContent: "center", backgroundColor: "#f2f2f2", borderWidth: 1, borderColor: '#f0f0f0' }}>
+                <TextInput
+                    ref={refTextInput}
+                    style={{ color: "#888", padding: 10, fontSize: 16, lineHeight: 20 }}
+                    placeholder="Ajouter un commentaire..."
+                    multiline={true}
+                    allowFontScaling={true}
+                    autoCapitalize={'sentences'}
+                    onContentSizeChange={(event) => _handelOnContentSizeChange(event)}
+                />
+            </View>
+            <TouchableOpacity style={{ width: 24, height: 24, marginLeft: 14, justifyContent: "center", alignItems: "center" }}>
+                <Ionicons name={'md-send'} color='#888' size={24} />
+            </TouchableOpacity>
+        </View>
     )
 }
