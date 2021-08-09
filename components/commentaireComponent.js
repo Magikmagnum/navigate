@@ -10,7 +10,7 @@ import { themeState } from '../store/atomes/theme';
 
 
 
-
+const color = require('../helpers/color.json')
 const windowWidth = Dimensions.get('window').width;
 
 
@@ -26,7 +26,7 @@ export function CommentaireItem(params) {
                     <Text style={{ fontSize: 12, color: "#888" }}>Le 05/06/2021</Text>
 
                 </View>
-                <TouchableOpacity style={{ margin: 10, borderWidth: 1, borderColor: "#ddd", borderRadius: 100, width: 24, height: 24, alignItems: 'center', justifyContent: 'center' }}>
+                <TouchableOpacity style={{ margin: 20, borderWidth: 0, borderColor: "#ddd", borderRadius: 12, width: 24, height: 24, alignItems: 'center', justifyContent: 'center' }}>
                     <Ionicons name={'md-heart'} color='#888' size={13} />
                 </TouchableOpacity>
             </View>
@@ -34,7 +34,7 @@ export function CommentaireItem(params) {
                 <Text style={{ fontSize: 13, color: "#888", lineHeight: 20 }}>Le lorem ipsum également appelé faux-texte, lipsum, ou bolo bolo est, en imprimerie, une suite de mots sans signification utilisée à titre...</Text>
             </View>
             <TouchableOpacity style={{ marginTop: 10 }}>
-                <Text style={{ fontSize: 13, fontWeight: 'bold', color: '#222', color: '#888' }}>Répondre</Text>
+                <Text style={{ fontSize: 13, fontWeight: 'bold', color: color.primary.color }}>Répondre</Text>
             </TouchableOpacity>
         </View>
     )
@@ -46,7 +46,6 @@ export function CommentaireListe({ visible, focus, setFocus }) {
     const modalVisible = visible.modalVisible
     const setModalVisible = visible.setModalVisible
 
-    console.log("CommentaireListe", focus)
     const _handelPressVoirCommentaire = useCallback(
         () => {
             setFocus(false)
@@ -59,7 +58,7 @@ export function CommentaireListe({ visible, focus, setFocus }) {
         <View style={{}}>
             <View style={{ borderTopWidth: 1, borderColor: "#f1f1f1", paddingHorizontal: 30, paddingVertical: 20 }}>
                 <TouchableOpacity onPress={_handelPressVoirCommentaire}>
-                    <Text style={{ color: "#888" }} >Voir les commentaire</Text>
+                    <Text style={{ color: color.primary.color }} >Voir les commentaire</Text>
                 </TouchableOpacity>
                 {modalVisible && <CommentaireModal setModalVisible={setModalVisible} modalVisible={modalVisible} focus={focus} />}
             </View>
@@ -82,11 +81,6 @@ export function CommentaireListeModal(params) {
             <CommentaireItem />
             <CommentaireItem />
             <CommentaireItem />
-            <CommentaireItem />
-            <CommentaireItem />
-            <CommentaireItem />
-            <CommentaireItem />
-            <CommentaireItem />
         </ScrollView>
     )
 }
@@ -97,7 +91,6 @@ function CommentaireModal({ modalVisible, setModalVisible, focus }) {
     const [theme, setTheme] = useState('light');
     const [themeStyle, setThemeStyle] = useRecoilState(themeState);
 
-    console.log("CommentaireModal", focus)
 
     return (
         <Modal
@@ -146,11 +139,9 @@ function CommentaireTextInput({ focus }) {
     useEffect(() => {
         if (focus) {
             refTextInput.current.focus()
-            console.log(refTextInput.current)
         }
     }, [focus])
 
-    console.log("CommentaireTextInput", focus)
 
     return (
         <View style={{ flexDirection: "row", marginHorizontal: 20, marginTop: 20, marginBottom: 20, alignItems: "center", width: windowWidth - 40 }} >
@@ -169,7 +160,7 @@ function CommentaireTextInput({ focus }) {
                 />
             </View>
             <TouchableOpacity style={{ width: 24, height: 24, marginLeft: 14, justifyContent: "center", alignItems: "center" }}>
-                <Ionicons name={'md-send'} color='#888' size={24} />
+                <Ionicons name={'md-send'} color={color.primary.color} size={24} />
             </TouchableOpacity>
         </View>
     )

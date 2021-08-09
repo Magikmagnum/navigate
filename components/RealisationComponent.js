@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Dimensions, Share } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { Ionicons } from '@expo/vector-icons'
 
@@ -7,6 +7,8 @@ import { HeaderAvatarComment } from './cardsComponent';
 import { CommentaireListe } from './commentaireComponent';
 
 const color = require('../helpers/color.json')
+const windowWidth = Dimensions.get('window').width;
+
 
 export default function Realisation(props) {
 
@@ -46,27 +48,35 @@ export default function Realisation(props) {
 
 export function RealisationIteme() {
     return (
-        <View style={{ backgroundColor: 'white', paddingBottom: 40 }}>
+        <View style={{ backgroundColor: 'white' }}>
             <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginBottom: 16, marginHorizontal: 20 }}>
                 <View style={{ marginRight: 16 }}>
                     <HeaderAvatarComment avatarUri={require("../assets/avatar/img5.jpg")} />
                 </View>
                 <View>
                     <Text style={{ fontWeight: "bold" }}>Maison de deux chambre</Text>
-                    <Text>Gansa Diambote</Text>
+                    <Text style={{ color: "#888" }}>Gansa Diambote</Text>
                     <Text style={{ fontSize: 12, fontWeight: "bold", color: color.primary.color }}>Maçon</Text>
                 </View>
             </View>
             <View style={{ marginHorizontal: 20, marginBottom: 16, }}>
-                <Text style={{ fontSize: 14, color: "#444", lineHeight: 24 }}>
+                <Text style={{ fontSize: 16, color: "#666", lineHeight: 24 }}>
                     Le lorem ipsum (également appelé faux-texte, lipsum, ou bolo bolo) est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée.
                 </Text>
             </View>
-            <RealisationCard />
-            <RealisationCard />
-            <RealisationCard />
-            <RealisationCard />
-            <RealisationCard />
+            <ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={true}
+                pagingEnabled={true}
+            >
+                <RealisationCard />
+                <RealisationCard />
+                <RealisationCard />
+                <RealisationCard />
+                <RealisationCard />
+            </ScrollView>
+            <View style={{ height: 70 }}></View>
+
         </View>
     )
 }
@@ -78,6 +88,10 @@ function RealisationCard() {
     const [loveCount, setLoveCount] = useState(0)
     const [modalVisible, setModalVisible] = useState(false);
     const [commentaireFocus, setCommentaireFocus] = useState(false);
+    const [imageSize, setImageSize] = useState({
+        width: windowWidth,
+        height: 0
+    })
 
     const _handelPressHeartButton = useCallback(
         () => {
@@ -96,12 +110,28 @@ function RealisationCard() {
         [],
     )
 
+    const _handelOnLoad = useCallback(
+        (e) => {
+            const height = (e.nativeEvent.source.height * windowWidth) / e.nativeEvent.source.width
+
+            setImageSize({
+                width: windowWidth,
+                height: height
+            })
+        },
+        [],
+    )
+
+
+
+
     return (
-        <View>
-            <View style={{ height: 200, backgroundColor: color.primary.color }}>
+        <View style={{ width: windowWidth }}>
+            <View style={{ backgroundColor: color.primary.color, height: "auto" }}>
                 <Image
-                    source={require("../assets/avatar/nounou.jpg")}
-                    style={{ flex: 1, width: null, height: null, resizeMode: "cover", }}
+                    onLoad={e => _handelOnLoad(e)}
+                    source={require("../assets/avatar/img3.jpg")}
+                    style={{ width: imageSize.width, height: imageSize.height }}
                 />
             </View>
             <View style={{ flexDirection: "row", paddingHorizontal: 20, paddingVertical: 10 }}>
@@ -116,7 +146,7 @@ function RealisationCard() {
                     <TouchableOpacity onPress={_handelPressCommentaireButton} >
                         <Ionicons style={{ marginLeft: 2, marginRight: 60 }} name={'md-chatbubbles'} color='#bbb' size={24} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={{}}>
+                    <TouchableOpacity onPress={_handelPressShare}>
                         <Ionicons style={{ marginLeft: 2, marginRight: 60 }} name={'md-share'} color='#bbb' size={24} />
                     </TouchableOpacity>
                 </View>
@@ -124,4 +154,25 @@ function RealisationCard() {
             <CommentaireListe visible={{ modalVisible, setModalVisible }} focus={commentaireFocus} setFocus={setCommentaireFocus} />
         </View>
     )
+}
+
+
+const _handelPressShare = async () => {
+    try {
+        const result = await Share.share({
+            message:
+                'Vous venez de partager une ralisation issue de Ratisseur version 1.0',
+        });
+        if (result.action === Share.sharedAction) {
+            if (result.activityType) {
+                // shared with activity type of result.activityType
+            } else {
+                // shared
+            }
+        } else if (result.action === Share.dismissedAction) {
+            // dismissed
+        }
+    } catch (error) {
+        alert(error.message);
+    }
 }
