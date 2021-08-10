@@ -1,7 +1,9 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Dimensions, Share } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
-import { Ionicons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 import { HeaderAvatarComment } from './cardsComponent';
 import { CommentaireListe } from './commentaireComponent';
@@ -46,7 +48,31 @@ export default function Realisation(props) {
     )
 }
 
+function RealisationText() {
+
+    const [voir, setVoir] = useState(true)
+
+    let text = "Le lorem ipsum (également appelé faux-texte, lipsum, ou bolo bolo) est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée.";
+
+
+    const _handelPressVoir = () => {
+        setVoir(c => !c)
+    }
+
+    return (
+        <View>
+            <Text style={{ fontSize: 16, color: "#666", lineHeight: 24 }}>
+                {(voir && text.length > 200) ? text.substring(0, 120) + "..." : text}
+            </Text>
+            {text.length > 200 && <TouchableOpacity onPress={_handelPressVoir} style={{ marginTop: 10 }}><Text style={{ fontSize: 14, color: color.primary.color, lineHeight: 24 }}>Voir plus</Text></TouchableOpacity>}
+        </View>
+    )
+}
+
 export function RealisationIteme() {
+
+
+
     return (
         <View style={{ backgroundColor: 'white' }}>
             <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginBottom: 16, marginHorizontal: 20 }}>
@@ -59,10 +85,8 @@ export function RealisationIteme() {
                     <Text style={{ fontSize: 12, fontWeight: "bold", color: color.primary.color }}>Maçon</Text>
                 </View>
             </View>
-            <View style={{ marginHorizontal: 20, marginBottom: 16, }}>
-                <Text style={{ fontSize: 16, color: "#666", lineHeight: 24 }}>
-                    Le lorem ipsum (également appelé faux-texte, lipsum, ou bolo bolo) est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée.
-                </Text>
+            <View style={{ marginHorizontal: 20, marginBottom: 24, }}>
+                <RealisationText />
             </View>
             <ScrollView
                 horizontal={true}
@@ -134,20 +158,24 @@ function RealisationCard() {
                     style={{ width: imageSize.width, height: imageSize.height }}
                 />
             </View>
-            <View style={{ flexDirection: "row", paddingHorizontal: 20, paddingVertical: 10 }}>
-                <Text style={{ flex: 1, color: "#888" }}>{loveCount} j'aimes</Text>
-                <Text style={{ flex: 1, color: "#888" }}>12 commentaires</Text>
+            <View style={{ flexDirection: "row", paddingHorizontal: 20, paddingVertical: 16 }}>
+                <Text style={{ flex: 1, color: "#888", fontSize: 12 }}>{loveCount} j'aimes</Text>
+                <Text style={{ color: "#888", fontSize: 12 }}>12 commentaires</Text>
+                <Text style={{ color: "#888", fontSize: 12, marginLeft: 20 }}>10000 partages</Text>
             </View>
             <View style={{ borderTopWidth: 1, borderColor: "#f1f1f1", }}>
-                <View style={{ flexDirection: "row", marginHorizontal: 20, paddingVertical: 6 }}>
-                    <TouchableOpacity onPress={_handelPressHeartButton}>
-                        <Ionicons style={{ marginLeft: 2, marginRight: 60 }} name={'md-heart'} color={love ? 'red' : '#bbb'} size={24} />
+                <View style={{ flexDirection: "row", marginHorizontal: 20, paddingVertical: 12 }}>
+                    <TouchableOpacity onPress={_handelPressHeartButton} style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                        <AntDesign style={{ marginRight: 10 }} v name={love ? 'heart' : 'hearto'} size={16} color={love ? 'red' : '#999'} />
+                        <Text style={{ color: love ? 'red' : '#999', fontSize: 13, fontWeight: '700' }}>j'aime</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={_handelPressCommentaireButton} >
-                        <Ionicons style={{ marginLeft: 2, marginRight: 60 }} name={'md-chatbubbles'} color='#bbb' size={24} />
+                    <TouchableOpacity onPress={_handelPressCommentaireButton} style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                        <FontAwesome5 style={{ marginRight: 10 }} name="comment-alt" size={15} color="#999" />
+                        <Text style={{ color: "#999", fontSize: 13, fontWeight: '700' }}>commentaires</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={_handelPressShare}>
-                        <Ionicons style={{ marginLeft: 2, marginRight: 60 }} name={'md-share'} color='#bbb' size={24} />
+                    <TouchableOpacity onPress={_handelPressShare} style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                        <AntDesign style={{ marginRight: 10 }} name="sharealt" size={20} color='#999' />
+                        <Text style={{ color: "#999", fontSize: 13, fontWeight: '700' }}>partager</Text>
                     </TouchableOpacity>
                 </View>
             </View>

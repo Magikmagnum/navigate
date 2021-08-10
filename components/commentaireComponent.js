@@ -58,7 +58,7 @@ export function CommentaireListe({ visible, focus, setFocus }) {
         <View style={{}}>
             <View style={{ borderTopWidth: 1, borderColor: "#f1f1f1", paddingHorizontal: 30, paddingVertical: 20 }}>
                 <TouchableOpacity onPress={_handelPressVoirCommentaire}>
-                    <Text style={{ color: color.primary.color }} >Voir les commentaire</Text>
+                    <Text style={{ color: color.primary.color, fontSize: 12 }} >Voir les commentaire</Text>
                 </TouchableOpacity>
                 {modalVisible && <CommentaireModal setModalVisible={setModalVisible} modalVisible={modalVisible} focus={focus} />}
             </View>
