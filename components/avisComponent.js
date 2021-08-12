@@ -17,7 +17,7 @@ export default function AvisComponent() {
             <View style={{ flexDirection: "row", marginBottom: 10 }}>
                 <View><Start note={3} /></View>
                 <View style={{ marginLeft: 20 }}>
-                    <Text style={{ fontSize: 12, color: "#888" }}>Le 05/06/2021</Text>
+                    <Text style={{ position: "relative", bottom: 1, fontSize: 12, color: "#888" }}>Le 05/06/2021</Text>
                 </View>
             </View>
             <View style={{ marginBottom: 10 }}>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Modal } from 'react-native';
-import { Category } from '../components/cardsComponent'
+import { SkillsLitleCards } from '../components/skillsCardsComponent'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { Start } from '../components/startComponent'
 import { useNavigation } from '@react-navigation/core';
@@ -17,7 +17,7 @@ export function SkillsSlide(props) {
 
         return (
             <TouchableOpacity onPress={() => _handelPress(props)}>
-                <Category title={props.data.title} imageUri={props.data.imageUri} note={props.data.note} voter={props.data.voter} />
+                <SkillsLitleCards title={props.data.title} imageUri={props.data.imageUri} note={props.data.note} voter={props.data.voter} />
             </TouchableOpacity>
         )
     }

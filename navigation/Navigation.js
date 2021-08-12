@@ -2,7 +2,7 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Ionicons } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons';
 import { Context } from '../store/configureStore'
 
 import HomeScreen from '../screens/HomeScreen'
@@ -18,7 +18,7 @@ import IdentityScreen from '../screens/IdentityScreen'
 import ResetingScreen from '../screens/ResetingScreen'
 import YourSkillScreen from '../screens/YourSkillScreen'
 import SkillsChannelScreen from '../screens/skillsChannelScreen'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
 
 
 const Tab = createBottomTabNavigator()
@@ -182,11 +182,11 @@ const ProfilStackNavigator = ({ navigation, route }) => {
       }}
       initialRouteName='Contact'>
       <ProfilStack.Screen name="Contact" component={ProfilScreen} options={{
-        title: "Profil",
+        title: "Dash",
         headerShown: false
       }} />
       <ProfilStack.Screen name="Settings" component={SettingsScreen} options={{
-        title: "Profil",
+        title: "Dash",
         headerShown: false
       }} />
     </ProfilStack.Navigator>
@@ -233,15 +233,13 @@ const HomeTabNavigator = () => (
     tabBarIcon: ({ color, size }) => {
       let iconName
       if (route.name == 'Acceuil') {
-        iconName = 'md-home'
-      } else if (route.name == 'Catalogue') {
-        iconName = 'md-images'
-      } else if (route.name == 'Settings') {
-        iconName = 'md-settings'
-      } else if (route.name == 'Profil') {
-        iconName = 'md-contact'
+        iconName = 'home'
+      } else if (route.name == 'Mes compétence') {
+        iconName = 'solution1'
+      } else if (route.name == 'Dash') {
+        iconName = 'dashboard'
       }
-      return <Ionicons name={iconName} size={size} color={color} />
+      return <AntDesign name={iconName} size={size} color={color} />
     },
   })}
 
@@ -252,8 +250,8 @@ const HomeTabNavigator = () => (
   >
 
     <Tab.Screen name='Acceuil' component={HomeStackNavigator} ></Tab.Screen>
-    <Tab.Screen name='Catalogue' component={SkillStackNavigator}></Tab.Screen>
-    <Tab.Screen name='Profil' component={ProfilStackNavigator}></Tab.Screen>
+    <Tab.Screen name='Mes compétence' component={SkillStackNavigator}></Tab.Screen>
+    <Tab.Screen name='Dash' component={ProfilStackNavigator}></Tab.Screen>
   </Tab.Navigator>
 )
 
@@ -265,14 +263,11 @@ function _getHeaderTitle(route) {
     case "Acceuil":
       return "Acceuil"
       break
-    case "Catalogue":
-      return "Catalogue"
+    case "Mes compétence":
+      return "Mes compétence"
       break
-    case "Settings":
-      return "Settings"
-      break
-    case "Profil":
-      return "Profil"
+    case "Dash":
+      return "Dash"
       break
   }
 }
@@ -280,7 +275,7 @@ function _getHeaderTitle(route) {
 
 function _shouldHeaderBeShown(route) {
   const routeName = route.state ? route.state.routes[route.state.index].name : 'Acceuil'
-  if (routeName == "Catalogue" || routeName == "Settings" || routeName == "Profil" || routeName == "Acceuil") {
+  if (routeName == "Mes compétence" || routeName == "Dash" || routeName == "Acceuil") {
     return false
   }
   return true

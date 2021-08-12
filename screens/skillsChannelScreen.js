@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, StatusBar, ScrollView, SafeAreaView, Text } from 'react-native';
+import { StyleSheet, View, StatusBar, ScrollView, SafeAreaView } from 'react-native';
 
-import { HeaderShown, ImageContent, HeaderTitle, Item, Category, Paragraphe, HeaderAvatarProfil } from '../components/cardsComponent';
+import { HeaderShown, HeaderTitle, Item, HeaderAvatarProfil } from '../components/cardsComponent';
 
 import { useRecoilState } from 'recoil';
 import { themeState } from '../store/atomes/theme';
 
 import { Button } from '../components/formComponent'
-import Map from '../components/mapComponent'
-import { experienceStorage } from '../helpers/experienceStorage'
-import { trainingStorage } from '../helpers/trainingStorage'
+
 import ExperienceChannelScreen from './ExperienceChannelScreen'
 import TrainingChannelScreen from './TrainingChannelScreen'
-import { ListItemsComponent } from '../components/ListItemsComponent'
 import GraphSkillComponent from '../components/graphSkillComponent'
 import { Loading } from '../components/loadingComponent'
 import Realisation from '../components/RealisationComponent'
 import { useNavigation } from '@react-navigation/core';
-import { Start } from '../components/startComponent'
 import { SkillDashBoard } from "../components/skillDashBoard"
 import AvisComponent from "../components/avisComponent"
 import FaireOffreComponent from "../components/FaireOffreComponent"

@@ -1,9 +1,7 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Dimensions, Share } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
-import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
 
 import { HeaderAvatarComment } from './cardsComponent';
 import { CommentaireListe } from './commentaireComponent';
@@ -34,11 +32,11 @@ export default function Realisation(props) {
                         <Text style={{ fontSize: 13, color: '#222' }}>{props.title}</Text>
                         <View style={{ flexDirection: "row", alignItems: 'center' }}>
                             <Text style={{ fontSize: 13, color: '#222', color: '#888' }}>8</Text>
-                            <Ionicons style={{ marginLeft: 2, marginRight: 16 }} name={'md-image'} color='#888' size={13} />
+                            <AntDesign style={{ marginLeft: 2, marginRight: 16 }} name='picture' size={14} color='#888' />
                             <Text style={{ fontSize: 13, color: '#222', color: '#888' }}>200</Text>
-                            <Ionicons style={{ marginLeft: 2, marginRight: 16 }} name={'md-heart'} color='#888' size={13} />
+                            <AntDesign style={{ marginLeft: 2, marginRight: 16 }} name='hearto' size={14} color='#888' />
                             <Text style={{ fontSize: 13, color: '#222', color: '#888' }}>30</Text>
-                            <Ionicons style={{ marginLeft: 2 }} name={'md-chatbubbles'} color='#888' size={13} />
+                            <AntDesign style={{ marginLeft: 2, marginRight: 16 }} name='message1' size={14} color='#888' />
                         </View>
                     </View>
                 }
@@ -166,11 +164,11 @@ function RealisationCard() {
             <View style={{ borderTopWidth: 1, borderColor: "#f1f1f1", }}>
                 <View style={{ flexDirection: "row", marginHorizontal: 20, paddingVertical: 12 }}>
                     <TouchableOpacity onPress={_handelPressHeartButton} style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-                        <AntDesign style={{ marginRight: 10 }} v name={love ? 'heart' : 'hearto'} size={16} color={love ? 'red' : '#999'} />
+                        <AntDesign style={{ marginRight: 10 }} name={love ? 'heart' : 'hearto'} size={20} color={love ? 'red' : '#999'} />
                         <Text style={{ color: love ? 'red' : '#999', fontSize: 13, fontWeight: '700' }}>j'aime</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={_handelPressCommentaireButton} style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-                        <FontAwesome5 style={{ marginRight: 10 }} name="comment-alt" size={15} color="#999" />
+                        <AntDesign style={{ marginRight: 10 }} name='message1' size={20} color='#999' />
                         <Text style={{ color: "#999", fontSize: 13, fontWeight: '700' }}>commentaires</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={_handelPressShare} style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>

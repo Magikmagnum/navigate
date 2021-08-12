@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, SafeAreaView, TextInput } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons';
 import { BorderlessButton } from 'react-native-gesture-handler'
 
 const color = require('../helpers/color.json')
@@ -120,9 +121,9 @@ export function Category(props) {
             <Text style={{ fontSize: 13, color: '#222' }}>{props.title}</Text>
             <View style={{ flexDirection: "row", alignItems: 'center' }}>
               <Text style={{ fontSize: 13, color: '#222', color: '#888' }}>{props.note}</Text>
-              <Ionicons style={{ marginLeft: 2, marginRight: 16 }} name={'md-star'} color='#888' size={13} />
+              <AntDesign style={{ marginLeft: 2, marginRight: 24 }} name='staro' size={14} color='#888' />
               <Text style={{ fontSize: 13, color: '#222', color: '#888' }}>{props.voter}</Text>
-              <Ionicons style={{ marginLeft: 2 }} name={'md-bookmark'} color='#888' size={13} />
+              <AntDesign style={{ marginLeft: 2, marginRight: 24 }} name='book' size={14} color='#888' />
             </View>
           </View>
         }
@@ -228,7 +229,7 @@ export function HeaderShownSearch(props) {
           onChangeText={(text) => searchContact(text)}
         />
         <View style={{ justifyContent: "center", alignItems: "center", width: 46, height: 46 }}>
-          <Ionicons name='md-search' size={24} color='#666' />
+          <AntDesign name='search1' size={24} color='#666' />
         </View>
       </View>
     </SafeAreaView>
