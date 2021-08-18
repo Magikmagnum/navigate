@@ -56,7 +56,7 @@ export default function HeaderShownSearch(props) {
                     <TouchableOpacity onPress={() => {
                         searchInput.current.clear()
                     }} style={{ justifyContent: "center", alignItems: "center", width: 46, height: 46 }}>
-                        <AntDesign name='close' size={24} color='#666' />
+                        <AntDesign name='close' size={20} color='#666' />
                     </TouchableOpacity>
                 }
             </View>

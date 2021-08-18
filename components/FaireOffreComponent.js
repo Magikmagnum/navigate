@@ -3,16 +3,11 @@ import { View } from 'react-native';
 import { Button } from './formComponent'
 
 
-import { useRecoilState } from 'recoil';
-import { themeState } from '../store/atomes/theme';
 import ModalComponent from './modalComponent'
-import MapComponent from './mapComponent'
 
 export default function FaireOffreComponent() {
 
     const [modalVisible, setModalVisible] = useState(false);
-    const [theme, setTheme] = useState('light');
-    const [themeStyle, setThemeStyle] = useRecoilState(themeState);
 
     return (
         <View>
@@ -22,7 +17,6 @@ export default function FaireOffreComponent() {
                 setModalVisible={setModalVisible}
                 title='Faire une offre'
             >
-                <MapComponent />
             </ModalComponent>
         </View>
     )

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, StatusBar, ScrollView, SafeAreaView, Text } from 'react-native';
+import { View } from 'react-native';
 
-import { HeaderShown, HeaderAvatar, ImageContent, HeaderTitle, Item, Category, Paragraphe } from './cardsComponent';
+import { Item } from './cardsComponent';
+
 const color = require('../helpers/color.json')
 
 export default function GraphSkillComponent() {

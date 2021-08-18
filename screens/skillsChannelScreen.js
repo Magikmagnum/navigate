@@ -22,12 +22,6 @@ import competenceData from '../helpers/competences'
 
 const color = require('../helpers/color.json')
 
-const data = {
-  coords: {
-    "latitude": 0.5031368,
-    "longitude": 9.4223535,
-  }
-}
 
 export default function SkillsChannelScreen(props) {
 
@@ -35,10 +29,9 @@ export default function SkillsChannelScreen(props) {
 
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState({})
-
   const [theme, setTheme] = useState('light');
-  const [themeStyle, setThemeStyle] = useRecoilState(themeState);
 
+  const [themeStyle, setThemeStyle] = useRecoilState(themeState);
   const navigation = useNavigation()
 
   const params = JSON.parse(props.route.params)
@@ -78,8 +71,8 @@ export default function SkillsChannelScreen(props) {
               <View>
                 <HeaderAvatarProfil avatarUri={data.avatarUri} />
               </View>
-              <View style={{ marginLeft: 20, marginTop: -20 }}>
-                <HeaderTitle title={data.nom} color="#444" litleTitle={data.adresse} /*subTitle={"Gansa Diambote eric"}*/ />
+              <View style={{ marginLeft: 20, marginTop: 0 }}>
+                <HeaderTitle title={data.nom} color="#444" litleTitle={data.adresse} />
               </View>
             </View>
 
