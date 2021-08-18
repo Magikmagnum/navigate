@@ -214,30 +214,6 @@ export function HeaderShown(props) {
   )
 }
 
-
-export function HeaderShownSearch(props) {
-  return (
-    <SafeAreaView style={{ backgroundColor: '#fff' }}>
-      <View style={{ flexDirection: "row", height: 46, backgroundColor: '#fff', margin: 20, borderRadius: 4, elevation: 3 }}>
-        <View style={{ justifyContent: "center", alignItems: "center", width: 46, height: 46 }}>
-          <Ionicons name='md-menu' size={24} color='#666' />
-        </View>
-        <TextInput
-          placeholder='Rechercher un contacts'
-          placeholderTextColor='#aaa'
-          style={{ flex: 1, height: 46, fontSize: 16, backgroundColor: '#fff', paddingHorizontal: 20 }}
-          onChangeText={(text) => searchContact(text)}
-        />
-        <View style={{ justifyContent: "center", alignItems: "center", width: 46, height: 46 }}>
-          <AntDesign name='search1' size={24} color='#666' />
-        </View>
-      </View>
-    </SafeAreaView>
-  )
-}
-
-
-
 export function Item(props) {
 
   let marginHorizontal = 0

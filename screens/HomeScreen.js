@@ -1,49 +1,36 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { StyleSheet, View, StatusBar, Dimensions, } from 'react-native'
+import { StyleSheet, View, StatusBar, Dimensions, ScrollView } from 'react-native'
 
-import { Category, HeaderTitle, HeaderShownSearch } from '../components/cardsComponent'
-import { Context } from '../store/configureStore'
-import SkillsChannelScreen from './skillsChannelScreen'
-import { SkillsCards } from '../components/skillsCardsComponent'
+import { HeaderTitle } from '../components/cardsComponent'
+import HeaderShownSearch from '../components/searchComponent'
+import { SkillContent } from '../components/skillsCardsComponent'
 import { SkillsSlide } from '../components/slideComponent'
+import { Loading } from '../components/loadingComponent'
+
+
 import { getSkills } from '../store/API/RatisseurApi'
+import { Context } from '../store/configureStore'
 
 
-import { ScrollView } from 'react-native-gesture-handler'
-
-
+import competenceData from '../helpers/competences'
 
 const color = require('../helpers/color.json')
 const windowWidth = Dimensions.get('window').width;
 
 export default function CatalogScreen({ navigation }) {
 
-  /*
-  const [state, dispatch] = useContext(Context)
-  const [content, setContent] = useState(false);
-  const [loading, response] = getSkills(state.compte.api_key);
+  const [competenceArray, setCompetenceArray] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
- 
-     if (loading == false) {
-       if (response.status == 200) {
-         const skills = response.data.map((item) => {
-           return <SkillsCards
-             key={item.id}
-             navigation={navigation}
-             id={3} callback={SkillsScreen}
-             imageUri={require("../assets/avatar/fete.jpg")} avatarUri={require("../assets/avatar/img1.jpg")}
-             title={item.skills.name} subTitle='Okala, Akanda / Gabon'
-             experience={6} training={2} recommendation={8}
-             note={5} voter={1} />
-         })
-         setContent(skills);
-       }
-     }
-   }, [loading])
-  */
+    setCompetenceArray(competenceData)
+    setIsLoading(false)
+  }, [competenceData])
 
 
+  if (isLoading) {
+    return <View><Loading /></View>
+  }
 
   return (
     <>
@@ -57,34 +44,19 @@ export default function CatalogScreen({ navigation }) {
         <View style={{ marginHorizontal: 20 }}>
           <HeaderTitle title='Les plus proche de vous' />
         </View>
-        <SkillsSlide />
+        <SkillsSlide data={competenceData} />
 
         <View style={{ marginHorizontal: 20 }}>
           <HeaderTitle title='Les plus solicité' />
         </View>
-        <SkillsSlide />
+        <SkillsSlide data={competenceData} />
 
         <View style={{ marginHorizontal: 20 }}>
           <HeaderTitle title='Nos propositions' />
         </View>
-        <SkillsCards
-          navigation={navigation}
-          id={1}
-          imageUri={require("../assets/avatar/rest.jpg")} avatarUri={require("../assets/avatar/img3.jpg")}
-          title='Traiteur' subTitle='Nzeng-Ayong, Libreville / Gabon'
-          experience={52} training={102} recommendation={3}
-          note={3} voter={3}
-        />
-        <SkillsCards
-          navigation={navigation}
-          id={2}
-          imageUri={require("../assets/avatar/nounou.jpg")} avatarUri={require("../assets/avatar/img5.jpg")}
-          title='Nounou' subTitle='Charbonnages, Libreville / Gabon'
-          experience={6} training={2} recommendation={8}
-          note={5} voter={1}
-        />
+        <SkillContent data={competenceData} />
 
-        <SkillsSlide />
+        <SkillsSlide data={competenceData} />
 
       </ScrollView>
     </>
@@ -158,3 +130,35 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 })
+
+
+
+
+
+
+
+/*
+  const [state, dispatch] = useContext(Context)
+  const [content, setContent] = useState(false);
+  const [loading, response] = getSkills(state.compte.api_key);
+
+  useEffect(() => {
+
+     if (loading == false) {
+       if (response.status == 200) {
+         const skills = response.data.map((item) => {
+           return <SkillsCards
+             key={item.id}
+             navigation={navigation}
+             id={3} callback={SkillsScreen}
+             imageUri={require("../assets/avatar/fete.jpg")} avatarUri={require("../assets/avatar/img1.jpg")}
+             title={item.skills.name} subTitle='Okala, Akanda / Gabon'
+             experience={6} training={2} recommendation={8}
+             note={5} voter={1} />
+         })
+         setContent(skills);
+       }
+     }
+   }, [loading])
+  */
+

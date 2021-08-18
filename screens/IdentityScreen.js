@@ -32,7 +32,7 @@ export default function IdentityAddComponent() {
   const [errorForm, setErrorForm] = React.useState({ name: false, sexe: false, brithday: false })
 
 
-  
+
   const getValidatorData = () => {
 
     setIsLoading(true)
@@ -103,7 +103,7 @@ export default function IdentityAddComponent() {
 
   return (
     <View style={styles.container}>
-      <HeaderShown title="Identité"/>
+      <HeaderShown title="Identité" />
       <ScrollView style={{ padding: 20 }}>
         <View style={styles.head}>
           <Header6

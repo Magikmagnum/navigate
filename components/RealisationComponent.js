@@ -23,13 +23,13 @@ export default function Realisation(props) {
         <TouchableOpacity onPress={() => {
             navigation.navigate('Realization', JSON.stringify(props))
         }}>
-            <View style={{ height: height, marginLeft: 20, borderWidth: 0.2 }}>
+            <View style={{ height: height, marginLeft: 20, borderWidth: 0.2, borderWidth: 0 }}>
                 <View style={{ height: 140, width: 200, borderColor: '#aaa', borderRadius: 12, elevation: 3, backgroundColor: color.primary.color }}>
                     <Image source={props.imageUri} style={{ borderBottomLeftRadius: 12, borderBottomRightRadius: 12, flex: 1, width: null, height: null, resizeMode: "cover", borderTopLeftRadius: 12, borderTopRightRadius: 12 }} />
                 </View>
                 {
                     props.title && <View style={{ flex: 1, paddingLeft: 2, paddingTop: 12 }}>
-                        <Text style={{ fontSize: 13, color: '#222' }}>{props.title}</Text>
+                        <Text style={{ fontSize: 13, color: '#666', fontWeight: "bold" }}>{props.title}</Text>
                         <View style={{ flexDirection: "row", alignItems: 'center' }}>
                             <Text style={{ fontSize: 13, color: '#222', color: '#888' }}>8</Text>
                             <AntDesign style={{ marginLeft: 2, marginRight: 16 }} name='picture' size={14} color='#888' />
@@ -149,11 +149,11 @@ function RealisationCard() {
 
     return (
         <View style={{ width: windowWidth }}>
-            <View style={{ backgroundColor: color.primary.color, height: "auto" }}>
+            <View style={{}}>
                 <Image
                     onLoad={e => _handelOnLoad(e)}
                     source={require("../assets/avatar/img3.jpg")}
-                    style={{ width: imageSize.width, height: imageSize.height }}
+                    style={{ width: (imageSize.width - 40), height: imageSize.height, marginHorizontal: 20, borderRadius: 20 }}
                 />
             </View>
             <View style={{ flexDirection: "row", paddingHorizontal: 20, paddingVertical: 16 }}>

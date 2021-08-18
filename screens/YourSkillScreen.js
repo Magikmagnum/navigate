@@ -1,53 +1,126 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, StatusBar, SafeAreaView, Text } from 'react-native';
-import { HeaderShown, HeaderAvatar, ImageContent } from '../components/cardsComponent';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, StatusBar, ScrollView, SafeAreaView, Image } from 'react-native';
+
+import { HeaderShown, HeaderTitle, Item, HeaderAvatarProfil } from '../components/cardsComponent';
+
 import { useRecoilState } from 'recoil';
 import { themeState } from '../store/atomes/theme';
-import { yourskillState } from '../store/atomes/yourskill';
-import { Start } from '../components/startComponent'
+
+import { Button } from '../components/formComponent'
+
+import FaireAppelComponent from "../components/faireAppelComponent"
+import ExperienceChannelScreen from './ExperienceChannelScreen'
+import TrainingChannelScreen from './TrainingChannelScreen'
+import GraphSkillComponent from '../components/graphSkillComponent'
+import { Loading } from '../components/loadingComponent'
+import Realisation from '../components/RealisationComponent'
+import { useNavigation } from '@react-navigation/core';
+import { SkillDashBoard } from "../components/skillDashBoard"
+import AvisComponent from "../components/avisComponent"
+import FaireOffreComponent from "../components/FaireOffreComponent"
+import { SkillsSlide } from '../components/slideComponent'
+
+const color = require('../helpers/color.json')
 
 
+export default function SkillsChannelScreen(props) {
 
 
-export default function YourSkillScreen() {
+    const [isLoading, setIsLoading] = useState(true)
+    const [state, setState] = useState({})
 
     const [theme, setTheme] = useState('light');
     const [themeStyle, setThemeStyle] = useRecoilState(themeState);
-    const [nextSkillView, setNextSkillView] = useRecoilState(yourskillState);
 
+    const navigation = useNavigation()
+
+    const params = JSON.parse(props.route.params)
+
+    useEffect(() => {
+        setState(params)
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 10)
+    }, [])
+
+    const render = (props) => {
+
+        if (isLoading) {
+            return <View><Loading /></View>
+        }
+
+        return (
+            <>
+                <SafeAreaView style={{ borderBottomColor: themeStyle.border, borderBottomWidth: 1 }}>
+                    <StatusBar backgroundColor={themeStyle.content} networkActivityIndicatorVisible={true} barStyle={theme == 'dark' ? 'light-content' : 'dark-content'} hidden={false} />
+                    <HeaderShown title={state.title} theme={theme} icon='md-arrow-back' callback={() => navigation.navigate('Catalog', JSON.stringify(props.data))} />
+                </SafeAreaView>
+
+
+                <ScrollView style={{ backgroundColor: '#fff', marginBottom: 50 }}>
+                    <View style={{ backgroundColor: '#000', height: 160 }} >
+                        <Image source={params.imageUri} resizeMode={'cover'} />
+                    </View>
+                    <View style={{ backgroundColor: '#fff', borderRadius: 20, position: "relative", top: -20 }}>
+
+                        <View style={{ marginBottom: 26, marginTop: 30 }}>
+                            <SkillDashBoard note={state.note} experience={state.experience} training={state.training} recommendation={state.recommendation} />
+                        </View>
+                        <View style={{ marginHorizontal: 20 }}>
+                            <HeaderTitle title='Vos offre' subTitle="Le lorem ipsum également appelé faux-texte, lipsum, ou bolo bolo est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée." />
+                        </View>
+                        <View style={{ ...styles.foot, flexDirection: 'row', height: 'auto' }}>
+                            <View style={{ flex: 1 }}>
+                                <FaireOffreComponent />
+                            </View>
+                        </View>
+
+                        <View style={{ marginHorizontal: 20 }}>
+                            <HeaderTitle title='Mes réalisations' subTitle="Le lorem ipsum également appelé faux-texte, lipsum, ou bolo bolo est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée." />
+                        </View>
+                        <View style={{ height: 190, marginBottom: 20 }}>
+                            <ScrollView
+                                horizontal={true}
+                                showsHorizontalScrollIndicator={false}
+                            >
+                                <Realisation title='Maçon' imageUri={require("../assets/avatar/macon.jpg")} />
+                                <Realisation title='Restaurant' imageUri={require("../assets/avatar/rest.jpg")} />
+                                <Realisation title='Mecanicien' imageUri={require("../assets/avatar/gara.jpg")} />
+                                <Realisation title='Restaurant' imageUri={require("../assets/avatar/rest.jpg")} />
+                                <Realisation title='Mecanicien' imageUri={require("../assets/avatar/gara.jpg")} />
+                                <View style={{ width: 20 }}></View>
+                            </ScrollView>
+                        </View>
+                    </View>
+                </ScrollView>
+
+            </>
+        )
+    }
 
     return (
-        <View style={{ ...styles.container, backgroundColor: themeStyle.content }}>
-            <SafeAreaView style={{ borderBottomColor: themeStyle.border, borderBottomWidth: 1 }}>
-                <StatusBar backgroundColor={themeStyle.content} networkActivityIndicatorVisible={true} barStyle={theme == 'dark' ? 'light-content' : 'dark-content'} hidden={false} />
-                <HeaderShown title='Détail' theme={theme} />
-            </SafeAreaView>
-
-            <ImageContent imageUri={nextSkillView.imageUri} />
-            <View style={{ flexDirection: 'row', padding: 20 }}>
-                <View style={{ marginRight: 20 }}>
-                    <HeaderAvatar avatarUri={require("../assets/avatar/img3.jpg")} />
-                </View>
-                <View style={{ flexDirection: 'column' }}>
-                    <Text style={{ fontWeight: 'bold' }}>{nextSkillView.title}</Text>
-                    <Text style={{ fontSize: 13, color: '#222', color: '#888' }}>{'coucou'}</Text>
-                </View>
-            </View>
-            <View style={{ paddingHorizontal: 16, height: 16 }}>
-                <Start note={3} voter={105} />
-            </View>
-        </View>
+        <View>{render(props)}</View>
     )
 }
 
 
+
+
+
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: "column",
-        backgroundColor: '#ddd',
+    content: {
+        height: 382,
+        backgroundColor: '#aaa',
+    },
+
+    head: {
+
+        flexDirection: "row",
+    },
+
+    foot: {
+        height: 116,
+        backgroundColor: '#fff',
+        paddingHorizontal: 16,
     },
 });
-
-
-

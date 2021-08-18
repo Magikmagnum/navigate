@@ -14,11 +14,11 @@ export function SkillDashBoard(props) {
             <View style={{
                 flexDirection: "row", height: 60, position: "relative", justifyContent: "space-between"
             }}>
-                <RealCardBottom title="note" note={props.experience} icon='staro' />
-                <RealCardBottom title="contrat" note={props.training} icon='book' />
-                <RealCardBottom title="réalisation" note={props.recommendation} icon='rocket1' />
-                <RealCardBottom title="aime" note={props.recommendation} icon='hearto' />
-                <RealCardBottom title="commentaire" note={6000} icon='message1' />
+                <RealCardBottom title="note" value={props.note} icon='staro' />
+                <RealCardBottom title="contrat" value={props.contrat} icon='book' />
+                <RealCardBottom title="réalisation" value={props.realisation} icon='rocket1' />
+                <RealCardBottom title="aime" value={props.aime} icon='hearto' />
+                <RealCardBottom title="commentaire" value={props.commentaire} icon='message1' />
             </View>
         </ScrollView>
     )
@@ -30,9 +30,9 @@ export function SkillDashBoard(props) {
 function RealCardBottom(props) {
     return (
         <View style={{ flexDirection: 'column', minWidth: 80, paddingHorizontal: 20, height: 60, justifyContent: "center", alignItems: "center" }}>
-            <AntDesign name={props.icon} size={24} color='#555' />
+            <AntDesign name={props.icon} size={20} color='#555' />
 
-            <Text style={{ fontSize: 12, fontWeight: 'bold', color: '#555' }}>{props.note}</Text>
+            <Text style={{ fontSize: 12, fontWeight: 'bold', color: '#555' }}>{props.value}</Text>
             <Text style={{ fontSize: 12, color: '#888' }}>{props.title}</Text>
         </View>
     )

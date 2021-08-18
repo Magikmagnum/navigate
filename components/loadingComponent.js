@@ -18,6 +18,7 @@ export const handleSuccess = (setIsLoading, setLoadingSuccess, callback) => {
             callback()
             setLoadingSuccess(false)
         }, 300)
+
 }
 
 

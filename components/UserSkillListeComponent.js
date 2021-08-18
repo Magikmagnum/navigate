@@ -9,6 +9,9 @@ import { useNavigation } from '@react-navigation/native';
 import { themeState } from '../store/atomes/theme';
 import { yourskillState } from '../store/atomes/yourskill';
 
+import { MySkillsCards } from '../components/skillsCardsComponent'
+
+
 
 
 
@@ -82,10 +85,26 @@ export default function UserSkillListe() {
 
     return (
         <View style={{}}>
-            <View style={{ marginHorizontal: 20 }}>
+            <View style={{ marginHorizontal: 20, marginBottom: 20 }}>
                 <HeaderTitle color={themeStyle.color} subColor={themeStyle.subColor} title='Administré vos competence' subTitle="Ici vous pouvez administre vos competence." />
             </View>
             {yourSkills}
+            <MySkillsCards
+                navigation={navigation}
+                id={1}
+                imageUri={require("../assets/avatar/rest.jpg")}
+                title='Devellopeur'
+                realisation={13}
+                etoile={3} contrat={3}
+            />
+            <MySkillsCards
+                navigation={navigation}
+                id={2}
+                imageUri={require("../assets/avatar/nounou.jpg")}
+                title='Musicien'
+                realisation={8}
+                etoile={4} contrat={1}
+            />
         </View>
     )
 }

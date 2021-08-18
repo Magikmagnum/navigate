@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, StatusBar, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, View, StatusBar, ScrollView, SafeAreaView, Image } from 'react-native';
 
 import { HeaderShown, HeaderTitle, Item, HeaderAvatarProfil } from '../components/cardsComponent';
 
 import { useRecoilState } from 'recoil';
 import { themeState } from '../store/atomes/theme';
 
-import { Button } from '../components/formComponent'
-
-import ExperienceChannelScreen from './ExperienceChannelScreen'
-import TrainingChannelScreen from './TrainingChannelScreen'
+import FaireAppelComponent from "../components/faireAppelComponent"
 import GraphSkillComponent from '../components/graphSkillComponent'
 import { Loading } from '../components/loadingComponent'
 import Realisation from '../components/RealisationComponent'
@@ -17,7 +14,11 @@ import { useNavigation } from '@react-navigation/core';
 import { SkillDashBoard } from "../components/skillDashBoard"
 import AvisComponent from "../components/avisComponent"
 import FaireOffreComponent from "../components/FaireOffreComponent"
-import { SkillsSlide } from '../components/slideComponent'
+import { SkillsSlide } from '../components/slideComponent';
+import GeoCoderComponent from '../components/geoCoderComponent'
+
+import competenceData from '../helpers/competences'
+
 
 const color = require('../helpers/color.json')
 
@@ -31,8 +32,9 @@ const data = {
 export default function SkillsChannelScreen(props) {
 
 
+
   const [isLoading, setIsLoading] = useState(true)
-  const [state, setState] = useState({})
+  const [data, setData] = useState({})
 
   const [theme, setTheme] = useState('light');
   const [themeStyle, setThemeStyle] = useRecoilState(themeState);
@@ -42,11 +44,15 @@ export default function SkillsChannelScreen(props) {
   const params = JSON.parse(props.route.params)
 
   useEffect(() => {
-    setState(params)
+    const id = params.id;
+    const newData = competenceData.find(item => item.id == id);
+    setData(newData)
     setTimeout(() => {
       setIsLoading(false)
-    }, 10)
+    }, 4)
   }, [])
+
+
 
   const render = (props) => {
 
@@ -58,73 +64,75 @@ export default function SkillsChannelScreen(props) {
       <>
         <SafeAreaView style={{ borderBottomColor: themeStyle.border, borderBottomWidth: 1 }}>
           <StatusBar backgroundColor={themeStyle.content} networkActivityIndicatorVisible={true} barStyle={theme == 'dark' ? 'light-content' : 'dark-content'} hidden={false} />
-          <HeaderShown title='Détail' theme={theme} icon='md-arrow-back' callback={() => navigation.navigate('Home', JSON.stringify(props.data))} />
+          <HeaderShown title={data.title} theme={theme} icon='md-arrow-back' callback={() => navigation.navigate('Home', JSON.stringify(props.data))} />
         </SafeAreaView>
 
 
         <ScrollView style={{ backgroundColor: '#fff', marginBottom: 70 }}>
+          <View style={{ backgroundColor: '#000', height: 160 }} >
+            <Image source={params.imageUri} resizeMode={'cover'} style={{ flex: 1, width: null, height: null }} />
+          </View>
+          <View style={{ backgroundColor: '#fff', borderRadius: 20, position: "relative", top: -20 }}>
 
-          <View style={{ flexDirection: "row", marginTop: 20, marginHorizontal: 20 }}>
-            <View style={{}}>
-              <HeaderAvatarProfil avatarUri={state.avatarUri} />
+            <View style={{ flexDirection: "row", marginTop: 20, marginHorizontal: 20 }}>
+              <View>
+                <HeaderAvatarProfil avatarUri={data.avatarUri} />
+              </View>
+              <View style={{ marginLeft: 20, marginTop: -20 }}>
+                <HeaderTitle title={data.nom} color="#444" litleTitle={data.adresse} /*subTitle={"Gansa Diambote eric"}*/ />
+              </View>
             </View>
-            <View style={{ marginLeft: 20, marginTop: -20 }}>
-              <HeaderTitle title={state.title} subTitle={state.subTitle} litleTitle={"Gansa Diambote eric"} />
+
+            <View style={{ marginBottom: 26, marginTop: 16 }}>
+              <SkillDashBoard note={data.note} contrat={data.contrat} realisation={data.realisation} aime={data.aime} commentaire={data.commentaire} />
             </View>
-          </View>
 
-          <View style={{ marginBottom: 26, marginTop: 16 }}>
-            <SkillDashBoard note={state.note} experience={state.experience} training={state.training} recommendation={state.recommendation} />
-          </View>
-
-          <View style={{ ...styles.foot, flexDirection: 'row', height: 'auto' }}>
-            <View style={{ flex: 6, marginRight: 10 }}>
-              <Button title="Lancer l'appel" />
+            <View style={{ ...styles.foot, flexDirection: 'row', height: 'auto' }}>
+              <View style={{ flex: 6, marginRight: 10 }}>
+                <FaireAppelComponent title="Lancer l'appel" number={data.telephone} />
+              </View>
+              <View style={{ flex: 6 }}>
+                <FaireOffreComponent />
+              </View>
             </View>
-            <View style={{ flex: 6 }}>
-              <FaireOffreComponent />
+
+            <View style={{ marginHorizontal: 20, marginTop: 20 }}>
+              <HeaderTitle title='A moins 1km de vous' subTitle={"Le lorem ipsum est, en imprimerie, une suite de mots sans signification"} />
             </View>
-          </View>
+            <View style={{ marginHorizontal: 20, marginBottom: 20, marginTop: -14, flexDirection: 'row', justifyContent: "space-between", alignItems: "center" }}>
+              <GeoCoderComponent data={data.coords} />
+            </View>
 
-          <View style={{ marginHorizontal: 20, marginTop: 20 }}>
-            <HeaderTitle title='A moins 1km de vous' subTitle={"Le lorem ipsum est, en imprimerie, une suite de mots sans signification"} />
-          </View>
-          <View style={{ marginHorizontal: 20, marginBottom: 20, marginTop: -14, flexDirection: 'row', justifyContent: "space-between", alignItems: "center" }}>
-            <Item icon="md-walk" title='36 min' />
-            <Item icon="md-bicycle" title='23 min' />
-            <Item icon="md-car" title='10 min' />
-          </View>
+            <View style={{ marginHorizontal: 20 }}>
+              <HeaderTitle title='Mes réalisations' />
+            </View>
+            <View style={{ height: 190, marginBottom: 20 }}>
+              <ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+              >
+                <Realisation title='Maçon' imageUri={require("../assets/avatar/macon.jpg")} />
+                <Realisation title='Restaurant' imageUri={require("../assets/avatar/rest.jpg")} />
+                <Realisation title='Mecanicien' imageUri={require("../assets/avatar/gara.jpg")} />
+                <Realisation title='Restaurant' imageUri={require("../assets/avatar/rest.jpg")} />
+                <Realisation title='Mecanicien' imageUri={require("../assets/avatar/gara.jpg")} />
+                <View style={{ width: 20 }}></View>
+              </ScrollView>
+            </View>
 
-          <View style={{ marginHorizontal: 20 }}>
-            <HeaderTitle title='Mes réalisations' />
-          </View>
-          <View style={{ height: 190, marginBottom: 20 }}>
-            <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-            >
-              <Realisation title='Maçon' imageUri={require("../assets/avatar/macon.jpg")} />
-              <Realisation title='Restaurant' imageUri={require("../assets/avatar/rest.jpg")} />
-              <Realisation title='Mecanicien' imageUri={require("../assets/avatar/gara.jpg")} />
-              <Realisation title='Restaurant' imageUri={require("../assets/avatar/rest.jpg")} />
-              <Realisation title='Mecanicien' imageUri={require("../assets/avatar/gara.jpg")} />
-              <View style={{ width: 20 }}></View>
-            </ScrollView>
-          </View>
+            <View style={{ marginHorizontal: 20 }}>
+              <HeaderTitle title='Notes et avis' />
+            </View>
+            <GraphSkillComponent />
+            <AvisComponent />
+            <AvisComponent />
+            <AvisComponent />
 
-          <View style={{ marginHorizontal: 20 }}>
-            <HeaderTitle title='Notes et avis' />
+            <View style={{ marginHorizontal: 20 }}>
+              <HeaderTitle title='Autres compétences' />
+            </View>
+            <SkillsSlide data={competenceData} />
           </View>
-          <GraphSkillComponent />
-          <AvisComponent />
-          <AvisComponent />
-          <AvisComponent />
-
-          <View style={{ marginHorizontal: 20 }}>
-            <HeaderTitle title='Autres compétences' />
-          </View>
-          <SkillsSlide />
-
           <View style={{ marginBottom: 20 }}></View>
         </ScrollView>
 
@@ -158,21 +166,3 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 });
-
-
-
-
-
-
-
-const experienceScreen = (arg) => {
-  return (
-    <ExperienceChannelScreen data={arg} avatarUri={state.avatarUri} />
-  )
-}
-
-const trainingScreen = (arg) => {
-  return (
-    <TrainingChannelScreen data={arg} avatarUri={state.avatarUri} />
-  )
-}
