@@ -6,8 +6,8 @@ import { AntDesign } from '@expo/vector-icons';
 import { Context } from '../store/configureStore'
 
 import HomeScreen from '../screens/HomeScreen'
-import CatalogScreen from '../screens/CatalogScreen'
-import ProfilScreen from '../screens/ProfilScreen'
+import DeskScreen from '../screens/DeskScreen'
+import OffreScreen from "../screens/OffreScreen"
 import RealisationScreen from '../screens/RealisationScreen'
 import SettingsScreen from '../screens/settings/SettingsScreen'
 import SettingsCompteScreen from '../screens/settings/SettingsCompteScreen'
@@ -108,9 +108,13 @@ const SkillStackNavigator = ({ navigation, route }) => {
         gestureDirection: "horizontal",
         ...TransitionPresets.SlideFromRightIOS
       }}
-      initialRouteName='Catalog'>
-      <SkillStack.Screen name="Catalog" component={CatalogScreen} options={{
+      initialRouteName='Desk'>
+      <SkillStack.Screen name="Desk" component={DeskScreen} options={{
         title: "Catalogue",
+        headerShown: false
+      }} />
+      <SkillStack.Screen name="Offre" component={OffreScreen} options={{
+        title: "Offre",
         headerShown: false
       }} />
       <SkillStack.Screen name="YourSkill" component={YourSkillScreen} options={{
@@ -180,13 +184,10 @@ const ProfilStackNavigator = ({ navigation, route }) => {
         gestureDirection: "horizontal",
         ...TransitionPresets.SlideFromRightIOS
       }}
-      initialRouteName='Contact'>
-      <ProfilStack.Screen name="Contact" component={ProfilScreen} options={{
-        title: "Dash",
-        headerShown: false
-      }} />
+      initialRouteName='Settings'>
+
       <ProfilStack.Screen name="Settings" component={SettingsScreen} options={{
-        title: "Dash",
+        title: "parametre",
         headerShown: false
       }} />
     </ProfilStack.Navigator>
@@ -234,10 +235,10 @@ const HomeTabNavigator = () => (
       let iconName
       if (route.name == 'Acceuil') {
         iconName = 'home'
-      } else if (route.name == 'Mes compétence') {
-        iconName = 'solution1'
-      } else if (route.name == 'Dash') {
-        iconName = 'dashboard'
+      } else if (route.name == 'Bureau') {
+        iconName = 'iconfontdesktop'
+      } else if (route.name == 'parametre') {
+        iconName = 'setting'
       }
       return <AntDesign name={iconName} size={size} color={color} />
     },
@@ -250,8 +251,8 @@ const HomeTabNavigator = () => (
   >
 
     <Tab.Screen name='Acceuil' component={HomeStackNavigator} ></Tab.Screen>
-    <Tab.Screen name='Mes compétence' component={SkillStackNavigator}></Tab.Screen>
-    <Tab.Screen name='Dash' component={ProfilStackNavigator}></Tab.Screen>
+    <Tab.Screen name='Bureau' component={SkillStackNavigator}></Tab.Screen>
+    <Tab.Screen name='parametre' component={ProfilStackNavigator}></Tab.Screen>
   </Tab.Navigator>
 )
 
@@ -263,11 +264,11 @@ function _getHeaderTitle(route) {
     case "Acceuil":
       return "Acceuil"
       break
-    case "Mes compétence":
-      return "Mes compétence"
+    case "Bureau":
+      return "Bureau"
       break
-    case "Dash":
-      return "Dash"
+    case "parametre":
+      return "parametre"
       break
   }
 }
@@ -275,7 +276,7 @@ function _getHeaderTitle(route) {
 
 function _shouldHeaderBeShown(route) {
   const routeName = route.state ? route.state.routes[route.state.index].name : 'Acceuil'
-  if (routeName == "Mes compétence" || routeName == "Dash" || routeName == "Acceuil") {
+  if (routeName == "Bureau" || routeName == "parametre" || routeName == "Acceuil") {
     return false
   }
   return true

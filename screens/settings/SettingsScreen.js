@@ -205,7 +205,7 @@ export default function SettingsScreen() {
     <View style={{ ...styles.container, backgroundColor: '#fff', paddingBottom: 0 }}>
       <SafeAreaView style={{ borderBottomColor: '#eee', borderBottomWidth: 1 }} >
         <StatusBar backgroundColor="#fff" networkActivityIndicatorVisible={true} barStyle='dark-content' hidden={false} />
-        <HeaderShown title="Paramètres" icon='md-arrow-back' callback={(() => navigation.goBack())} />
+        <HeaderShown title="Paramètres" />
       </SafeAreaView>
       <SectionList
         sections={DATA}

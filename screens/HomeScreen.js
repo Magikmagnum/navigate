@@ -17,7 +17,7 @@ import competenceData from '../helpers/competences'
 const color = require('../helpers/color.json')
 const windowWidth = Dimensions.get('window').width;
 
-export default function CatalogScreen({ navigation }) {
+export default function deskScreen({ navigation }) {
 
   const [competenceArray, setCompetenceArray] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

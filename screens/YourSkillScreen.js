@@ -1,24 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, StatusBar, ScrollView, SafeAreaView, Image } from 'react-native';
 
-import { HeaderShown, HeaderTitle, Item, HeaderAvatarProfil } from '../components/cardsComponent';
+import { HeaderShown, HeaderTitle } from '../components/cardsComponent';
 
 import { useRecoilState } from 'recoil';
 import { themeState } from '../store/atomes/theme';
-
-import { Button } from '../components/formComponent'
-
-import FaireAppelComponent from "../components/faireAppelComponent"
-import ExperienceChannelScreen from './ExperienceChannelScreen'
-import TrainingChannelScreen from './TrainingChannelScreen'
-import GraphSkillComponent from '../components/graphSkillComponent'
 import { Loading } from '../components/loadingComponent'
 import Realisation from '../components/RealisationComponent'
 import { useNavigation } from '@react-navigation/core';
 import { SkillDashBoard } from "../components/skillDashBoard"
-import AvisComponent from "../components/avisComponent"
-import FaireOffreComponent from "../components/FaireOffreComponent"
-import { SkillsSlide } from '../components/slideComponent'
 
 const color = require('../helpers/color.json')
 
@@ -53,7 +43,7 @@ export default function SkillsChannelScreen(props) {
             <>
                 <SafeAreaView style={{ borderBottomColor: themeStyle.border, borderBottomWidth: 1 }}>
                     <StatusBar backgroundColor={themeStyle.content} networkActivityIndicatorVisible={true} barStyle={theme == 'dark' ? 'light-content' : 'dark-content'} hidden={false} />
-                    <HeaderShown title={state.title} theme={theme} icon='md-arrow-back' callback={() => navigation.navigate('Catalog', JSON.stringify(props.data))} />
+                    <HeaderShown title={state.title} theme={theme} icon='md-arrow-back' callback={() => navigation.navigate('Desk', JSON.stringify(props.data))} />
                 </SafeAreaView>
 
 
