@@ -6,6 +6,7 @@ import { HeaderShown, HeaderTitle } from '../components/cardsComponent';
 import { useRecoilState } from 'recoil';
 import { themeState } from '../store/atomes/theme';
 import { Loading } from '../components/loadingComponent'
+import FaireOffreComponent from '../components/FaireOffreComponent'
 import Realisation from '../components/RealisationComponent'
 import { useNavigation } from '@react-navigation/core';
 import { SkillDashBoard } from "../components/skillDashBoard"

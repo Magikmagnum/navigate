@@ -1,8 +1,12 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+
 import { AntDesign } from '@expo/vector-icons';
+
 import { Context } from '../store/configureStore'
 
 import HomeScreen from '../screens/HomeScreen'
@@ -10,7 +14,6 @@ import DeskScreen from '../screens/DeskScreen'
 import OffreScreen from "../screens/OffreScreen"
 import RealisationScreen from '../screens/RealisationScreen'
 import SettingsScreen from '../screens/settings/SettingsScreen'
-import SettingsCompteScreen from '../screens/settings/SettingsCompteScreen'
 import SignInScreen from '../screens/SignInScreen'
 import SignUpScreen from '../screens/SignUpScreen'
 import AvatarScreen from '../screens/AvatarScreen'
@@ -20,14 +23,13 @@ import YourSkillScreen from '../screens/YourSkillScreen'
 import SkillsChannelScreen from '../screens/skillsChannelScreen'
 
 
-
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
-const SettingsStack = createStackNavigator()
 const SkillStack = createStackNavigator()
 const ProfilStack = createStackNavigator()
 const SignUpStack = createStackNavigator()
 const HomeStack = createStackNavigator()
+const DeskStack = createMaterialTopTabNavigator();
 
 let INITIAL_ROUTE_NAME = 'SignIn'
 
@@ -71,7 +73,6 @@ export default function Navigation() {
 
 
 const SignUpStackNavigator = () => {
-
   return (
     <SignUpStack.Navigator
       screenOptions={{
@@ -88,7 +89,26 @@ const SignUpStackNavigator = () => {
 }
 
 
+const DeskTabStackNavigator = ({ navigation, route }) => {
+  return (
+    <DeskStack.Navigator
+
+      tabBarOptions={{
+        activeTintColor: COLOR.primary.color,
+        showLabel: true,
+        indicatorStyle: { backgroundColor: COLOR.primary.color, height: 3 },
+        labelStyle: { fontSize: 12, fontWeight: "bold", color: "#000", textTransform: "none" },
+      }}
+    >
+      <DeskStack.Screen name="Mes compétences" component={SkillStackNavigator} />
+      <DeskStack.Screen name="Mes offres" component={OffreScreen} />
+    </DeskStack.Navigator>
+  );
+}
+
+
 const SkillStackNavigator = ({ navigation, route }) => {
+
   if (route.state) {
     navigation.setOptions({
       tabBarVisible: route.state.index > 0 ? false : true
@@ -127,11 +147,14 @@ const SkillStackNavigator = ({ navigation, route }) => {
 
 
 const HomeStackNavigator = ({ navigation, route }) => {
-  if (route.state) {
+  const routeName = getFocusedRouteNameFromRoute(route)
+
+  if (routeName) {
     navigation.setOptions({
       tabBarVisible: route.state.index > 0 ? false : true
     })
   }
+
   return (
     <HomeStack.Navigator
       screenOptions={{
@@ -164,8 +187,10 @@ const HomeStackNavigator = ({ navigation, route }) => {
 }
 
 
-const ProfilStackNavigator = ({ navigation, route }) => {
-  if (route.state) {
+const SettingsStackNavigator = ({ navigation, route }) => {
+  const routeName = getFocusedRouteNameFromRoute(route)
+
+  if (routeName) {
     navigation.setOptions({
       tabBarVisible: route.state.index > 0 ? false : true
     })
@@ -195,70 +220,41 @@ const ProfilStackNavigator = ({ navigation, route }) => {
 }
 
 
-const SettingsStackNavigator = ({ navigation, route }) => {
-  if (route.state) {
-    navigation.setOptions({
-      tabBarVisible: route.state.index > 0 ? false : true
-    })
-  }
-  return (
-    <SettingsStack.Navigator
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: '#fff',
-        },
-        headerTintColor: '#000',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-        gestureEnabled: true,
-        gestureDirection: "horizontal",
-        ...TransitionPresets.SlideFromRightIOS
-      }}
-      initialRouteName='Contact'>
-      <SettingsStack.Screen name="Settings" component={SettingsScreen} options={{
-        title: "Paramètres",
-        headerShown: false
-      }} />
-      <SettingsStack.Screen name='SettingsCompte' component={SettingsCompteScreen} options={{
-        title: "Paramètre de compte",
-        headerShown: false
-      }} />
-    </SettingsStack.Navigator>
-  )
-}
-
-
 const HomeTabNavigator = () => (
-  <Tab.Navigator screenOptions={({ route }) => ({
-    tabBarIcon: ({ color, size }) => {
-      let iconName
-      if (route.name == 'Acceuil') {
-        iconName = 'home'
-      } else if (route.name == 'Bureau') {
-        iconName = 'iconfontdesktop'
-      } else if (route.name == 'parametre') {
-        iconName = 'setting'
-      }
-      return <AntDesign name={iconName} size={size} color={color} />
-    },
-  })}
+  <Tab.Navigator
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ color, size }) => {
+        let iconName
+        if (route.name == 'Acceuil') {
+          iconName = 'home'
+        } else if (route.name == 'Bureau') {
+          iconName = 'iconfontdesktop'
+        } else if (route.name == 'parametre') {
+          iconName = 'setting'
+        }
+        return <AntDesign name={iconName} size={size} color={color} />
+      },
+
+    })}
 
     tabBarOptions={{
       activeTintColor: COLOR.primary.color,
-      inactiveTintColor: 'gray',
+      inactiveTintColor: '#888',
+      labelStyle: { marginBottom: 6 },
+      iconStyle: { marginTop: 6 }
     }}
   >
 
     <Tab.Screen name='Acceuil' component={HomeStackNavigator} ></Tab.Screen>
-    <Tab.Screen name='Bureau' component={SkillStackNavigator}></Tab.Screen>
-    <Tab.Screen name='parametre' component={ProfilStackNavigator}></Tab.Screen>
+    <Tab.Screen name='Bureau' component={DeskTabStackNavigator}
+      options={{ tabBarBadge: 3 }}
+    ></Tab.Screen>
+    <Tab.Screen name='parametre' component={SettingsStackNavigator}></Tab.Screen>
   </Tab.Navigator>
 )
 
-
 function _getHeaderTitle(route) {
-  const routeName = route.state ? route.state.routes[route.state.index].name : 'Acceuil'
+  const routeName = getFocusedRouteNameFromRoute(route) ? getFocusedRouteNameFromRoute(route) : 'Acceuil'
 
   switch (routeName) {
     case "Acceuil":
@@ -275,7 +271,8 @@ function _getHeaderTitle(route) {
 
 
 function _shouldHeaderBeShown(route) {
-  const routeName = route.state ? route.state.routes[route.state.index].name : 'Acceuil'
+
+  const routeName = getFocusedRouteNameFromRoute(route) ? getFocusedRouteNameFromRoute(route) : 'Acceuil'
   if (routeName == "Bureau" || routeName == "parametre" || routeName == "Acceuil") {
     return false
   }

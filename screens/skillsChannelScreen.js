@@ -62,7 +62,7 @@ export default function SkillsChannelScreen(props) {
 
 
         <ScrollView style={{ backgroundColor: '#fff', marginBottom: 70 }}>
-          <View style={{ backgroundColor: '#000', height: 160 }} >
+          <View style={{ backgroundColor: '#000', height: 172 }} >
             <Image source={params.imageUri} resizeMode={'cover'} style={{ flex: 1, width: null, height: null }} />
           </View>
           <View style={{ backgroundColor: '#fff', borderRadius: 20, position: "relative", top: -20 }}>
