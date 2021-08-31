@@ -31,7 +31,7 @@ const SignUpStack = createStackNavigator()
 const HomeStack = createStackNavigator()
 const DeskStack = createMaterialTopTabNavigator();
 
-let INITIAL_ROUTE_NAME = 'SignIn'
+let INITIAL_ROUTE_NAME = 'Home'
 
 const COLOR = require('../helpers/color.json')
 
@@ -100,8 +100,9 @@ const DeskTabStackNavigator = ({ navigation, route }) => {
         labelStyle: { fontSize: 12, fontWeight: "bold", color: "#000", textTransform: "none" },
       }}
     >
-      <DeskStack.Screen name="Mes compétences" component={SkillStackNavigator} />
       <DeskStack.Screen name="Mes offres" component={OffreScreen} />
+      <DeskStack.Screen name="Mes contract" component={OffreScreen} />
+      <DeskStack.Screen name="Mes compétences" component={SkillStackNavigator} />
     </DeskStack.Navigator>
   );
 }

@@ -1,71 +1,38 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, StyleSheet, Dimensions } from 'react-native'
 import Animated from 'react-native-reanimated'
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
-import { HeaderAvatar, HeaderTitle, Item, HeaderShown } from '../components/cardsComponent'
+import { TapGestureHandler } from 'react-native-gesture-handler'
 
 
 const { width, height } = Dimensions.get("window")
 const heightBottomSheet = height - 136
 
 
-export default function AnimetedBottomSheetComponent({ translateY }) {
+export default function AnimetedBottomSheetComponent({ translateY, gesturHandler, zIndex, height }) {
 
     const infos = () => {
         return (
-            <>
-                <View style={{ ...styles.head, marginHorizontal: 12 }}>
-                    <HeaderAvatar avatarUri={require("../assets/avatar/img1.jpg")} />
-                    <HeaderTitle title="Gansa Diambote" subTitle='Dispo dans 30 minute' />
-                </View>
-                <ScrollView>
-                    <View style={{ marginHorizontal: 20 }}>
-                        <HeaderShown icon='md-person' title='Identité' />
-                        <Item marginLeft={54} title='Sexe:     Hommme' />
-                        <Item marginLeft={54} title='Age:     42 ans' />
+            <View>
 
-                        <HeaderShown icon='md-call' title='Télephone' />
-                        <TouchableOpacity>
-                            <Item marginLeft={54} title='+241 74609874' />
-                        </TouchableOpacity>
-
-                        <HeaderShown icon='md-at' title='Email' />
-                        <TouchableOpacity>
-                            <Item marginLeft={54} title='ericgansa01@gmail.com' />
-                        </TouchableOpacity>
-
-
-                        <HeaderShown icon='md-bonfire' title='Competence' />
-
-                        <TouchableOpacity>
-                            <Item marginLeft={54} title='Mathématicent' subTitle='Analyste' />
-                        </TouchableOpacity>
-
-                        <TouchableOpacity>
-                            <Item marginLeft={54} title='Informaticien' subTitle='Dévelopeur web et mobile' />
-                        </TouchableOpacity>
-
-                        <TouchableOpacity>
-                            <Item marginLeft={54} title='Compositeur de musique' subTitle='Hip-Hop & RNB' />
-                        </TouchableOpacity>
-
-                        <TouchableOpacity>
-                            <Item marginLeft={54} title='Infographe' subTitle='motion designe' />
-                        </TouchableOpacity>
-
-                        <HeaderShown icon='md-pin' title='Adresse' />
-                        <TouchableOpacity style={{ marginBottom: 40 }}>
-                            <Item marginLeft={54} title='Nzeng-Ayong' subTitle='Libreville / Gabon' />
-                        </TouchableOpacity>
-                    </View>
-                </ScrollView>
-            </>
+            </View>
         )
     }
 
+    useEffect(() => {
+        //console.log(zIndex)
+    }, [])
+
     return (
         <>
-            <Animated.View style={{ ...styles.bottomSeet, transform: [{ translateY: translateY }], zIndex: 100 }}>
+            <TapGestureHandler {...gesturHandler}>
+                <Animated.View style={{ ...StyleSheet.absoluteFill, backgroundColor: 'rgba(0,0,0,0.5)', zIndex: zIndex, }}>
+                    <View style={{ justifyContent: 'center', alignItems: "center" }} >
+                        <View style={{ position: 'absolute', top: 136, height: 5, width: 50, backgroundColor: '#fff', borderRadius: 20 }} ></View>
+
+                    </View>
+                </Animated.View>
+            </TapGestureHandler>
+            <Animated.View style={{ ...styles.bottomSeet, transform: [{ translateY: translateY }], zIndex: 100, height: height }}>
                 {infos()}
             </Animated.View>
         </>
@@ -81,12 +48,12 @@ const styles = StyleSheet.create({
     },
     bottomSeet: {
         position: "absolute",
+        marginHorizontal: 0,
         bottom: 0,
         width: width,
-        height: heightBottomSheet,
         backgroundColor: '#fff',
-        borderTopLeftRadius: 18,
-        borderTopRightRadius: 18,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
         //alignItems:"center",
         //justifyContent:"center",
         elevation: 4

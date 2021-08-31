@@ -1,31 +1,67 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { StyleSheet, View, StatusBar, Dimensions, ScrollView } from 'react-native'
+import { StyleSheet, View, StatusBar, Dimensions, ScrollView, Text } from 'react-native'
+import { State } from 'react-native-gesture-handler'
 
 import { HeaderTitle } from '../components/cardsComponent'
 import HeaderShownSearch from '../components/searchComponent'
 import { SkillContent } from '../components/skillsCardsComponent'
 import { SkillsSlide } from '../components/slideComponent'
 import { Loading } from '../components/loadingComponent'
+import Animated, { cond, eq, useCode, Value, set, not, interpolate } from 'react-native-reanimated';
+import AnimetedBottomSheetComponent from '../components/AnimetedBottomSheetComponent';
+import { withTransition } from 'react-native-redash';
 
 
 import { getSkills } from '../store/API/RatisseurApi'
 import { Context } from '../store/configureStore'
 
 
-import competenceData from '../helpers/competences'
+import competenceData from '../helpers/competences';
 
-const color = require('../helpers/color.json')
+const color = require('../helpers/color.json');
 const windowWidth = Dimensions.get('window').width;
+const windowsHeight = Dimensions.get('window').height;
 
-export default function deskScreen({ navigation }) {
+//const { Value } = Animated;
+const heightBottomSheet = windowsHeight - 200;
+
+
+export default function deskScreen() {
 
   const [competenceArray, setCompetenceArray] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  //const translateY = new Value(heightBottomSheet);
+  const state = new Value(State.UNDETERMINED);
+  const isOpen = new Value(0);
+
+  const transition = withTransition(isOpen);
+  translateY = interpolate(transition, {
+    inputRange: [0, 1],
+    outputRange: [heightBottomSheet, 0],
+  });
+
+  const zIndex = interpolate(translateY, {
+    inputRange: [0, 299, heightBottomSheet],
+    outputRange: [1, 1, -1],
+  });
+
+  useCode(() =>
+    cond(
+      eq(state, State.END),
+      set(isOpen, not(isOpen))
+    ),
+    [state, isOpen]
+  );
+
+
+
+  //console.log(zIndex)
+
   useEffect(() => {
-    setCompetenceArray(competenceData)
-    setIsLoading(false)
-  }, [competenceData])
+    setCompetenceArray(competenceData);
+    setIsLoading(false);
+  }, [competenceData]);
 
 
   if (isLoading) {
@@ -36,7 +72,12 @@ export default function deskScreen({ navigation }) {
     <>
       <View style={{ borderBottomColor: '#eee', borderBottomWidth: 1 }}>
         <StatusBar backgroundColor="#fff" networkActivityIndicatorVisible={true} barStyle='dark-content' hidden={false} />
-        <HeaderShownSearch />
+        <HeaderShownSearch
+          gesturHandler={{
+            onHandlerStateChange: Animated.event([{
+              nativeEvent: { state }
+            }])
+          }} />
       </View>
 
       <ScrollView style={{ ...styles.container, backgroundColor: '#fff' }}>
@@ -59,6 +100,19 @@ export default function deskScreen({ navigation }) {
         <SkillsSlide data={competenceData} />
 
       </ScrollView>
+
+      <AnimetedBottomSheetComponent
+        zIndex={zIndex}
+        translateY={translateY}
+        height={heightBottomSheet}
+        gesturHandler={{
+          onHandlerStateChange: Animated.event([{
+            nativeEvent: { state }
+          }])
+        }}>
+
+      </AnimetedBottomSheetComponent>
+
     </>
   )
 }
