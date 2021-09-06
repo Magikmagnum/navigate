@@ -1,73 +1,78 @@
 import React, { useContext, useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
-import { Header7, Header5, Header6 } from '../components/typoComponent'
-import { CheckBoxfrom } from "../components/formComponent";
+import { Header7, Header5, Header6 } from './typoComponent'
+import { CheckBoxfrom } from "./formComponent";
+import { HeaderAvatarProfil } from './cardsComponent';
 import { Context } from '../store/configureStore'
 
 
 const color = require('../helpers/color.json')
 
-export function ItemTitle(props) { 
-    
-    const [ state, dispatch ] = useContext(Context);
+export function Item(props) {
+
+    const [state, dispatch] = useContext(Context);
 
     const checker = () => {
-        if(props.checkBox){
-            return <CheckBoxfrom callBack={addPesonneContact} value={props.checkBoxValue}/>
+        if (props.checkBox) {
+            return <CheckBoxfrom callBack={addPesonneContact} value={props.checkBoxValue} />
         }
     }
 
     const addPesonneContact = () => {
-        dispatch({type: 'TOGGLE_CONTACT', payload: props.data});
+        dispatch({ type: 'TOGGLE_CONTACT', payload: props.data });
     }
+
+    var data = props.data ? props.data : {}
+
+    const image = data.image ? data.image : "";
+    const title = data.title ? data.title : "Non precis";
+    const address = data.addres ? data.addres : "Non precis";
+    const hours = data.hours ? data.hours : "Non precis";
+
 
 
     const body = () => {
 
-        return(
-            <View style={ styles.global }>
-                <View style={ styles.contentImage }>
-                    <Image
-                        style={styles.image}
-                        source={ props.data.image }
-                    />
+        return (
+            <View style={styles.global}>
+                <View style={{}}>
+                    <HeaderAvatarProfil avatarUri={require("../assets/avatar/img9.jpg")} />
                 </View>
-                <View style={ styles.content }>
-                    <View style={ styles.header }>
-                        <View style={ styles.contentTitle }>
+                <View style={styles.content}>
+                    <View style={styles.header}>
+                        <View style={styles.contentTitle}>
                             <Header5
                                 color={color.text.secondary}
                                 fontWeight="bold"
-                                title={props.data.title?props.data.title:"Non precis"}
+                                title={title}
                                 numberOfLines={1}
                             />
                         </View>
                     </View>
-                    <View style={ styles.contentBody }>
+                    <View style={styles.contentBody}>
                         <Header6
                             color={color.primary.color}
-                            //fontWeight="bold"
-                            title={props.data.addres?props.data.addres:"Non precis"}
+                            title={address}
                             numberOfLines={1}
                         />
                     </View>
-                    <View style={ styles.contentFooter }>
+                    <View style={styles.contentFooter}>
                         <Header7
                             color={color.text.secondary}
                             //fontWeight="bold"
-                            title={props.data.addres?props.data.heure:"Non precis"}
+                            title={hours}
                             numberOfLines={1}
                         />
                     </View>
                 </View>
-                <View style={ styles.contentVote }>
+                <View style={styles.contentVote}>
                     {checker()}
                 </View>
             </View>
         )
     }
-    
-    if(props.touchable == false){
+
+    if (props.touchable == false) {
         return (
             <View>
                 {body()}
@@ -75,7 +80,7 @@ export function ItemTitle(props) {
         )
     }
 
-    return(
+    return (
         <TouchableOpacity onPress={() => props.onPress(props.data)}>
             {body()}
         </TouchableOpacity>
@@ -86,41 +91,26 @@ export function ItemTitle(props) {
 
 const styles = StyleSheet.create({
     global: {
-        display: "flex",
         flexDirection: "row",
         //backgroundColor: color.primary.silver,
-        height: 84,
-        paddingVertical:6,
-        paddingRight:8,
+        marginTop: 20,
+        paddingVertical: 6,
+        paddingRight: 8,
         paddingHorizontal: 20,
     },
-    contentImage: {
-        backgroundColor: color.primary.color,
-        width: 48,
-        height: 48,
-        margin: 8,
-        borderRadius: 64,
-    },
-    image: {
-        width: 48,
-        height: 48,
-        borderRadius: 64,
-    },
+
     content: {
         flex: 1,
-        display: "flex",
         flexDirection: "column",
         marginLeft: 9
     },
     header: {
         flex: 1,
-        display: "flex",
         flexDirection: "row",
         //backgroundColor: "#e0d318",
     },
     contentTitle: {
         flex: 3,
-        display: "flex",
         flexDirection: "row",
         //backgroundColor: "#cecdc0",
     },
@@ -138,7 +128,7 @@ const styles = StyleSheet.create({
         height: 10,
     },
     contentVote: {
-        padding:16,
+        padding: 16,
         justifyContent: "center",
         //backgroundColor: "#002432",
     },
@@ -150,7 +140,7 @@ const styles = StyleSheet.create({
     },
     contentBody: {
         flex: 1,
-        marginRight:24,
+        marginRight: 24,
         //backgroundColor: "crimson",
     },
     body: {

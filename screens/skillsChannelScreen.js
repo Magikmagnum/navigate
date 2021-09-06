@@ -13,7 +13,7 @@ import Realisation from '../components/RealisationComponent'
 import { useNavigation } from '@react-navigation/core';
 import { SkillDashBoard } from "../components/skillDashBoard"
 import AvisComponent from "../components/avisComponent"
-import FaireOffreComponent from "../components/FaireOffreComponent"
+import FaireOffreComponent from "../components/faireOffreComponent"
 import { SkillsSlide } from '../components/slideComponent';
 import GeoCoderComponent from '../components/geoCoderComponent'
 

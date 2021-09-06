@@ -8,7 +8,7 @@ import { SkillContent } from '../components/skillsCardsComponent'
 import { SkillsSlide } from '../components/slideComponent'
 import { Loading } from '../components/loadingComponent'
 import Animated, { cond, eq, useCode, Value, set, not, interpolate } from 'react-native-reanimated';
-import AnimetedBottomSheetComponent from '../components/AnimetedBottomSheetComponent';
+import AnimetedBottomSheetComponent from '../components/animetedBottomSheetComponent';
 import { withTransition } from 'react-native-redash';
 
 

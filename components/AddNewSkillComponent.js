@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity, Modal } from 'react-native';
-import { HeaderTitle } from '../components/cardsComponent';
-import { SkillsAbstraction } from '../components/settings/skills/AddComponent';
+import { HeaderTitle } from './cardsComponent';
+import { SkillsAbstraction } from './settings/skills/AddComponent';
 import { useRecoilState } from 'recoil';
 import { themeState } from '../store/atomes/theme';
 

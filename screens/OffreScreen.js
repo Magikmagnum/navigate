@@ -6,6 +6,7 @@ import {
 import { useRecoilState } from 'recoil';
 import { themeState } from '../store/atomes/theme';
 
+import { Item } from '../components/itemComponent'
 
 export default function OffreScreen({ navigation }) {
 
@@ -17,9 +18,23 @@ export default function OffreScreen({ navigation }) {
         <View style={{ ...styles.container, backgroundColor: themeStyle.content }}>
             <SafeAreaView style={{ borderBottomColor: themeStyle.border, borderBottomWidth: 1 }}>
                 <StatusBar backgroundColor={themeStyle.content} networkActivityIndicatorVisible={true} barStyle={theme == 'dark' ? 'light-content' : 'dark-content'} hidden={false} />
-
             </SafeAreaView>
 
+            <ScrollView>
+                <Item></Item>
+                <Item></Item>
+                <Item></Item>
+                <Item></Item>
+                <Item></Item>
+                <Item></Item>
+                <Item></Item>
+                <Item></Item>
+                <Item></Item>
+                <Item></Item>
+                <Item></Item>
+                <Item></Item>
+                <Item></Item>
+            </ScrollView>
         </View>
     )
 }
