@@ -2,14 +2,14 @@ import React, { useState, useEffect, useContext } from "react";
 import { RecoilState } from "recoil";
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Context } from '../store/configureStore';
-import { HeaderTitle, Category } from '../components/cardsComponent';
+import { HeaderTitle, Category } from './cardsComponent';
 import { getUserSkill, API_IMG_SKILL } from '../store/API/RatisseurApi';
 import { useRecoilState } from 'recoil';
 import { useNavigation } from '@react-navigation/native';
 import { themeState } from '../store/atomes/theme';
 import { yourskillState } from '../store/atomes/yourskill';
 
-import { MySkillsCards } from '../components/skillsCardsComponent'
+import { MySkillsCards } from './skillsCardsComponent'
 
 
 

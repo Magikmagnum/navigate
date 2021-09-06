@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, StatusBar, ScrollView, SafeAreaView } from 'react-native';
 
-import UserSkillListe from '../components/UserSkillListeComponent';
+import UserSkillListe from '../components/userSkillListeComponent';
 import AddNewSkill from '../components/addNewSkillComponent';
 import { useRecoilState } from 'recoil';
 import { themeState } from '../store/atomes/theme';

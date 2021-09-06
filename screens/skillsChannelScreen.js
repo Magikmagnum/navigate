@@ -9,7 +9,7 @@ import { themeState } from '../store/atomes/theme';
 import FaireAppelComponent from "../components/faireAppelComponent"
 import GraphSkillComponent from '../components/graphSkillComponent'
 import { Loading } from '../components/loadingComponent'
-import Realisation from '../components/RealisationComponent'
+import Realisation from '../components/realisationComponent'
 import { useNavigation } from '@react-navigation/core';
 import { SkillDashBoard } from "../components/skillDashBoard"
 import AvisComponent from "../components/avisComponent"
