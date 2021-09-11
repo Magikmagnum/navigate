@@ -110,9 +110,11 @@ const DeskTabStackNavigator = ({ navigation, route }) => {
 
 const SkillStackNavigator = ({ navigation, route }) => {
 
-  if (route.state) {
+  const routeName = getFocusedRouteNameFromRoute(route)
+
+  if (routeName) {
     navigation.setOptions({
-      tabBarVisible: route.state.index > 0 ? false : true
+      tabBarVisible: routeName == 'Desk' ? true : false
     })
   }
   return (
@@ -148,11 +150,12 @@ const SkillStackNavigator = ({ navigation, route }) => {
 
 
 const HomeStackNavigator = ({ navigation, route }) => {
+
   const routeName = getFocusedRouteNameFromRoute(route)
 
   if (routeName) {
     navigation.setOptions({
-      tabBarVisible: route.state.index > 0 ? false : true
+      tabBarVisible: routeName == 'Home' ? true : false
     })
   }
 
@@ -189,13 +192,15 @@ const HomeStackNavigator = ({ navigation, route }) => {
 
 
 const SettingsStackNavigator = ({ navigation, route }) => {
+
   const routeName = getFocusedRouteNameFromRoute(route)
 
   if (routeName) {
     navigation.setOptions({
-      tabBarVisible: route.state.index > 0 ? false : true
+      tabBarVisible: routeName == 'Settings' ? true : false
     })
   }
+
   return (
     <ProfilStack.Navigator
       screenOptions={{
