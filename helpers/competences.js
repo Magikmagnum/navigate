@@ -1,5 +1,4 @@
-
-export default data = [
+let data = [
         {
                 //identité
                 title: 'Electriciien',
@@ -161,4 +160,6 @@ export default data = [
                 realisation: 2,
                 commentaire: 6
         },
-]
+];
+
+export default data;
