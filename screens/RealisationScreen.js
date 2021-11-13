@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/core';
 import { useRecoilState } from 'recoil';
 
 import { HeaderShown } from '../components/cardsComponent';
-import { RealisationIteme } from '../components/realisationComponent';
+import { RealisationIteme } from '../components/RealisationComponent';
 import { Loading } from '../components/loadingComponent'
 
 import { themeState } from '../store/atomes/theme';

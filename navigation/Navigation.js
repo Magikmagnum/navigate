@@ -20,7 +20,7 @@ import AvatarScreen from '../screens/AvatarScreen'
 import IdentityScreen from '../screens/IdentityScreen'
 import ResetingScreen from '../screens/ResetingScreen'
 import YourSkillScreen from '../screens/YourSkillScreen'
-import SkillsChannelScreen from '../screens/SkillsChannelScreen'
+import SkillsChannelScreen from '../screens/skillsChannelScreen'
 
 
 const Tab = createBottomTabNavigator()

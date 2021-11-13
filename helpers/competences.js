@@ -1,7 +1,7 @@
 let data = [
         {
                 //identité
-                title: 'Electriciien',
+                title: 'Electricien',
                 nom: "Gansa diambote eric",
                 adresse: 'Angondje, Akanda / Gabon',
                 telephone: "074853544",

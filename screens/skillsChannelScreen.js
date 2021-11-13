@@ -9,11 +9,11 @@ import { themeState } from '../store/atomes/theme';
 import FaireAppelComponent from "../components/faireAppelComponent"
 import GraphSkillComponent from '../components/graphSkillComponent'
 import { Loading } from '../components/loadingComponent'
-import Realisation from '../components/realisationComponent'
+import Realisation from '../components/RealisationComponent'
 import { useNavigation } from '@react-navigation/core';
 import { SkillDashBoard } from "../components/skillDashBoard"
 import AvisComponent from "../components/avisComponent"
-import FaireOffreComponent from "../components/faireOffreComponent"
+import FaireOffreComponent from "../components/FaireOffreComponent"
 import { SkillsSlide } from '../components/slideComponent';
 import GeoCoderComponent from '../components/geoCoderComponent'
 
@@ -57,7 +57,7 @@ export default function SkillsChannelScreen(props) {
       <>
         <SafeAreaView style={{ borderBottomColor: themeStyle.border, borderBottomWidth: 1 }}>
           <StatusBar backgroundColor={themeStyle.content} networkActivityIndicatorVisible={true} barStyle={theme == 'dark' ? 'light-content' : 'dark-content'} hidden={false} />
-          <HeaderShown title={data.title} theme={theme} icon='md-arrow-back' callback={() => navigation.navigate('Home', JSON.stringify(props.data))} />
+
         </SafeAreaView>
 
 
