@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 
-const API_PATH = "http://192.168.1.196:8000";
+const API_PATH = "http://192.168.43.90:8080";
 const API_LOCAL = API_PATH + "/api/v1/";
 
 
@@ -11,6 +11,7 @@ export const API_IMG_SKILL = (ImageName) => {
 
 
 export function post() {
+    console.log('coucou');
     return fetch(API_LOCAL + 'produit', {
         method: 'POST',
         headers: {

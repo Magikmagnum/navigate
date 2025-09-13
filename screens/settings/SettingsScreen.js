@@ -23,6 +23,7 @@ export default function SettingsScreen() {
   const [state, dispatch] = useContext(Context)
   const navigation = useNavigation()
 
+
   const DATA = [
     {
       title: 'Identité',

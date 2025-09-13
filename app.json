@@ -25,7 +25,6 @@
     "ios": {
       "supportsTablet": true
     },
-    "sdkVersion": "43.0.0",
     "android": {
       "package": "com.ericgansa.ratisseurApp"
     }
